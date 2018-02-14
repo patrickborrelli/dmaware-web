@@ -1,0 +1,27 @@
+{
+  "name": "dmaware-web",
+  "authors": [
+    "Patrick Borrelli <patrickborrelli@gmail.com>"
+  ],
+  "description": "Web front end for DMAware project",
+  "main": "index.html",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^4.0.0",
+    "font-awesome": "^5.0.6",
+    "angular": "^1.6.9",
+    "angular-ui-router": "^1.0.15",
+    "angular-route": "^1.6.9",
+    "ng-dialog": "^1.4.0",
+    "ui-bootstrap": "^2.5.6"
+  }
+}
