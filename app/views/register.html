@@ -1,0 +1,76 @@
+<div class="ngdialog-message">
+    <div class="">
+        <h3>Register for DMAware</h3>
+    </div>
+    <div class="">&nbsp;</div>
+    <div class="">
+        <form name="regForm" class="form-horizontal" >
+            <div class="form-group custom-padding">
+                <label class="sr-only" for="username">Username</label>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <div class="input-group-addon custom-width-140">Username</div>
+                        <input type="text" class="form-control" id="username" ng-model="registration.username">
+                    </div>                    
+                </div>
+            </div>
+            <div class="form-group custom-padding">
+                <label class="sr-only" for="password">Password</label>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <div class="input-group-addon custom-width-140">Password</div>
+                        <input type="text" class="form-control" id="password" ng-model="registration.password">
+                    </div>                    
+                </div>
+            </div>
+            <div class="form-group custom-padding">
+                <label class="sr-only" for="confirmpassword">Confirm Password</label>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <div class="input-group-addon custom-width-140">Confirm Password</div>
+                        <input type="text" class="form-control" id="confirmpassword" ng-model="registration.confirmpassword">
+                    </div>                    
+                </div>
+            </div>
+            <div class="form-group custom-padding">
+                <label class="sr-only" for="first_name">First Name</label>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <div class="input-group-addon custom-width-140">First Name</div>
+                        <input type="text" class="form-control" id="first_name" ng-model="registration.first_name">
+                    </div>                    
+                </div>
+            </div>            
+            <div class="form-group custom-padding">
+                <label class="sr-only" for="last_name">Last Name</label>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <div class="input-group-addon custom-width-140">Last Name</div>
+                        <input type="text" class="form-control" id="last_name" ng-model="registration.last_name">
+                    </div>                    
+                </div>
+            </div>
+            <div class="form-group custom-padding">
+                <label class="sr-only" for="email_address">Email</label>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <div class="input-group-addon custom-width-140">Email</div>
+                        <input type="text" class="form-control" id="email_address" ng-model="registration.email_address">
+                    </div>                    
+                </div>
+            </div>
+            <div class="form-group custom-padding-bottom">
+                <label class="sr-only" for="mobile">Mobile</label>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <div class="input-group-addon custom-width-140">Mobile</div>
+                        <input type="text" class="form-control" id="mobile" ng-model="registration.mobile">
+                    </div>                    
+                </div>
+            </div>   
+            <button type="button" class="btn btn-info" ng-click="showRegLoading(); registerUser()">Register</button>
+            <button type="button" class="btn btn-default" ng-click='closeThisDialog("Cancel")'>Cancel</button>
+        </form>
+        <div ng-show="showRegLoader" class="loader"></div>
+    </div>
+</div>

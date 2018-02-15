@@ -25,16 +25,6 @@ angular.module('dm-app', ['ui.router', 'ngDialog'])
                         controller  : 'HomeController'
                     }
                 }
-            })
-        
-            .state('app.invite', {
-                url:'invite/:inviteId',
-                views: {
-                    'content@': {
-                        templateUrl: 'views/invite.html',
-                        controller  : 'InviteController'
-                    }
-                }
             });
             $urlRouterProvider.otherwise('/');     
             
