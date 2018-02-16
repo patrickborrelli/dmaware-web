@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dm-app', ['ui.router', 'ngDialog'])
+angular.module('dm-app', ['ui.router', 'ngDialog', 'ui.bootstrap'])
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider            
             .state('app', {

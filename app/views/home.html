@@ -1,4 +1,3 @@
-
 <div class="row row-content" ng-show="isAuthenticated(); isAdmin()">    
     <div class="col-xs-12">
         <h4>DM Aware Administration</h4>
@@ -34,36 +33,10 @@
     <div class="col-xs-12">
         <h4>DM Aware User Tools</h4>
     </div>
+    
     <div class="col-xs-12">
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" ng-class="{active:isSelected(1)}">
-            <a ng-click="select(1); subSelect(1)" aria-controls="users" role="tab">Intro</a>
-            </li>
-            <li role="presentation" ng-class="{active:isSelected(2)}">
-            <a ng-click="select(2); subSelect(1)" aria-controls="teams" role="tab">Race</a>
-            </li>
-            <li role="presentation" ng-class="{active:isSelected(3)}">
-            <a ng-click="select(3); subSelect(1);" aria-controls="configuration" role="tab">Class</a>
-            </li>
-            <li role="presentation" ng-class="{active:isSelected(4)}">
-            <a ng-click="select(4); subSelect(1);" aria-controls="configuration" role="tab">Alignment</a>
-            </li>
-            <li role="presentation" ng-class="{active:isSelected(5)}">
-            <a ng-click="select(5); subSelect(1);" aria-controls="configuration" role="tab">Abilities</a>
-            </li>
-            <li role="presentation" ng-class="{active:isSelected(6)}">
-            <a ng-click="select(6); subSelect(1);" aria-controls="configuration" role="tab">Skills</a>
-            </li>
-            <li role="presentation" ng-class="{active:isSelected(7)}">
-            <a ng-click="select(7); subSelect(1);" aria-controls="configuration" role="tab">Equipment</a>
-            </li>
-            <li role="presentation" ng-class="{active:isSelected(8)}">
-            <a ng-click="select(8); subSelect(1);" aria-controls="configuration" role="tab">Spellcasting</a>
-            </li>
-        </ul>
-
-        <div class="tab-content">
-            <div id="tabContent" class="tab-pane fade in active" ng-show="isSelected(1)">
+        <uib-tabset active="activeIndex">
+            <uib-tab index="0" heading="Intro">
                 <div><img src="http://www.patrickborrelli.com/images/dropW.jpg" style="height: 75px; float: left; padding-right: 10px; padding-bottom: 5px;"/>
                 </div>
                 <div>
@@ -72,14 +45,13 @@
                     Enter the information required below and click on Begin to get started!
                 </div><br/>
                 
-                <!-- insert form here -->
-                <form name="introform" class="form-horizontal" >
+                <form name="introForm" class="form-horizontal" >
                     <div class="form-group custom-padding">
                         <label class="sr-only" for="playername">Player Name</label>
                         <div class="col-xs-8">
                             <div class="input-group">
                                 <div class="input-group-addon custom-width-140">Player Name</div>
-                                <input type="text" class="form-control input-sm" id="playername" ng-model="registration.playername" disabled>
+                                <input type="text" class="form-control input-sm" id="playername" ng-model="registration.playername" placeholder={{getUserName()}} disabled>
                             </div>                    
                         </div>
                     </div>
@@ -92,33 +64,24 @@
                             </div>                    
                         </div>
                     </div>         
-                        <button type="button" style="margin-left: 16px;" class="btn btn-info btn-xs" ng-click="select(2)">Begin</button>
-                    
+                    <button type="button" style="margin-left: 16px;" class="btn btn-info btn-xs" ng-click="switchToRace(getUserName(), introForm.charactername);">Begin</button>   
                 </form>
-                
-                <!-- end of form -->
-            </div>
-            <div id="tabContent" class="tab-pane fade in active" ng-show="isSelected(2)">
-            Race Selected
-            </div>
-            <div id="tabContent" class="tab-pane fade in active" ng-show="isSelected(3)">
-            Class selected
-            </div>
-            <div id="tabContent" class="tab-pane fade in active" ng-show="isSelected(4)">
-            Alignment selected
-            </div>
-            <div id="tabContent" class="tab-pane fade in active" ng-show="isSelected(5)">
-            Abilities selected
-            </div>
-            <div id="tabContent" class="tab-pane fade in active" ng-show="isSelected(6)">
-            Skills selected
-            </div>
-            <div id="tabContent" class="tab-pane fade in active" ng-show="isSelected(7)">
-            Equipment selected
-            </div>
-            <div id="tabContent" class="tab-pane fade in active" ng-show="isSelected(8)">
-            Spellcasting selected
-            </div>
-        </div>
+            </uib-tab>
+            <uib-tab index="1" heading="Race" disable="raceDisabled">Race<br/>
+                <button type="button" style="margin-left: 16px;" class="btn btn-info btn-xs" ng-click="classDisabled = false; switchTab(2);">Next</button>
+            </uib-tab>
+            <uib-tab index="2" heading="Class" disable="classDisabled">Class<br/>
+                <button type="button" style="margin-left: 16px;" class="btn btn-info btn-xs" ng-click="alignDisabled = false; switchTab(3);">Next</button>
+            </uib-tab>
+            <uib-tab index="3" heading="Alignment" disable="alignDisabled">Alignment<br/>
+                <button type="button" style="margin-left: 16px;" class="btn btn-info btn-xs" ng-click="abilityDisabled = false; switchTab(4);">Next</button>
+            </uib-tab>
+            <uib-tab index="4" heading="Abilities" disable="abilityDisabled">Abilities<br/>
+                <button type="button" style="margin-left: 16px;" class="btn btn-info btn-xs" ng-click="skillsDisabled = false; switchTab(5);">Next</button>
+            </uib-tab>
+            <uib-tab index="5" heading="Skills" disable="skillsDisabled">Skills</uib-tab>
+            <uib-tab index="6" heading="Equipment" disable="equipDisabled">Equipment</uib-tab>            
+            <uib-tab index="7" heading="Spellcasting" disable="spellsDisabled">Spellcasting</uib-tab>
+        </uib-tabset>
     </div>
 </div>

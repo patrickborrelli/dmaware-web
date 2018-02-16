@@ -18,6 +18,10 @@
     border-bottom: 1px solid Gainsboro;
 }
 
+.tab-pane {
+    margin: 20px 20px;
+  }
+
 .form-inline > * {
     margin-right:45px !important;
 }
