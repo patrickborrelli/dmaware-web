@@ -64,7 +64,7 @@
                             </div>                    
                         </div>
                     </div>         
-                    <button type="button" style="margin-left: 16px;" class="btn btn-sm btn-info btn-custom125"" ng-click="switchToRace(getUserName(), introForm.charactername);">Begin</button>   
+                    <button type="button" style="margin-left: 16px;" class="btn btn-sm btn-info btn-custom125" ng-click="switchToRace(getUserName(), introForm.charactername)">Begin</button>   
                 </form>
             </uib-tab>
             <uib-tab index="1" heading="Race" disable="raceDisabled">
@@ -360,7 +360,54 @@
                 </div>
             </uib-tab>
             <uib-tab index="2" heading="Class" disable="classDisabled">Class<br/>
-                <button type="button" style="margin-left: 16px;" class="btn btn-info btn-xs" ng-click="alignDisabled = false; switchTab(3);">Next</button>
+                <div class="col-xs-12">
+                    <ul class="media-list">
+                        <li class="media">
+                            <div class="media-left media-top" >                            
+                                <div class="col-xs-4">
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-class="{'active': showingBarbarian}" ng-click="setShowingBarbarian()">BARBARIAN</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-class="{'active': showingBard}" ng-click="setShowingBard()">BARD</button> 
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-class="{'active': showingCleric}" ng-click="setShowingCleric()">CLERIC</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-class="{'active': showingDruid}" ng-click="setShowingDruid()">DRUID</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-class="{'active': showingFighter}" ng-click="setShowingFighter()">FIGHTER</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-class="{'active': showingMonk}" ng-click="setShowingMonk()">MONK</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-class="{'active': showingPaladin}" ng-click="setShowingPaladin()">PALADIN</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-class="{'active': showingRanger}" ng-click="setShowingRanger()">RANGER</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-class="{'active': showingRogue}" ng-click="setShowingRogue()">ROGUE</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-class="{'active': showingSorcerer}" ng-click="setShowingSorcerer()">SORCERER</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-class="{'active': showingWarlock}" ng-click="setShowingWarlock()">WARLOCK</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-class="{'active': showingWizard}" ng-click="setShowingWizard()">WIZARD</button>
+                                    <button type="button" class="btn btn-sm btn-info btn-custom125" ng-click="saveCurrentClass();">Next</button>
+                                    <button type="button" class="btn btn-sm btn-info btn-custom125" ng-click="switchTab(activeIndex - 1);">Previous</button>
+                                </div>
+                            </div>
+                            <div class="media-body" ng-show="isShowingHuman()">
+                                <table>
+                                    <tr>
+                                        <td align="right" valign="top"><img src="http://www.patrickborrelli.com/images/dropH.jpg" style="padding-right: 5px; padding-bottom: 10px;"/></td>
+                                        <td valign="top" style="text-align:justify;">umans are the youngest of the common races, late to arrive on the world scene and  short-lived in comparison to dwarves, elves and dragons.  Perhaps it is because of their shorter lives that they strive to achieve as much as they can in the years they are given. Or maybe they feel they have something to prove to the elder races, and that is why they build their mighty empires on the foundation of conquest and trade.  Whatever drives them, humans are the innovators, the achievers and the pioneers of the worlds.</td>
+                                    </tr>
+                                </table>
+                                <div style="text-align:justify;">
+                                            <h2 style="font-variant: small-caps;">Human Traits</h2>
+                                            Humans are the most adaptable and ambitious people among the common races.  They have widely varying tastes, morals and customs in the many different lands where they have settled.  When they settle, though, they stay: they build cities to last for the ages, and great kingdoms that can persist for long centuries.  They live fully and in the present, making them well suited for the adventuring life - but also plan for the future, striving to leave a lasting legacy.<br /><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Ability Score Increase: </span> All ability scores increase by 1.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Age: </span> Humans reach adulthood in their late teens and live less than a century.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Alignment: </span> Humans tend toward no particular alignment.  The best and the worst are found among them.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Size: </span> Humans vary widely in height and build, from barely 5 feet to well over 6 feet tall.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Speed: </span> Base walking speed is 30ft.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Languages: </span> Humans can speak, read and write Common and one extra language of your choice.  Humands typically learn the languages of other peoples they deal with, including obscure dialects.<br/>
+
+                                </div>
+                                <table width="100%" cellpadding="10">
+                                    <tr align="center">
+                                        <td><img src="http://www.patrickborrelli.com/images/human.jpg"/></td>
+                                    </tr>
+                                </table>                                   
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </uib-tab>
             <uib-tab index="3" heading="Alignment" disable="alignDisabled">Alignment<br/>
                 <button type="button" style="margin-left: 16px;" class="btn btn-info btn-xs" ng-click="abilityDisabled = false; switchTab(4);">Next</button>

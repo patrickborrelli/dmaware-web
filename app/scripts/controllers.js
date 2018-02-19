@@ -361,7 +361,279 @@ angular.module('dm-app')
         
         
         //Class ///////////////////////////////////
+        $scope.showingBarbarian = true;
+        $scope.showingBard = false;
+        $scope.showingCleric = false;
+        $scope.showingDruid = false;
+        $scope.showingFighter = false;
+        $scope.showingMonk = false;
+        $scope.showingPaladin = false;
+        $scope.showingRanger = false;
+        $scope.showingRogue = false;
+        $scope.showingSorcerer = false;
+        $scope.showingWarlock = false;
+        $scope.showingWizard = false;
         
+        $scope.isShowingBarbarian = function() {
+            return $scope.showingBarbarian;
+        };
+        
+        $scope.setShowingBarbarian = function() {
+            $scope.showingBarbarian = true;
+            $scope.showingBard = false;
+            $scope.showingCleric = false;
+            $scope.showingDruid = false;
+            $scope.showingFighter = false;
+            $scope.showingMonk = false;
+            $scope.showingPaladin = false;
+            $scope.showingRanger = false;
+            $scope.showingRogue = false;
+            $scope.showingSorcerer = false;
+            $scope.showingWarlock = false;
+            $scope.showingWizard = false;
+        };
+        
+        $scope.isShowingBard = function() {
+            return $scope.showingBard;
+        };
+        
+        $scope.setShowingBard = function() {
+            $scope.showingBarbarian = false;
+            $scope.showingBard = true;
+            $scope.showingCleric = false;
+            $scope.showingDruid = false;
+            $scope.showingFighter = false;
+            $scope.showingMonk = false;
+            $scope.showingPaladin = false;
+            $scope.showingRanger = false;
+            $scope.showingRogue = false;
+            $scope.showingSorcerer = false;
+            $scope.showingWarlock = false;
+            $scope.showingWizard = false;
+        };
+        
+        $scope.isShowingCleric = function() {
+            return $scope.showingCleric;
+        };
+        
+        $scope.setShowingCleric = function() {
+            $scope.showingBarbarian = false;
+            $scope.showingBard = false;
+            $scope.showingCleric = true;
+            $scope.showingDruid = false;
+            $scope.showingFighter = false;
+            $scope.showingMonk = false;
+            $scope.showingPaladin = false;
+            $scope.showingRanger = false;
+            $scope.showingRogue = false;
+            $scope.showingSorcerer = false;
+            $scope.showingWarlock = false;
+            $scope.showingWizard = false;
+        };
+        
+        $scope.isShowingDruid = function() {
+            return $scope.showingDruid;
+        };
+        
+        $scope.setShowingDruid = function() {
+            $scope.showingBarbarian = false;
+            $scope.showingBard = false;
+            $scope.showingCleric = false;
+            $scope.showingDruid = true;
+            $scope.showingFighter = false;
+            $scope.showingMonk = false;
+            $scope.showingPaladin = false;
+            $scope.showingRanger = false;
+            $scope.showingRogue = false;
+            $scope.showingSorcerer = false;
+            $scope.showingWarlock = false;
+            $scope.showingWizard = false;
+        };
+        
+        $scope.isShowingFighter = function() {
+            return $scope.showingFighter;
+        };
+        
+        $scope.setShowingFighter = function() {
+            $scope.showingBarbarian = false;
+            $scope.showingBard = false;
+            $scope.showingCleric = false;
+            $scope.showingDruid = false;
+            $scope.showingFighter = true;
+            $scope.showingMonk = false;
+            $scope.showingPaladin = false;
+            $scope.showingRanger = false;
+            $scope.showingRogue = false;
+            $scope.showingSorcerer = false;
+            $scope.showingWarlock = false;
+            $scope.showingWizard = false;
+        };
+        
+        $scope.isShowingMonk = function() {
+            return $scope.showingMonk;
+        };
+        
+        $scope.setShowingMonk = function() {
+            $scope.showingBarbarian = false;
+            $scope.showingBard = false;
+            $scope.showingCleric = false;
+            $scope.showingDruid = false;
+            $scope.showingFighter = false;
+            $scope.showingMonk = true;
+            $scope.showingPaladin = false;
+            $scope.showingRanger = false;
+            $scope.showingRogue = false;
+            $scope.showingSorcerer = false;
+            $scope.showingWarlock = false;
+            $scope.showingWizard = false;
+        };
+        
+        $scope.isShowingPaladin = function() {
+            return $scope.showingPaladin;
+        };
+        
+        $scope.setShowingPaladin = function() {
+            $scope.showingBarbarian = false;
+            $scope.showingBard = false;
+            $scope.showingCleric = false;
+            $scope.showingDruid = false;
+            $scope.showingFighter = false;
+            $scope.showingMonk = false;
+            $scope.showingPaladin = true;
+            $scope.showingRanger = false;
+            $scope.showingRogue = false;
+            $scope.showingSorcerer = false;
+            $scope.showingWarlock = false;
+            $scope.showingWizard = false;
+        };
+        
+        $scope.isShowingRanger = function() {
+            return $scope.showingRanger;
+        };
+        
+        $scope.setShowingRanger = function() {
+            $scope.showingBarbarian = false;
+            $scope.showingBard = false;
+            $scope.showingCleric = false;
+            $scope.showingDruid = false;
+            $scope.showingFighter = false;
+            $scope.showingMonk = false;
+            $scope.showingPaladin = false;
+            $scope.showingRanger = true;
+            $scope.showingRogue = false;
+            $scope.showingSorcerer = false;
+            $scope.showingWarlock = false;
+            $scope.showingWizard = false;
+        };
+        
+        $scope.isShowingRogue = function() {
+            return $scope.showingRogue;
+        };
+        
+        $scope.setShowingRogue = function() {
+            $scope.showingBarbarian = false;
+            $scope.showingBard = false;
+            $scope.showingCleric = false;
+            $scope.showingDruid = false;
+            $scope.showingFighter = false;
+            $scope.showingMonk = false;
+            $scope.showingPaladin = false;
+            $scope.showingRanger = false;
+            $scope.showingRogue = true;
+            $scope.showingSorcerer = false;
+            $scope.showingWarlock = false;
+            $scope.showingWizard = false;
+        };
+        
+        $scope.isShowingSorcerer = function() {
+            return $scope.showingSorcerer;
+        };
+        
+        $scope.setShowingSorcerer = function() {
+            $scope.showingBarbarian = false;
+            $scope.showingBard = false;
+            $scope.showingCleric = false;
+            $scope.showingDruid = false;
+            $scope.showingFighter = false;
+            $scope.showingMonk = false;
+            $scope.showingPaladin = false;
+            $scope.showingRanger = false;
+            $scope.showingRogue = false;
+            $scope.showingSorcerer = true;
+            $scope.showingWarlock = false;
+            $scope.showingWizard = false;
+        };
+        
+        $scope.isShowingWarlock = function() {
+            return $scope.showingWarlock;
+        };
+        
+        $scope.setShowingWarlock = function() {
+            $scope.showingBarbarian = false;
+            $scope.showingBard = false;
+            $scope.showingCleric = false;
+            $scope.showingDruid = false;
+            $scope.showingFighter = false;
+            $scope.showingMonk = false;
+            $scope.showingPaladin = false;
+            $scope.showingRanger = false;
+            $scope.showingRogue = false;
+            $scope.showingSorcerer = false;
+            $scope.showingWarlock = true;
+            $scope.showingWizard = false;
+        };
+        
+        $scope.isShowingWizard = function() {
+            return $scope.showingWizard;
+        };
+        
+        $scope.setShowingWizard = function() {
+            $scope.showingBarbarian = false;
+            $scope.showingBard = false;
+            $scope.showingCleric = false;
+            $scope.showingDruid = false;
+            $scope.showingFighter = false;
+            $scope.showingMonk = false;
+            $scope.showingPaladin = false;
+            $scope.showingRanger = false;
+            $scope.showingRogue = false;
+            $scope.showingSorcerer = false;
+            $scope.showingWarlock = false;
+            $scope.showingWizard = true;
+        };
+        
+        $scope.saveCurrentClass = function() {
+            if($scope.showingBarbarian) {
+                $scope.characterForm.class = 'BARBARIAN';
+            } else if($scope.showingBard) {
+                $scope.characterForm.class = 'BARD';
+            } else if($scope.showingCleric) {
+                $scope.characterForm.class = 'CLERIC';
+            } else if($scope.showingDruid) {
+                $scope.characterForm.class = 'DRUID';
+            } else if($scope.showingFighter) {
+                $scope.characterForm.class = 'FIGHTER';
+            } else if($scope.showingMonk) {
+                $scope.characterForm.class = 'MONK';
+            } else if($scope.showingPaladin) {
+                $scope.characterForm.class = 'PALADIN';
+            } else if($scope.showingRanger) {
+                $scope.characterForm.class = 'RANGER';
+            } else if($scope.showingRogue) {
+                $scope.characterForm.class = 'ROGUE';
+            } else if($scope.showingSorcerer) {
+                $scope.characterForm.class = 'SORCERER';
+            } else if($scope.showingWarlock) {
+                $scope.characterForm.class = 'WARLOCK';
+            } else if($scope.showingWizard) {
+                $scope.characterForm.class = 'WIZARD';
+            }
+            
+            console.log("current character form contains:");
+            console.log($scope.characterForm);
+            $scope.classDisabled = false; 
+            $scope.switchTab(3);
+        };  
         
         ////////////////////////////////////////////        
        
