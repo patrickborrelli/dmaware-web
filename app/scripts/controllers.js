@@ -73,6 +73,48 @@ angular.module('dm-app')
         $scope.spellsDisabled = true;
         $scope.activeIndex = 0;
         
+         //init form:
+        $scope.loadIntroForm = function() {
+            var user = userService.getUserFullname();
+            console.log('loading user with full name ' + user);
+            $scope.introForm = {
+                playername: user,
+                charactername: ''
+            };
+            $scope.introFormLoaded = true;
+            return true;
+        };
+        
+        
+        
+        //navigation        
+        $scope.switchToRace = function(player, char) {
+            console.log('Received player:' + player + ' and char:' +char);
+            $scope.characterForm.player = player;
+            $scope.characterForm.character = char;
+            console.log($scope.characterForm);
+            $scope.raceDisabled = false; 
+            $scope.switchTab(1);
+        }
+        
+        $scope.getUserName = function() {
+            return userService.getUserFullname().toUpperCase();
+        };
+
+        $scope.switchTab = function(tabIndex){ 
+            $timeout(function(){
+                $scope.activeIndex = tabIndex;
+            });
+        };
+        
+        $scope.isAuthenticated = function() {
+            return authService.isUserAuthenticated();
+        };
+        
+        $scope.isAdmin = function() {
+            return authService.isAdmin();
+        };
+        
         //Race ///////////////////////////////////
         $scope.showingHuman = true;
         $scope.showingDwarf = false;
@@ -284,55 +326,45 @@ angular.module('dm-app')
             $scope.showingHalfOrc = true;
         };
         
-        
+        $scope.saveCurrentRace = function() {
+            if($scope.showingHuman) {
+                $scope.characterForm.race = 'HUMAN';
+            } else if($scope.showingDwarf) {
+                $scope.characterForm.race = 'DWARF';
+            } else if($scope.showingHillDwarf) {
+                $scope.characterForm.race = 'HILL DWARF';
+            } else if($scope.showingElf) {
+                $scope.characterForm.race = 'ELF';
+            } else if($scope.showingHighElf) {
+                $scope.characterForm.race = 'HIGH ELF';
+            } else if($scope.showingHalfling) {
+                $scope.characterForm.race = 'HALFLING';
+            } else if($scope.showingLightfoot) {
+                $scope.characterForm.race = 'LIGHTFOOT';
+            } else if($scope.showingGnome) {
+                $scope.characterForm.race = 'GNOME';
+            } else if($scope.showingRockGnome) {
+                $scope.characterForm.race = 'ROCK GNOME';
+            } else if($scope.showingHalfElf) {
+                $scope.characterForm.race = 'HALF ELF';
+            } else if($scope.showingHalfOrc) {
+                $scope.characterForm.race = 'HALF ORC';
+            }
+            
+            console.log("current character form contains:");
+            console.log($scope.characterForm);
+            $scope.classDisabled = false; 
+            $scope.switchTab(2);
+        };       
         
         ////////////////////////////////////////////
         
         
+        //Class ///////////////////////////////////
         
         
-        
-        //init form:
-        $scope.loadIntroForm = function() {
-            var user = userService.getUserFullname();
-            console.log('loading user with full name ' + user);
-            $scope.introForm = {
-                playername: user,
-                charactername: ''
-            };
-            $scope.introFormLoaded = true;
-            return true;
-        };
-        
-        
-        
-        //navigation        
-        $scope.switchToRace = function(player, char) {
-            console.log('Received player:' + player + ' and char:' +char);
-            $scope.characterForm.player = player;
-            $scope.characterForm.character = char;
-            console.log($scope.characterForm);
-            $scope.raceDisabled = false; 
-            $scope.switchTab(1);
-        }
-        
-        $scope.getUserName = function() {
-            return userService.getUserFullname().toUpperCase();
-        };
-
-        $scope.switchTab = function(tabIndex){ 
-            $timeout(function(){
-                $scope.activeIndex = tabIndex;
-            });
-        };
-        
-        $scope.isAuthenticated = function() {
-            return authService.isUserAuthenticated();
-        };
-        
-        $scope.isAdmin = function() {
-            return authService.isAdmin();
-        };
+        ////////////////////////////////////////////        
+       
      }])
 ;
 

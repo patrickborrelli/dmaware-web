@@ -73,18 +73,18 @@
                         <li class="media">
                             <div class="media-left media-top" >                            
                                 <div class="col-xs-4">
-                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-click="setShowingHuman()">HUMAN</button>
-                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-click="setShowingDwarf()">DWARF</button>                                    
-                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-click="setShowingHillDwarf()">HILL DWARF</button>
-                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-click="setShowingElf()">ELF</button>
-                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-click="setShowingHighElf()">HIGH ELF</button>
-                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-click="setShowingHalfling()">HALFLING</button>
-                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-click="setShowingLightfoot()">LIGHTFOOT</button>
-                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-click="setShowingGnome()">GNOME</button>
-                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-click="setShowingRockGnome()">ROCK GNOME</button>
-                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-click="setShowingHalfElf()">HALF ELF</button>
-                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-click="setShowingHalfOrc()">HALF ORC</button>
-                                    <button type="button" class="btn btn-sm btn-info btn-custom125" ng-click="classDisabled = false; switchTab(2);">Next</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-class="{'active': showingHuman}" ng-click="setShowingHuman()">HUMAN</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-class="{'active': showingDwarf}" ng-click="setShowingDwarf()">DWARF</button> 
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-class="{'active': showingHillDwarf}" ng-click="setShowingHillDwarf()">HILL DWARF</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-class="{'active': showingElf}" ng-click="setShowingElf()">ELF</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-class="{'active': showingHighElf}" ng-click="setShowingHighElf()">HIGH ELF</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-class="{'active': showingHalfling}" ng-click="setShowingHalfling()">HALFLING</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-class="{'active': showingLightfoot}" ng-click="setShowingLightfoot()">LIGHTFOOT</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-class="{'active': showingGnome}" ng-click="setShowingGnome()">GNOME</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-class="{'active': showingRockGnome}" ng-click="setShowingRockGnome()">ROCK GNOME</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-class="{'active': showingHalfElf}" ng-click="setShowingHalfElf()">HALF ELF</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-class="{'active': showingHalfOrc}" ng-click="setShowingHalfOrc()">HALF ORC</button>
+                                    <button type="button" class="btn btn-sm btn-info btn-custom125" ng-click="saveCurrentRace();">Next</button>
                                     <button type="button" class="btn btn-sm btn-info btn-custom125" ng-click="switchTab(activeIndex - 1);">Previous</button>
                                 </div>
                             </div>
