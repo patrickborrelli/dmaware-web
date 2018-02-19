@@ -94,6 +94,11 @@
     margin-top: 10px;
 }
 
+.btn.btn-sm.btn-custom125 {
+    width: 125px;
+    margin-top: 5px;
+}
+
 .btn.btn-sm.btn-custom {
     margin-top: 10px;
 }

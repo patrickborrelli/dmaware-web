@@ -1,4 +1,4 @@
-<div class="row row-content" ng-show="isAuthenticated(); isAdmin()">    
+<div class="row row-content" ng-show="isAuthenticated() && isAdmin()">    
     <div class="col-xs-12">
         <h4>DM Aware Administration</h4>
     </div>
@@ -29,7 +29,7 @@
     </div>
 </div>
 
-<div class="row row-content" ng-show="isAuthenticated(); !isAdmin()">    
+<div class="row row-content" ng-show="(isAuthenticated() && !isAdmin())">    
     <div class="col-xs-12">
         <h4>DM Aware User Tools</h4>
     </div>
@@ -45,13 +45,13 @@
                     Enter the information required below and click on Begin to get started!
                 </div><br/>
                 
-                <form name="introForm" class="form-horizontal" >
+                <form class="form-horizontal" >
                     <div class="form-group custom-padding">
                         <label class="sr-only" for="playername">Player Name</label>
                         <div class="col-xs-8">
                             <div class="input-group">
                                 <div class="input-group-addon custom-width-140">Player Name</div>
-                                <input type="text" class="form-control input-sm" id="playername" ng-model="registration.playername" placeholder={{getUserName()}} disabled>
+                                <input type="text" class="form-control input-sm" id="playername" ng-model="introForm.playername" placeholder={{getUserName()}}>
                             </div>                    
                         </div>
                     </div>
@@ -60,15 +60,304 @@
                         <div class="col-xs-8">
                             <div class="input-group">
                                 <div class="input-group-addon custom-width-140">Character Name</div>
-                                <input type="text" class="form-control input-sm" id="charactername" ng-model="registration.charactername">
+                                <input type="text" class="form-control input-sm" id="charactername" ng-model="introForm.charactername">
                             </div>                    
                         </div>
                     </div>         
-                    <button type="button" style="margin-left: 16px;" class="btn btn-info btn-xs" ng-click="switchToRace(getUserName(), introForm.charactername);">Begin</button>   
+                    <button type="button" style="margin-left: 16px;" class="btn btn-sm btn-info btn-custom125"" ng-click="switchToRace(getUserName(), introForm.charactername);">Begin</button>   
                 </form>
             </uib-tab>
-            <uib-tab index="1" heading="Race" disable="raceDisabled">Race<br/>
-                <button type="button" style="margin-left: 16px;" class="btn btn-info btn-xs" ng-click="classDisabled = false; switchTab(2);">Next</button>
+            <uib-tab index="1" heading="Race" disable="raceDisabled">
+                <div class="col-xs-12">
+                    <ul class="media-list">
+                        <li class="media">
+                            <div class="media-left media-top" >                            
+                                <div class="col-xs-4">
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-click="setShowingHuman()">HUMAN</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-click="setShowingDwarf()">DWARF</button>                                    
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-click="setShowingHillDwarf()">HILL DWARF</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-click="setShowingElf()">ELF</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-click="setShowingHighElf()">HIGH ELF</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-click="setShowingHalfling()">HALFLING</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-click="setShowingLightfoot()">LIGHTFOOT</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-click="setShowingGnome()">GNOME</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-click="setShowingRockGnome()">ROCK GNOME</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-click="setShowingHalfElf()">HALF ELF</button>
+                                    <button type="button" class="btn btn-sm btn-default btn-custom125" ng-click="setShowingHalfOrc()">HALF ORC</button>
+                                    <button type="button" class="btn btn-sm btn-info btn-custom125" ng-click="classDisabled = false; switchTab(2);">Next</button>
+                                    <button type="button" class="btn btn-sm btn-info btn-custom125" ng-click="switchTab(activeIndex - 1);">Previous</button>
+                                </div>
+                            </div>
+                            <div class="media-body" ng-show="isShowingHuman()">
+                                <table>
+                                    <tr>
+                                        <td align="right" valign="top"><img src="http://www.patrickborrelli.com/images/dropH.jpg" style="padding-right: 5px; padding-bottom: 10px;"/></td>
+                                        <td valign="top" style="text-align:justify;">umans are the youngest of the common races, late to arrive on the world scene and  short-lived in comparison to dwarves, elves and dragons.  Perhaps it is because of their shorter lives that they strive to achieve as much as they can in the years they are given. Or maybe they feel they have something to prove to the elder races, and that is why they build their mighty empires on the foundation of conquest and trade.  Whatever drives them, humans are the innovators, the achievers and the pioneers of the worlds.</td>
+                                    </tr>
+                                </table>
+                                <div style="text-align:justify;">
+                                            <h2 style="font-variant: small-caps;">Human Traits</h2>
+                                            Humans are the most adaptable and ambitious people among the common races.  They have widely varying tastes, morals and customs in the many different lands where they have settled.  When they settle, though, they stay: they build cities to last for the ages, and great kingdoms that can persist for long centuries.  They live fully and in the present, making them well suited for the adventuring life - but also plan for the future, striving to leave a lasting legacy.<br /><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Ability Score Increase: </span> All ability scores increase by 1.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Age: </span> Humans reach adulthood in their late teens and live less than a century.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Alignment: </span> Humans tend toward no particular alignment.  The best and the worst are found among them.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Size: </span> Humans vary widely in height and build, from barely 5 feet to well over 6 feet tall.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Speed: </span> Base walking speed is 30ft.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Languages: </span> Humans can speak, read and write Common and one extra language of your choice.  Humands typically learn the languages of other peoples they deal with, including obscure dialects.<br/>
+
+                                </div>
+                                <table width="100%" cellpadding="10">
+                                    <tr align="center">
+                                        <td><img src="http://www.patrickborrelli.com/images/human.jpg"/></td>
+                                    </tr>
+                                </table>                                   
+                            </div>
+                            <div class="media-body" ng-show="isShowingDwarf()">
+                                <table>
+                                    <tr>
+                                        <td align="right" valign="top"><img src="http://www.patrickborrelli.com/images/dropD.jpg" style="padding-right: 5px; padding-bottom: 10px;"/></td>
+                                        <td valign="top" style="text-align:justify;">warves are known as skilled warriors, miners, and workers of stone and metal.  Though they stand well under 5 feet tall, dwarves are so broad  and compact that they can weigh as much as a human standing nearly two feet taller.  Their courage and endurance are also easily a match for any of the larger folk.<br /><br />Kingdoms rich in ancient grandeur, halls carved into the roots of mountains, the echoing of picks and hammers in deep mines and blazing forges, a commitment to clan and tradition, and a burning hatred of goblins and orcs - these common threads unite all dwarves.</td>
+                                    </tr>
+                                </table>
+                                <div style="text-align:justify;">
+                                            <h2 style="font-variant: small-caps;">Dwarf Traits</h2>
+                                            Dwarven skin ranges from deep brown to paler hues tinged with red, but the common shades are light brown or deep tan, tones of the earth.  Dwarves can live to be more than 400 years old, so the oldest living dwarves often remember a very different world.<br /><br/>Dwarves are solid and enduring like the mountains they love, weathering the passage of centuries with stoic endurance and little change.<br /><br/>
+
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Ability Score Increase: </span> Your constitution score increases by 2.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Age: </span> Dwarves mature a the same rate as humans, but they are considered young until they reach the age of 50. On average they live about 350 years.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Alignment: </span> Most dwarves are lawful, believing firmly in the benefits of a well-ordered society.  They tend toward good, as well, with a strong sense of fair play and a belief that everyone deserves to share in the benefits of a just order.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Size: </span> Dwarves stand between 4 and 5 feet tall and average around 150lbs.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Speed: </span> Base walking speed is 25ft., but your speed is not reduced by wearing heavy armor.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Darkvision: </span> Accustomed to life underground, Dwarves have supperior vision in dark and dim conditions.  They can see in dim light within 60 feet as if it were bright light, and in darkness as if it were dim light.  They cannot discern color in darkness, only shades of gray.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Dwarven Resilience: </span> Dwarves have advantage on saving throws against poison, and have resistance against poison damage.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Dwarven Combat Training: </span> Dwarves have proficiency with the battleaxe, handaxe, throwing hammer, and warhammer.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Tool Proficiency: </span> Dwaves gain proficiency with the artisans tools of their choice: smith's tools, brewer's supplies or mason's tools.<br/><br />
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Stonecunning: </span> Whenever a dwarf makes an Intelligence (History) check related to the origin of stonework, they are considered proficient in the History skill and add double your proficiency bonus to the check.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Languages: </span> Dwarves can speak, read, and write Common and Dwarvish.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Subrace: </span> One main subrace of dwarves populate the worlds of D&D: hill dwarves.  Additional modifiers apply to this subrace.<br/><br/>
+
+                                </div>
+                                <table width="100%" cellpadding="10">
+                                    <tr align="center">
+                                        <td><img src="http://www.patrickborrelli.com/images/dwarf.jpg"/></td>
+                                    </tr>
+                                </table>                                
+                            </div>
+                            <div class="media-body" ng-show="isShowingHillDwarf()">
+                                <table>
+                                    <tr>
+                                        <td align="right" valign="top"><img src="http://www.patrickborrelli.com/images/dropH.jpg" style="padding-right: 5px; padding-bottom: 10px;"/></td>
+                                        <td valign="top" style="text-align:justify;">ill dwarves have keen senses, deep intuition and remarkable resilience.  The following traits are added on top of the traits of the Dwarven Race.<br /><br/>
+
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Ability Score Increase: </span> Their Wisdom score increases by 1.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Dwarven Toughness: </span> Their hit point maximum increases by 1, and increases by 1 every time they gain a level.<br/><br/>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table width="100%" cellpadding="10">
+                                    <tr align="center">
+                                        <td><img src="http://www.patrickborrelli.com/images/hillDwarf.jpg"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="media-body" ng-show="isShowingElf()">
+                                <table>
+                                    <tr>
+                                        <td align="right" valign="top"><img src="http://www.patrickborrelli.com/images/dropE.jpg" style="padding-right: 5px; padding-bottom: 10px;"/></td>
+                                        <td valign="top" style="text-align:justify;">lves are a magical people of otherworldly grace, living in the world but not entirely part of it.  They live in places of ethereal beauty, in the midst of ancient forests or in silvery spires glittering with faery light, where soft music drifts through the air and gentle fragrances waft on the breeze.  Elves love nature and magic, art and artistry, music and poetry, and the good things of the world. With their unearthly grace and fine features, elves appear hauntingly beautiful to humans and members of many other races.</td>
+                                    </tr>
+                                </table>
+                                <div style="text-align:justify;">
+                                            <h2 style="font-variant: small-caps;">Elf Traits</h2>
+                                            Elves can live well over 700 years, giving them a broad perspective on events that might trouble the shorter-lived races more deeply.  They are more often amused than excited, and more likely to be curious than greedy.  They tend to remain aloof and unfazed by petty happenstance.  When pursuing a goal, however, whether adventuring or on a mission, elves can be focused and relentless. They are slow to make friends and enemies, and even slower to forget them.<br /><br/>
+
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Ability Score Increase: </span> Dexterity score increases by 2.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Age: </span> Although elves reach physical maturity at about the same age as humans, the elven understanding of adulthood goes beyond physical growth to encompass worldly experience.  An elf typically claims adulthood at around the age of 100 and can live to be 750 years old.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Alignment: </span> Elves love freedon, variety and self-expression, so they lean toward the gentler aspects of chaos.  They value and protect others' freedom as well as their own, and the are more often good than not.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Size: </span> Elves range from under 5 feet to over 6 feet and have slender builds.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Speed: </span> Base walking speed is 30ft.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Darkvision: </span> Accustomed to twilit forests and the night sky, elves have superior vision in dark and dim conditions.  Elves can see in dim light within 60 feet as if it were bright light, and in darkness as if it were dim light.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Keen Senses: </span> Elves have proficiency in the Perception skill.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Fey Ancestry: </span> Elves have advantage on saving throws against being charmed, and magic cannot put them to sleep.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Trance: </span> Elves do not need to sleep, instead they meditate deeply, remaining semiconscious, for 4 hours a day. After resting this way, elves gain the same benefit that a human does from 8 hours of sleep.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Languages: </span> Elves can speak,write and read Elvish and Common.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Subraces: </span> Ancient divides among the elven people resulted in three main subraces: high elves, wood elves and dark elves (drow).<br/><br/>
+                                </div>
+                                <table width="100%" cellpadding="10">
+                                    <tr align="center">
+                                        <td><img src="http://www.patrickborrelli.com/images/elf.jpg"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="media-body" ng-show="isShowingHighElf()">
+                                <table>
+                                    <tr>
+                                        <td align="right" valign="top"><img src="http://www.patrickborrelli.com/images/dropH.jpg" style="padding-right: 5px; padding-bottom: 10px;"/></td>
+                                        <td valign="top" style="text-align:justify;">igh elves have a keen mind and a mastery of at least the basics of magic. There are several kinds of high elves, some are haughty and reclusive, believing themselves to be superior to non-elves and other elves.  Others are more common and friendly and often encountered among humans and other races.  They often have hair of silver-white, black or blue, but various shades of blonde, brown and red are not uncommon.  Their eyes tend to be blue or green and flecked with gold. The following traits are added on top of the traits of the Elven Race.<br /><br/>
+
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Ability Score Increase: </span> Intelligence score increases by 1.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Elf Weapon Training: </span> They have proficiency with longsword, shortsword, short and long bows.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Cantrip: </span> Elves know one cantrip of choice from the wizard spell list.  Intelligence is your spellcasting ability for it.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Extra Language: </span> High elves can speak, read and write one extra language.<br/><br/>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table width="100%" cellpadding="10">
+                                    <tr align="center">
+                                        <td><img src="http://www.patrickborrelli.com/images/highelves.jpg"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="media-body" ng-show="isShowingHalfling()">
+                                <table>
+                                    <tr>
+                                        <td align="right" valign="top"><img src="http://www.patrickborrelli.com/images/dropH.jpg" style="padding-right: 5px; padding-bottom: 10px;"/></td>
+                                        <td valign="top" style="text-align:justify;">alflings survive in a world full of larger creatures by avoiding notice.  The comforts of home are the goals of most halfling's lives: a place to settle in peace and quiet, far from marauding monsters and clashing armies; a blazing fire and a generous meal; fine drink and fine conversation.  Though some halflings live out their days in remote agricultural communities, others form nomadic bands that travel constantly, lured by the open road and the wide horizon to discover the wonders of new lands and peoples.  Even those wanderes love peace, food, hearth and home, though home might be a wagon jostling along a dirt road.  Standing about 3 feet tall, they appear relatively harmless so have managed to survive for centuries in the shadow of empires and on the edge of wars and political strife.  They are inclined to be stout, weighing between 40 and 50 lbs.</td>
+                                    </tr>
+                                </table>
+                                <div style="text-align:justify;">
+                                            <h2 style="font-variant: small-caps;">Halfling Traits</h2>
+                                            Halflings' skin ranges from tan to pale with a ruddy cast, and their hair is usually brown to sandy brown and wavy. They are affable and cheerful people and cherish the bonds of family and friendship, harboring few dreams of gold or glory.  Halflings are easily moved to pity and hate to see any living thing suffer.  They are generous, happlily sharing what they have, even in lean times.<br /><br/>
+
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Ability Score Increase: </span> Dexterity score increases by 1.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Age: </span> Halflings reach adulthood at the age of 20 and generally live until the middle of his or her second century..<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Alignment: </span> Most halflings are lawful good.  As a rule they are good-hearted and kind, hate to see others in pain and have no tolerance for oppression. They are also very orderly and traditional.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Size: </span> Halflings average around 3 feet tall and weigh around 40 lbs. Character size is small. <br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Speed: </span> Base walking speed is 25ft.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Lucky: </span> Whenever rolling a 1 on an attack, ability check or saving throw, you can reroll and must use the new roll.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Brave: </span> Advantage on saving throws against being frightened.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Halfling Nimbleness: </span> Halflings move through the space of any creature of a larger size. <br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Languages: </span> Halflings can speak, read and write Common and Halfling.  Halflings write very little so they do not have a rich body of literature, but their oral tradition is very strong.<br/><br />
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Subraces: </span> There are two kinds of subrace halflings, Lightfoot and Stout, although they are more like closely related family groups than true subraces.<br/><br/>
+                                </div>
+                                <table width="100%" cellpadding="10">
+                                    <tr align="center">
+                                        <td><img src="http://www.patrickborrelli.com/images/halflings.jpg"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="media-body" ng-show="isShowingLightfoot()">
+                                <table>
+                                    <tr>
+                                        <td align="right" valign="top"><img src="http://www.patrickborrelli.com/images/dropL.jpg" style="padding-right: 5px; padding-bottom: 10px;"/></td>
+                                        <td valign="top" style="text-align:justify;">ightfeet can easily hide from notice, even using other people as cover.  They are inclined to be affable and get along well with others.  Lightfeet are the most widely spread and common of the halflings.  They are prone to wanderlust more than other halflings, and often dwell alongside other races. The following traits are added on top of the traits of the Elven Race.<br /><br/>
+
+                                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Ability Score Increase: </span> Charisma score increases by 1.<br/><br/>
+                                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Naturally Stealthy: </span> They can attempt to hide even when only obscured by a creature at least one size larger than them.<br/>
+                                                        </td>
+                                                    </tr>
+                                </table>
+                                <table width="100%" cellpadding="10">
+                                    <tr align="center">
+                                        <td><img src="http://www.patrickborrelli.com/images/lightfoot.jpg"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="media-body" ng-show="isShowingGnome()">
+                                <table>
+                                    <tr>
+                                        <td align="right" valign="top"><img src="http://www.patrickborrelli.com/images/dropG.jpg" style="padding-right: 5px; padding-bottom: 10px;"/></td>
+                                        <td valign="top" style="text-align:justify;">nomes take delight in life, enjoying every moment of invention, exploration, investigation, creation and play.  A constant hum of busy activity pervades the warrens and neighborhoods where gnomes form their close knit communities.  Louder sounds punctuate the hum: a crunch of grinding gears here, a minor explosion there, a yelp of surprise or triumph, and especially bursts of laughter. A gnome's personality is written largely on his or her appearance.  A male gnome's beard, in contrast to his wild hair, is kept carefully trimmed but often styled into curious forks or neat points.  A gnome's clothing, though usually made in modest earth tones, is elaborately decorated with embroidery, embossing or gleaming jewels.</td>
+                                    </tr>
+                                </table>
+                                <div style="text-align:justify;">
+                                            <h2 style="font-variant: small-caps;">Gnome Traits</h2>
+                                            A gnome's energy and enthusiasm for living shines through every inch of his or her tiny body.  Gnomes average slightly over 3 feet tall and weigh 40-50 lbs.  Their tan or brown faces are usually adorned with broad smiles, beneath their prodigious noses, and their eyes shine bright with excitement.<br /><br/>
+
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Ability Score Increase: </span> Intelligence score increases by 2.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Age: </span> Gnomes mature at the same rate as humans and most are expected to settle down into adult life by around age 40.  They can live 350 to almost 500 years.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Alignment: </span> Gnomes are most often good.  Those who tend towards law are sages, engineers, researchers, scholars, investigators or inventors.  Those who tend towards chaos are mistrels, tricksters, wanderers or fanciful jewelers.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Size: </span> Gnomes are between 3 and 4 feet tall, and average around 40 pounds. Size is small.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Speed: </span> Base walking speed is 25ft.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Darkvision: </span> Accustomed to life underground, Gnomes have supperior vision in dark and dim conditions.  They can see in dim light within 60 feet as if it were bright light, and in darkness as if it were dim light.  They cannot discern color in darkness, only shades of gray.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Gnome Cunning: </span> Advantage on all Intelligence, Wisdom and Charisma saving throws against magic.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Languages: </span> Gnomes speak, read and write Common and Gnomish. The Gnome language, which uses Dwarvish script, is renowned for its technical treatises and its catalogs of knowledge about the natural world.<br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Subraces: </span>  Two subraces of gnomes are found in the worlds, forest gnomes and rock gnomes.<br/>
+                                </div>
+                                <table width="100%" cellpadding="10">
+                                    <tr align="center">
+                                        <td><img src="http://www.patrickborrelli.com/images/gnome.jpg"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="media-body" ng-show="isShowingRockGnome()">
+                                <table>
+                                    <tr>
+                                        <td align="right" valign="top"><img src="http://www.patrickborrelli.com/images/dropR.jpg" style="padding-right: 5px; padding-bottom: 10px;"/></td>
+                                        <td valign="top" style="text-align:justify;">ock gnomes have a natural inventiveness and hardiness beyond that of other gnomes.  Rock gnomes are the most common subrace.  The following traits are added on top of the traits of the Gnomish Race.<br /><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Ability Score Increase: </span> Their Constitution score increases by 1.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Artificer's Lore: </span> Whenever a gnome makes an Intelligence (History) check related to magical items, alchemical objects or technological devices, they add twice their proficiency bonus.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Tinker: </span> Proficiency with artisan's tools (tinker's tools). Using these tools a rock gnome can spend 1 hour and 10gp worth of materials to construct a tiny clockwork device (AC5, 1hp).  The device ceases to function after 24 hours unless the gnome spends 1 hr repairing it.  Possiblities include:<br/>
+                                            <span style="font-style: italic;">Clockwork Toy</span> - toy clockwork animal, monster or person. Moves 5 feet each turn in random directions and makes noise appropriate to the creature it represents.<br />
+                                            <span style="font-style: italic;">Fire Starter</span> - Device produces a miniature flame, which can be used to light a candle, torch or campfire.<br />
+                                            <span style="font-style: italic;">Music Box</span> - Plays a single song at a moderate volume.  Box stops playing when it reaches the song's end or it is closed.<br/>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table width="100%" cellpadding="10">
+                                    <tr align="center">
+                                        <td><img src="http://www.patrickborrelli.com/images/rockGnome.jpg"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="media-body" ng-show="isShowingHalfElf()">
+                                <table>
+                                    <tr>
+                                        <td align="right" valign="top"><img src="http://www.patrickborrelli.com/images/dropH.jpg" style="padding-right: 5px; padding-bottom: 10px;"/></td>
+                                        <td valign="top" style="text-align:justify;">alf elves combine what some say are the best qualities of their elf and human parents: human curiosity, inventiveness, and ambition tempered by the refined senses, love of nature, and artistic tastes of the leves.  Some half-elves live among humans, set apart by their emotional and physical differences, watching friends and loved ones age while time barely touches them.  Others live with the elves, growing restless as they reach adulthood in the timeless elven realms, while their peers continue to live as children.  Many half-elves unable to fit into either society, chose lives of solitary wandering or join with other misfits and outcasts in the adventuring life.</td>
+                                    </tr>
+                                </table>
+                                <div style="text-align:justify;">
+                                            <h2 style="font-variant: small-caps;">Half Elf Traits</h2>
+                                            To humans, half-elves look like elves, and to elves they look human.  In height they are on par with both parents, though they are neither as slender as elves nor as broad as humans.  They range from 5 feet to about 6 feet and from 100 to 180 pounds, with men only slightly taller and heavier than women.  Half-elf men do grow beards and sometimes grow them to mask their elven ancestry. They tend to have the eyes of their elven parents.<br /><br/>
+
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Ability Score Increase: </span> Charisma increases by 2, and two other ability scores of your choice increase by 1.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Age: </span> Half-elves mature at the same rate as humans, and reach adulthood around 20.  They live much longer than humans however, often exceeding 180 years.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Alignment: </span> Half-elves share the chaotic bent of thei elven heritage. They chafe at rules, resent others' demands and sometimes prove unreliable or more accurately unpredictable.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Size: </span> Half-elves are about the same size as humans, between 5 and 6 feet tall.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Speed: </span> Base walking speed is 30ft.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Darkvision: </span> Thanks to their elf blood, they have supperior vision in dark and dim conditions.  They can see in dim light within 60 feet as if it were bright light, and in darkness as if it were dim light.  They cannot discern color in darkness, only shades of gray.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Fey Ancestry: </span> Half-elves have advantage on saving throws against being charmed, and magic cannot put them to sleep.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Skill Versatility: </span> Half-elves gain proficiency in two skills of their choice.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Languages: </span> Half-elves can speak, read and write Common, Elvish and one extra language of your choice.<br/>
+                                </div>
+                                <table width="100%" cellpadding="10">
+                                    <tr align="center">
+                                        <td><img src="http://www.patrickborrelli.com/images/halfelf.jpg"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="media-body" ng-show="isShowingHalfOrc()">
+                                <table>
+                                    <tr>
+                                        <td align="right" valign="top"><img src="http://www.patrickborrelli.com/images/dropH.jpg" style="padding-right: 5px; padding-bottom: 10px;"/></td>
+                                        <td valign="top" style="text-align:justify;">alf orcs are the result of alliances between orcs and humans, whether united under the leadership of a mighty wizard or having fought to a standstill after years of conflict, orc and human tribes sometimes form alliances.  Some half-ors rise to become proud chiefs of orc tribes, their human blood giving them an edge over their full-blooded orc rivals.  Some venture into the world to prove their worth among humans and other more civilized races. Many of these become adventurers, achieving greatness for their mighty deeds and notoriety for their barbaric customs and savage fury.</td>
+                                    </tr>
+                                </table>
+                                <div style="text-align:justify;">
+                                            <h2 style="font-variant: small-caps;">Half-orc Traits</h2>
+                                            Half-orcs' grayinsh pigmentation, sloping foreheads, jutting jaws and towering builds make their orkish heritage plain to see. They stand betwwen 6 and 7 feet tall and usually weigh between 180 and 250 pounds.  O regard battle scars as tokens of pride and ornamental scars as things of beauty.  Any half-orc who has lived among orcs has scars, whether marks of humiliation or of pride, recounting their past exploits and injuries.  Such a half-orc living among humans might display these scars proudly or hide them in shame.<br /><br/>
+
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Ability Score Increase: </span> Strength increases by 2 and Constitution by 1.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Age: </span> Half-orcs mature a little faster than humans and reach adulthood around 14. They age noticably faster and rarely live beyond 75.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Alignment: </span> Half-orcs inheret a tendancy towards chaos from their orc parents and are not strongly inclined toward good.  Half-orcs raised among orcs are usually evil.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Size: </span> Half-orcs are somewhat larger and bulkier than humans, ranging from 5 to well over 6 feet.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Speed: </span> Base walking speed is 30ft.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Darkvision: </span> Thanks to their orc blood, half-orcs have supperior vision in dark and dim conditions.  They can see in dim light within 60 feet as if it were bright light, and in darkness as if it were dim light.  They cannot discern color in darkness, only shades of gray.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Menacing: </span> Proficiency in Intimidation skill.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Relentless Endurance: </span> When reduced to 0 hit points, but not killed outright, half-orcs can drop to 1 hit point instead. This feature cannot be used again until after a long rest.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Savage Attack: </span> When scoring a critical hit with a melee weapon attack, half-orcs can roll one of the weapon's damage dice an additional time and add it to the extra damage of the critical hit.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Languages: </span> Half-orcs can read, write and speak Common and Orc.  Orc is a harsh, grating language with hard consonants.  It has no script of its own, but is written using the Dwarvish script.<br/>
+                                </div>
+                                <table width="100%" cellpadding="10">
+                                    <tr align="center">
+                                        <td><img src="http://www.patrickborrelli.com/images/halforc.jpg"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </uib-tab>
             <uib-tab index="2" heading="Class" disable="classDisabled">Class<br/>
                 <button type="button" style="margin-left: 16px;" class="btn btn-info btn-xs" ng-click="alignDisabled = false; switchTab(3);">Next</button>
