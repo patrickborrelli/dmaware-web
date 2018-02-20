@@ -635,7 +635,153 @@ angular.module('dm-app')
             $scope.switchTab(3);
         };  
         
-        ////////////////////////////////////////////        
+        ////////////////////////////////////////////   
+        
+        //Alignment ///////////////////////////////////
+        $scope.selectedLG = false;
+        $scope.selectedNG = false;
+        $scope.selectedCG = false;
+        $scope.selectedLN = false;
+        $scope.selectedTN = false;
+        $scope.selectedCN = false;
+        $scope.selectedLE = false;
+        $scope.selectedNE = false;
+        $scope.selectedCE = false;
+        
+        $scope.setSelectedLG = function() {
+            $scope.selectedLG = true;
+            $scope.selectedNG = false;
+            $scope.selectedCG = false;
+            $scope.selectedLN = false;
+            $scope.selectedTN = false;
+            $scope.selectedCN = false;
+            $scope.selectedLE = false;
+            $scope.selectedNE = false;
+            $scope.selectedCE = false;
+        };
+        
+        $scope.setSelectedNG = function() {
+            $scope.selectedLG = false;
+            $scope.selectedNG = true;
+            $scope.selectedCG = false;
+            $scope.selectedLN = false;
+            $scope.selectedTN = false;
+            $scope.selectedCN = false;
+            $scope.selectedLE = false;
+            $scope.selectedNE = false;
+            $scope.selectedCE = false;
+        };
+        
+        $scope.setSelectedCG = function() {
+            $scope.selectedLG = false;
+            $scope.selectedNG = false;
+            $scope.selectedCG = true;
+            $scope.selectedLN = false;
+            $scope.selectedTN = false;
+            $scope.selectedCN = false;
+            $scope.selectedLE = false;
+            $scope.selectedNE = false;
+            $scope.selectedCE = false;
+        };
+        
+        $scope.setSelectedLN = function() {
+            $scope.selectedLG = false;
+            $scope.selectedNG = false;
+            $scope.selectedCG = false;
+            $scope.selectedLN = true;
+            $scope.selectedTN = false;
+            $scope.selectedCN = false;
+            $scope.selectedLE = false;
+            $scope.selectedNE = false;
+            $scope.selectedCE = false;
+        };
+        
+        $scope.setSelectedTN = function() {
+            $scope.selectedLG = false;
+            $scope.selectedNG = false;
+            $scope.selectedCG = false;
+            $scope.selectedLN = false;
+            $scope.selectedTN = true;
+            $scope.selectedCN = false;
+            $scope.selectedLE = false;
+            $scope.selectedNE = false;
+            $scope.selectedCE = false;
+        };
+        
+        $scope.setSelectedCN = function() {
+            $scope.selectedLG = false;
+            $scope.selectedNG = false;
+            $scope.selectedCG = false;
+            $scope.selectedLN = false;
+            $scope.selectedTN = false;
+            $scope.selectedCN = true;
+            $scope.selectedLE = false;
+            $scope.selectedNE = false;
+            $scope.selectedCE = false;
+        };
+        
+        $scope.setSelectedLE = function() {
+            $scope.selectedLG = false;
+            $scope.selectedNG = false;
+            $scope.selectedCG = false;
+            $scope.selectedLN = false;
+            $scope.selectedTN = false;
+            $scope.selectedCN = false;
+            $scope.selectedLE = true;
+            $scope.selectedNE = false;
+            $scope.selectedCE = false;
+        };
+        
+        $scope.setSelectedNE = function() {
+            $scope.selectedLG = false;
+            $scope.selectedNG = false;
+            $scope.selectedCG = false;
+            $scope.selectedLN = false;
+            $scope.selectedTN = false;
+            $scope.selectedCN = false;
+            $scope.selectedLE = false;
+            $scope.selectedNE = true;
+            $scope.selectedCE = false;
+        };
+        
+        $scope.setSelectedCE = function() {
+            $scope.selectedLG = false;
+            $scope.selectedNG = false;
+            $scope.selectedCG = false;
+            $scope.selectedLN = false;
+            $scope.selectedTN = false;
+            $scope.selectedCN = false;
+            $scope.selectedLE = false;
+            $scope.selectedNE = false;
+            $scope.selectedCE = true;
+        };
+        
+         $scope.saveCurrentAlignment = function() {
+            if($scope.selectedLG) {
+                $scope.characterForm.alignment = 'LAWFUL GOOD';
+            } else if($scope.selectedNG) {
+                $scope.characterForm.alignment = 'NEUTRAL GOOD';
+            } else if($scope.selectedCG) {
+                $scope.characterForm.alignment = 'CHAOTIC GOOD';
+            } else if($scope.selectedLN) {
+                $scope.characterForm.alignment = 'LAWFUL NEUTRAL';
+            } else if($scope.selectedTN) {
+                $scope.characterForm.alignment = 'TRUE NEUTRAL';
+            } else if($scope.selectedCN) {
+                $scope.characterForm.alignment = 'CHAOTIC NEUTRAL';
+            } else if($scope.selectedLE) {
+                $scope.characterForm.alignment = 'LAWFUL EVIL';
+            } else if($scope.selectedNE) {
+                $scope.characterForm.alignment = 'NEUTRAL EVIL';
+            } else if($scope.selectedCE) {
+                $scope.characterForm.alignment = 'CHAOTIC EVIL';
+            } 
+            
+            console.log("current character form contains:");
+            console.log($scope.characterForm);
+            $scope.abilityDisabled = false; 
+            $scope.switchTab(4);
+        };  
        
      }])
 ;
