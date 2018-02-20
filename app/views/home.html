@@ -359,7 +359,7 @@
                     </ul>
                 </div>
             </uib-tab>
-            <uib-tab index="2" heading="Class" disable="classDisabled">Class<br/>
+            <uib-tab index="2" heading="Class" disable="classDisabled">
                 <div class="col-xs-12">
                     <ul class="media-list">
                         <li class="media">
@@ -381,30 +381,341 @@
                                     <button type="button" class="btn btn-sm btn-info btn-custom125" ng-click="switchTab(activeIndex - 1);">Previous</button>
                                 </div>
                             </div>
-                            <div class="media-body" ng-show="isShowingHuman()">
+                            <div class="media-body" ng-show="isShowingBarbarian()">
                                 <table>
                                     <tr>
-                                        <td align="right" valign="top"><img src="http://www.patrickborrelli.com/images/dropH.jpg" style="padding-right: 5px; padding-bottom: 10px;"/></td>
-                                        <td valign="top" style="text-align:justify;">umans are the youngest of the common races, late to arrive on the world scene and  short-lived in comparison to dwarves, elves and dragons.  Perhaps it is because of their shorter lives that they strive to achieve as much as they can in the years they are given. Or maybe they feel they have something to prove to the elder races, and that is why they build their mighty empires on the foundation of conquest and trade.  Whatever drives them, humans are the innovators, the achievers and the pioneers of the worlds.</td>
+                                        <td align="right" valign="top"><img src="http://www.patrickborrelli.com/images/dropB.jpg" style="padding-right: 5px; padding-bottom: 10px;"/></td>
+                                        <td valign="top" style="text-align:justify;">arbarians, different as they may be, are defined by their rage: unbridled, unquenchable, and unthinking fury.  More than a mere emotion, their anger is the ferocity of a cornered predator, the unrelenting assault of a storm, the churning turmoil of the sea.  For some, their rage springs from a communion with fierce animal spirits.  Others draw from a roiling reservoir of anger at a world full of pain.  For every barbarian, rage is a power that fuels not just a battle frenzy but also uncanny reflexes, resilience and feats of strength.</td>
                                     </tr>
                                 </table>
                                 <div style="text-align:justify;">
-                                            <h2 style="font-variant: small-caps;">Human Traits</h2>
-                                            Humans are the most adaptable and ambitious people among the common races.  They have widely varying tastes, morals and customs in the many different lands where they have settled.  When they settle, though, they stay: they build cities to last for the ages, and great kingdoms that can persist for long centuries.  They live fully and in the present, making them well suited for the adventuring life - but also plan for the future, striving to leave a lasting legacy.<br /><br/>
-                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Ability Score Increase: </span> All ability scores increase by 1.<br/><br/>
-                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Age: </span> Humans reach adulthood in their late teens and live less than a century.<br/><br/>
-                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Alignment: </span> Humans tend toward no particular alignment.  The best and the worst are found among them.<br/><br/>
-                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Size: </span> Humans vary widely in height and build, from barely 5 feet to well over 6 feet tall.<br/><br/>
-                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Speed: </span> Base walking speed is 30ft.<br/><br/>
-                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Languages: </span> Humans can speak, read and write Common and one extra language of your choice.  Humands typically learn the languages of other peoples they deal with, including obscure dialects.<br/>
+                                            <h2 style="font-variant: small-caps;">Class Features</h2>
+                                            Barbarians gain the following class features:<br /><br/>
+
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Hit Dice: </span> 1d12 per barbarian level.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Hit Points at 1st Level: </span> 12 + your constitution modifier.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Armor Proficiencies: </span> Light/medium armor, shields.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Weapon Proficiencies: </span> Simple weapons, martial weapons.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Tool Proficiencies: </span> None<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Saving Throw Proficiencies: </span> Strength, Constitution.<br/><br />
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Skills: </span> Choose two from Animal Handling, Athletics, Intimidation, Nature, Perception and Survival.<br/><br />
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Proficiency Bonus at 1st Level: </span> +2<br/>
+                                </div>
+                                <table width="100%" cellpadding="10">
+                                    <tr align="center">
+                                        <td><img src="http://www.patrickborrelli.com/images/barbarian.jpg"/></td>
+                                    </tr>
+                                </table>                      
+                            </div>
+                            <div class="media-body" ng-show="isShowingBard()">
+                                <table>
+                                    <tr>
+                                        <td align="right" valign="top"><img src="http://www.patrickborrelli.com/images/dropB.jpg" style="padding-right: 5px; padding-bottom: 10px;"/></td>
+                                        <td valign="top" style="text-align:justify;">ards say that the universe was spoken into existence, that the words of the gods gave it shape.  The music of the Bard is an attempt to snatch and harness those echoes, subtly woven into their spells and powers.  The Bard is a master of song, speech, and the magic they contain.  A Bard's life is spent wandering across the land gathering lore, telling stories, and living on the gratitude of audiences, much like any other entertainer, but a depth of knowledge, a level of musical skill, and a touch of magic sets the Bard apart.  The greatest strength of bards is their sheer versatility.  Many bards prefer to stick to the sidelines in combat, using their magic to inspire their allies and hinder their foes from a distance.  But bards are capable of defending themselves in melee if necessary, using their magic to bolster their swords and armor.</td>
+                                    </tr>
+                                </table>
+                                <div style="text-align:justify;">
+                                            <h2 style="font-variant: small-caps;">Class Features</h2>
+                                            Bards gain the following class features:<br /><br/>
+
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Hit Dice: </span> 1d8 per level.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Hit Points at 1st Level: </span> 8 + your constitution modifier.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Armor Proficiencies: </span> Light armor.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Weapon Proficiencies: </span> Simple weapons, hand crossbows, longswords, rapiers, shortswords.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Tool Proficiencies: </span> Three musical instruments of your choice.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Saving Throw Proficiencies: </span> Dexterity, Charisma.<br/><br />
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Skills: </span> Choose any three.<br/><br />
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Proficiency Bonus at 1st Level: </span> +2<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Spells known at 1st Level: </span> 4<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Cantrips known at 1st Level: </span> 2<br/>
 
                                 </div>
                                 <table width="100%" cellpadding="10">
                                     <tr align="center">
-                                        <td><img src="http://www.patrickborrelli.com/images/human.jpg"/></td>
+                                        <td><img src="http://www.patrickborrelli.com/images/bards.jpg"/></td>
                                     </tr>
-                                </table>                                   
+                                </table>
                             </div>
+                            <div class="media-body" ng-show="isShowingCleric()">
+                                <table>
+                                    <tr>
+                                        <td align="right" valign="top"><img src="http://www.patrickborrelli.com/images/dropC.jpg" style="padding-right: 5px; padding-bottom: 10px;"/></td>
+                                        <td valign="top" style="text-align:justify;">lerics combine the helpful magic of healing and inspiring their allies with spells that harm and hinder foes.  Divine magic is the power of the gods, flowing from them into the world.  Clerics are the conduits for that power, manifesting it as miraculous effects.  The gods don't grant this power to everyone who seeks it, but only to those chosen to fulfill a high calling.  Harnessing divine magic doesn't rely on study or training.  A cleric may learn formulaic prayers and ancient rites, but the ability to cast cleric spells relies on devotion and an intuitive sense of a deity's wishes.  Clerics can provoke awe and dread, lay curses of plague or poison, and even call down flames from the heavens to consume their enemies.  For evildoers who would benefit most from a mace to the head, clerics depend on their combat training to let them wade into battle with the power of the gods on their side.</td>
+                                    </tr>
+                                </table>
+                                <div style="text-align:justify;">
+                                            <h2 style="font-variant: small-caps;">Class Features</h2>
+                                            Clerics gain the following class features:<br /><br/>
+
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Hit Dice: </span> 1d8 per level.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Hit Points at 1st Level: </span> 8 + your constitution modifier.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Armor Proficiencies: </span> Light/medium armor, shields.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Weapon Proficiencies: </span> All simple weapons.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Tool Proficiencies: </span> None.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Saving Throw Proficiencies: </span> Wisdom, Charisma.<br/><br />
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Skills: </span> Choose two from History, Insight, Medicine, Persuasion and Religion.<br/><br />
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Proficiency Bonus at 1st Level: </span> +2<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Cantrips known at 1st Level: </span> 3<br/>
+
+                                </div>
+                                <table width="100%" cellpadding="10">
+                                    <tr align="center">
+                                        <td><img src="http://www.patrickborrelli.com/images/clerics.jpg"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="media-body" ng-show="isShowingDruid()">
+                                <table>
+                                    <tr>
+                                        <td align="right" valign="top"><img src="http://www.patrickborrelli.com/images/dropD.jpg" style="padding-right: 5px; padding-bottom: 10px;"/></td>
+                                        <td valign="top" style="text-align:justify;">ruids revere nature above all, gaining their spells and other magical powers either from the force of nature itself or from a nature deity.  Many druids pursue a mystic spirituality of trancendent union with nature rather than devotion to a divine entity, while others serve gods of wild nature, animals, or elemental forces.  Druid spells are oriented toward nature and animals - the power of tooth and claw, of sun and moon, of fire and storm.  Druids also gain the ability to take on animal forms, and some druids make a particular study of this practice, even to the point where they prefer animal form to their natural form.  For Druids, nature exists in a precarious balance.  The four elements that make up the world - air, earth, fire and water - must remain in equilibrium.  If one element were to gain power over the others, the world could be broken apart.</td>
+                                    </tr>
+                                </table>
+                                <div style="text-align:justify;">
+                                            <h2 style="font-variant: small-caps;">Class Features</h2>
+                                            Druids gain the following class features:<br /><br/>
+
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Hit Dice: </span> 1d8 per level.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Hit Points at 1st Level: </span> 8 + your constitution modifier.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Armor Proficiencies: </span> Light/medium armor, shields (druids will not wear armor or shields made of metal).<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Weapon Proficiencies: </span> Clubs, daggers, darts, javelins, maces, quarterstaves, scimitars, sickles, slings, spears.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Tool Proficiencies: </span> Herbalism kit.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Saving Throw Proficiencies: </span> Wisdom, Intelligence.<br/><br />
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Skills: </span> Choose two from Arcana, Animal Handling, Insight, Medicine, Nature, Perception, Religion and Survival.<br/><br />
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Proficiency Bonus at 1st Level: </span> +2<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Cantrips known at 1st Level: </span> 2<br/>
+
+                                </div>
+                                <table width="100%" cellpadding="10">
+                                    <tr align="center">
+                                        <td><img src="http://www.patrickborrelli.com/images/druids.jpg"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="media-body" ng-show="isShowingFighter()">
+                                <table>
+                                    <tr>
+                                        <td align="right" valign="top"><img src="http://www.patrickborrelli.com/images/dropF.jpg" style="padding-right: 5px; padding-bottom: 10px;"/></td>
+                                        <td valign="top" style="text-align:justify;">ighters learn the basics of all combat styles.  Every fighter can swing an axe, fence with a rapier, weild a longsword or a greatsword, use a bow, and even trap foes in a net with some degree of skill. Likewise, a fighter is adept with shields and every form of armor.  Beyond that basic degree of familiarity, each fighter specializes in a certain form of combat.  Some concentrate on archery, some on fighting with two weapons at once, and some on augmenting their martial skills with magic.  This combination of broad general ability and extensive specialization makes fighters superior combatants on battlefields and in dungeons alike.</td>
+                                    </tr>
+                                </table>
+                                <div style="text-align:justify;">
+                                            <h2 style="font-variant: small-caps;">Class Features</h2>
+                                            Fighters gain the following class features:<br /><br/>
+
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Hit Dice: </span> 1d10 per level.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Hit Points at 1st Level: </span> 10 + your constitution modifier.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Armor Proficiencies: </span> All armor and shields. <br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Weapon Proficiencies: </span> Simple weapons, martial weapons.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Tool Proficiencies: </span> None.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Saving Throw Proficiencies: </span> Strength, Constitution.<br/><br />
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Skills: </span> Choose two from Acrobatics, Animal Handling, Athletics, History, Insight, Intimidation, Perception and Survival.<br/><br />
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Proficiency Bonus at 1st Level: </span> +2<br/>
+
+                                </div>
+                                <table width="100%" cellpadding="10">
+                                    <tr align="center">
+                                        <td><img src="http://www.patrickborrelli.com/images/fighters.jpg"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="media-body" ng-show="isShowingMonk()">
+                                <table>
+                                    <tr>
+                                        <td align="right" valign="top"><img src="http://www.patrickborrelli.com/images/dropM.jpg" style="padding-right: 5px; padding-bottom: 10px;"/></td>
+                                        <td valign="top" style="text-align:justify;">onks make careful study of a magical energy that most monastic traditions call ki.  This energy is an element of the magic that fills the universe - specifically the element that flows through living bodies.  Monks harness this power within themselves to create magical effects and exceed their bodies' physical capabilities, and some of their attacks can hinder the flow of ki in their opponents.  Using this energy, monks channel uncanny speed and strength into their unarmed strikes.</td>
+                                    </tr>
+                                </table>
+                                <div style="text-align:justify;">
+                                            <h2 style="font-variant: small-caps;">Class Features</h2>
+                                            Monks gain the following class features:<br /><br/>
+
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Hit Dice: </span> 1d8 per level.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Hit Points at 1st Level: </span> 8 + your constitution modifier.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Armor Proficiencies: </span> None <br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Weapon Proficiencies: </span> Simple weapons, shortswords.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Tool Proficiencies: </span> Choose one type of artisan's or one musical instrument.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Saving Throw Proficiencies: </span> Strength, Dexterity.<br/><br />
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Skills: </span> Choose two from Acrobatics, Athletics, History, Insight, Religion and Stealth.<br/><br />
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Proficiency Bonus at 1st Level: </span> +2<br/>
+
+                                </div>
+                                <table width="100%" cellpadding="10">
+                                    <tr align="center">
+                                        <td><img src="http://www.patrickborrelli.com/images/monks.jpg"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="media-body" ng-show="isShowingPaladin()">
+                                <table>
+                                    <tr>
+                                        <td align="right" valign="top"><img src="http://www.patrickborrelli.com/images/dropP.jpg" style="padding-right: 5px; padding-bottom: 10px;"/></td>
+                                        <td valign="top" style="text-align:justify;">aladins swear to uphold justice and righteousness, to stand with the good things of the world against the encroaching darkness, and to hunt the forces of evil wherever they lurk. Clad in plate armor that gleams in the sunlight despite the dust and grime of long travel, a Paladin lays down her sword and shield and lays her hands on a mortally wounded man.  Divine radiance shines from her hands, the man's wounds knit closed, and his eyes open wide with amazement.
+                                        Different paladins focus on various aspects of the cause of righteousness, but all are bound by the oaths that grant them power to do their sacred work. Although many paladins are devoted to gods of good, a paladin's power comes as much from a commitment to justice iteslf as it does from a god.</td>
+                                    </tr>
+                                </table>
+                                <div style="text-align:justify;">
+                                            <h2 style="font-variant: small-caps;">Class Features</h2>
+                                            Paladins gain the following class features:<br /><br/>
+
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Hit Dice: </span> 1d10 per level.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Hit Points at 1st Level: </span> 10 + your constitution modifier.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Armor Proficiencies: </span> All armor, shields.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Weapon Proficiencies: </span> Simple weapons, martial weapons.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Tool Proficiencies: </span> None.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Saving Throw Proficiencies: </span> Wisdom, Charisma.<br/><br />
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Skills: </span> Choose two from Athletics, Insight, Intimidation, Medicine, Persuassion and Religion.<br/><br />
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Proficiency Bonus at 1st Level: </span> +2<br/>
+
+                                </div>
+                                <table width="100%" cellpadding="10">
+                                    <tr align="center">
+                                        <td><img src="http://www.patrickborrelli.com/images/paladins.jpg"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="media-body" ng-show="isShowingRanger()">
+                                <table>
+                                    <tr>
+                                        <td align="right" valign="top"><img src="http://www.patrickborrelli.com/images/dropR.jpg" style="padding-right: 5px; padding-bottom: 10px;"/></td>
+                                        <td valign="top" style="text-align:justify;">ough and wild looking, a human stalks alone through the shadows of the trees, hunting the orcs he knows are planning a raid on a nearby farm.  Clutching a shortsword in each hand, he becomes a whirlwind of steel, cutting down one enemy after another.  Warriors of the wilderness, rangers specialize in hunting the monsters that threaten the edges of civilization - humanoid raiders, rampaging beasts and monstrosities, terrible giants, and deadly dragons.  They learn to track their quarry as a predator does, moving stealthily through the wilds and hiding themselves in brush and rubble.  Rangers focus their combat training on techniques that are particularly useful agains their specific favored foes.</td>
+                                    </tr>
+                                </table>
+                                <div style="text-align:justify;">
+                                            <h2 style="font-variant: small-caps;">Class Features</h2>
+                                            Rangers gain the following class features:<br /><br/>
+
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Hit Dice: </span> 1d10 per level.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Hit Points at 1st Level: </span> 10 + your constitution modifier.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Armor Proficiencies: </span> Light/medium armor, shields.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Weapon Proficiencies: </span> Simple weapons, martial weapons.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Tool Proficiencies: </span> None.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Saving Throw Proficiencies: </span> Strength, Dexterity.<br/><br />
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Skills: </span> Choose three from Animal Handling, Athletics, Insight, Investigation, Nature, Perception, Stealth and Survival.<br/><br />
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Proficiency Bonus at 1st Level: </span> +2<br/>
+
+                                </div>
+                                <table width="100%" cellpadding="10">
+                                    <tr align="center">
+                                        <td><img src="http://www.patrickborrelli.com/images/rangers.jpg"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="media-body" ng-show="isShowingRogue()">
+                                <table>
+                                    <tr>
+                                        <td align="right" valign="top"><img src="http://www.patrickborrelli.com/images/dropR.jpg" style="padding-right: 5px; padding-bottom: 10px;"/></td>
+                                        <td valign="top" style="text-align:justify;">ogues rely on skill, stealth and their foes' vulnerabilities to get the upper hand in any situation.  They have a knack for finding the solution to just about any problem, demonstrating a resourcefulness and versatility that is the cornerstone of any successful adventuring party.  Rogues devote as much effort to mastering the use of a variety of skills as they do perfecting their combat abilities, giving them a broad expertise that few other characters can match.  Many rogues focus on stealth and deception, while others refine the skills that help them in a dungeon environment, such as climbing, finding and disarming traps, and opening locks. </td>
+                                    </tr>
+                                </table>
+                                <div style="text-align:justify;">
+                                            <h2 style="font-variant: small-caps;">Class Features</h2>
+                                            Rogues gain the following class features:<br /><br/>
+
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Hit Dice: </span> 1d8 per level.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Hit Points at 1st Level: </span> 8 + your constitution modifier.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Armor Proficiencies: </span> Light armor.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Weapon Proficiencies: </span> Simple weapons, hand crossbows, longswords, rapiers, shortswords.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Tool Proficiencies: </span> Thieves tools.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Saving Throw Proficiencies: </span> Intelligence, Dexterity.<br/><br />
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Skills: </span> Choose four from Acrobatics, Athletics, Deception, Insight, Intimidation, Investigation, Perception, Performance, Persuassion, Sleight of Hand and Stealth.<br/><br />
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Proficiency Bonus at 1st Level: </span> +2<br/>
+
+                                </div>
+                                <table width="100%" cellpadding="10">
+                                    <tr align="center">
+                                        <td><img src="http://www.patrickborrelli.com/images/rogues.jpg"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="media-body" ng-show="isShowingSorcerer()">
+                                <table>
+                                    <tr>
+                                        <td align="right" valign="top"><img src="http://www.patrickborrelli.com/images/dropS.jpg" style="padding-right: 5px; padding-bottom: 10px;"/></td>
+                                        <td valign="top" style="text-align:justify;">orcerers are rare in the world and it's unusual to find a sorcerer who is not involved in the adventuring life in some way.  Sorcerers carry a magical birthright conferred upon them by an exotic bloodline, some otherworldly influence, or exposure to unknown cosmic forces.  One cannot study sorcery as one learns a language, any more than one can learn to live a legendary life.  No one chooses sorcery; the power chooses the sorcerer.</td>
+                                    </tr>
+                                </table>
+                                <div style="text-align:justify;">
+                                            <h2 style="font-variant: small-caps;">Class Features</h2>
+                                            Sorcerers gain the following class features:<br /><br/>
+
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Hit Dice: </span> 1d6 per level.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Hit Points at 1st Level: </span> 6 + your constitution modifier.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Armor Proficiencies: </span> None.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Weapon Proficiencies: </span> Daggers, darts, slings, quarterstaffs, light crossbows.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Tool Proficiencies: </span> None.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Saving Throw Proficiencies: </span> Constitution, Charisma.<br/><br />
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Skills: </span> Choose two from Arcana, Deception, Insight, Intimidation, Persuassion and Religion.<br/><br />
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Proficiency Bonus at 1st Level: </span> +2<br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Spells known at 1st Level: </span> 2<br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Cantrips known at 1st Level: </span> 4<br/>
+
+                                </div>
+                                <table width="100%" cellpadding="10">
+                                    <tr align="center">
+                                        <td><img src="http://www.patrickborrelli.com/images/sorcerers.jpg"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="media-body" ng-show="isShowingWarlock()">
+                                <table>
+                                    <tr>
+                                        <td align="right" valign="top"><img src="http://www.patrickborrelli.com/images/dropW.jpg" style="padding-right: 5px; padding-bottom: 10px;"/></td>
+                                        <td valign="top" style="text-align:justify;">arlocks are driven by an insatiable need for knowledge and power, which compels them into their pacts and shapes their lives.  A warlock is defined by a pact with an otherworldly being.  Sometimes the pact between warlock and patron is like that of a cleric and a deity, though the beings that serve as patrons for warlocks are not gods.  The magic bestowed on a warlock ranges from minor but lasting alterations to the warlock's being to access to more powerful spells.  Unlike bookish wizards, warlocks suppliment their magic with some facility at hand-to-hand combat. Stories of warlocks binding themselves to fiends are widely known.  But many warlocks serve patrons that are not fiendish.</td>
+                                    </tr>
+                                </table>
+                                <div style="text-align:justify;">
+                                            <h2 style="font-variant: small-caps;">Class Features</h2>
+                                            Warlocks gain the following class features:<br /><br/>
+
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Hit Dice: </span> 1d8 per level.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Hit Points at 1st Level: </span> 8 + your constitution modifier.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Armor Proficiencies: </span> Light armor.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Weapon Proficiencies: </span> Simple weapons.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Tool Proficiencies: </span> None.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Saving Throw Proficiencies: </span> Widom, Charisma.<br/><br />
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Skills: </span> Choose two from Arcana, Deception, History, Intimidation, Investigation, Nature and Religion.<br/><br />
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Proficiency Bonus at 1st Level: </span> +2<br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Spells known at 1st Level: </span> 2<br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Cantrips known at 1st Level: </span> 2<br/>
+
+                                </div>
+                                <table width="100%" cellpadding="10">
+                                    <tr align="center">
+                                        <td><img src="http://www.patrickborrelli.com/images/warlocks.jpg"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="media-body" ng-show="isShowingWizard()">
+                                <table>
+                                    <tr>
+                                        <td align="right" valign="top"><img src="http://www.patrickborrelli.com/images/dropW.jpg" style="padding-right: 5px; padding-bottom: 10px;"/></td>
+                                        <td valign="top" style="text-align:justify;">izards are supreme magic-users, defined and united as a class by the spells they cast.  Drawing on the subtle weave of magic that permeates the cosmos, wisards cast spells of explosive fire, arcing lightning, subtle deception, and brute-force mind control.  Their magic conjurs monsters from other planes of existence, glimpses the future, or turns slain foes into zombies.  Their mightiest spells change one substance into another, call meteors down from the sky, or open portals to other worlds.  Wizards' lives are seldom mundane.  The closest a wizard is likely to come to an ordinary life is working as a sage or lecturer in a library or university, teaching others the secrets of the universe.</td>
+                                    </tr>
+                                </table>
+                                <div style="text-align:justify;">
+                                            <h2 style="font-variant: small-caps;">Class Features</h2>
+                                            Wizards gain the following class features:<br /><br/>
+
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Hit Dice: </span> 1d6 per level.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Hit Points at 1st Level: </span> 6 + your constitution modifier.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Armor Proficiencies: </span> None.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Weapon Proficiencies: </span> Daggers, darts, slings, quarterstaffs, light crossbows.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Tool Proficiencies: </span> None.<br/><br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Saving Throw Proficiencies: </span> Intelligence, Wisdom.<br/><br />
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Skills: </span> Choose two from Arcana, History, Insight, Investigation, Medicine and Religion.<br/><br />
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Proficiency Bonus at 1st Level: </span> +2<br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Spells known at 1st Level: </span> 2<br/>
+                                            <span style="text-align:left; font-style:italic; font-weight: bold;">Cantrips known at 1st Level: </span> 3<br/>
+
+                                </div>
+                                <table width="100%" cellpadding="10">
+                                    <tr align="center">
+                                        <td><img src="http://www.patrickborrelli.com/images/wizards.jpg"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            
                         </li>
                     </ul>
                 </div>
