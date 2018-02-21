@@ -772,8 +772,92 @@
                     </ul>
                 </div>
             </uib-tab>
-            <uib-tab index="4" heading="Abilities" disable="abilityDisabled">Abilities<br/>
-                <button type="button" style="margin-left: 16px;" class="btn btn-info btn-xs" ng-click="skillsDisabled = false; switchTab(5);">Next</button>
+            <uib-tab index="4" heading="Abilities" disable="abilityDisabled">
+                <div class="col-xs-12">
+                    <div class="col-xs-4">  
+                        <div style="text-align:justify;"><img src="http://www.patrickborrelli.com/images/dropE.jpg" style="padding-right: 5px; padding-bottom: 10px; float: left;"/>ach of a creature’s abilities has a score, a number that defines the magnitude of that ability. An ability score is not just a measure of innate capabilities, but also encompasses a creature’s training and competence in activities related to that ability. A score of 10 or 11 is the normal human average, but adventurers and many monsters are a cut above average in most abilities. A score of 18 is the highest that a person usually reaches. Adventurers can have scores as high as 20, and monsters and divine beings can have scores as high as 30. These six abilities provide a quick description of every creature’s physical and mental characteristics:</div><br/>
+                        <ul>
+                            <li><strong>Strength</strong> - physical power</li>
+                            <li><strong>Dexterity</strong> - agility</li>
+                            <li><strong>Constitution</strong> - endurance</li>
+                            <li><strong>Intelligence</strong> - reasoning and memory</li> 
+                            <li><strong>Wisdom</strong> - perception and insight</li>
+                            <li><strong>Charisma</strong> - force of personality</li>
+                        </ul><br/>
+                        <div style="text-align:justify;">DMAware uses random rolled ability scores.  This is the standard approach to determining your characters ability scores. A six-sided die is rolled 4 times, and the best 3 results are kept. This results in scores ranging from 3 to 18.</div><br/>
+                        <button type="button" class="btn btn-sm btn-info btn-custom125" ng-click="saveCurrentAbilities();">Next</button><br/>
+                        <button type="button" class="btn btn-sm btn-info btn-custom125" ng-click="switchTab(activeIndex - 1);">Previous</button>
+                    </div>
+                    <form>
+                    <div class="col-xs-4">
+                        <div style="text-align:center;" class="col-xs-12>"><h2>Roll Scores</h2></div>
+                        <div class="col-xs-12">
+                            <button type="button" ng-click="rollStr()" class="btn btn-dark" style="margin: 0px;" ng-disabled="strDisabled"><img src="images/die2.png"></button>
+                            <input type="text" disabled style="width: 40px; height: 40px; margin: 0px; padding: 0px;" ng-model="abilityForm.strRoll1">
+                            <input type="text" disabled style="width: 40px; height: 40px; margin: 0px; padding: 0px;" ng-model="abilityForm.strRoll2">
+                            <input type="text" disabled style="width: 40px; height: 40px; margin: 0px; padding: 0px;" ng-model="abilityForm.strRoll3">
+                            <input type="text" disabled style="width: 40px; height: 40px; margin: 0px; padding: 0px;" ng-model="abilityForm.strRoll4">
+                        </div>
+                        <div class="col-xs-12">
+                            <button type="button" ng-click="rollDex()" class="btn btn-dark" style="margin: 0px;" ng-disabled="dexDisabled"><img src="images/die2.png"></button>
+                            <input type="text" disabled style="width: 40px; height: 40px; margin: 0px; padding: 0px;" ng-model="abilityForm.dexRoll1">
+                            <input type="text" disabled style="width: 40px; height: 40px; margin: 0px; padding: 0px;" ng-model="abilityForm.dexRoll2">
+                            <input type="text" disabled style="width: 40px; height: 40px; margin: 0px; padding: 0px;" ng-model="abilityForm.dexRoll3">
+                            <input type="text" disabled style="width: 40px; height: 40px; margin: 0px; padding: 0px;" ng-model="abilityForm.dexRoll4">
+                        </div>
+                        <div class="col-xs-12">
+                            <button type="button" ng-click="rollCon()" class="btn btn-dark" style="margin: 0px;" ng-disabled="conDisabled"><img src="images/die2.png"></button>
+                            <input type="text" disabled style="width: 40px; height: 40px; margin: 0px; padding: 0px;" ng-model="abilityForm.conRoll1">
+                            <input type="text" disabled style="width: 40px; height: 40px; margin: 0px; padding: 0px;" ng-model="abilityForm.conRoll2">
+                            <input type="text" disabled style="width: 40px; height: 40px; margin: 0px; padding: 0px;" ng-model="abilityForm.conRoll3">
+                            <input type="text" disabled style="width: 40px; height: 40px; margin: 0px; padding: 0px;" ng-model="abilityForm.conRoll4">
+                        </div>
+                        <div class="col-xs-12">
+                            <button type="button" ng-click="rollWis()" class="btn btn-dark" style="margin: 0px;" ng-disabled="wisDisabled"><img src="images/die2.png"></button>
+                            <input type="text" disabled style="width: 40px; height: 40px; margin: 0px; padding: 0px;" ng-model="abilityForm.wisRoll1">
+                            <input type="text" disabled style="width: 40px; height: 40px; margin: 0px; padding: 0px;" ng-model="abilityForm.wisRoll2">
+                            <input type="text" disabled style="width: 40px; height: 40px; margin: 0px; padding: 0px;" ng-model="abilityForm.wisRoll3">
+                            <input type="text" disabled style="width: 40px; height: 40px; margin: 0px; padding: 0px;" ng-model="abilityForm.wisRoll4">
+                        </div>
+                        <div class="col-xs-12">
+                             <button type="button" ng-click="rollInt()" class="btn btn-dark" style="margin: 0px;" ng-disabled="intDisabled"><img src="images/die2.png"></button>
+                            <input type="text" disabled style="width: 40px; height: 40px; margin: 0px; padding: 0px;" ng-model="abilityForm.intRoll1">
+                            <input type="text" disabled style="width: 40px; height: 40px; margin: 0px; padding: 0px;" ng-model="abilityForm.intRoll2">
+                            <input type="text" disabled style="width: 40px; height: 40px; margin: 0px; padding: 0px;" ng-model="abilityForm.intRoll3">
+                            <input type="text" disabled style="width: 40px; height: 40px; margin: 0px; padding: 0px;" ng-model="abilityForm.intRoll4">
+                        </div>
+                        <div class="col-xs-12">
+                            <button type="button" ng-click="rollCha()" class="btn btn-dark" style="margin: 0px;" ng-disabled="chaDisabled"><img src="images/die2.png"></button>
+                            <input type="text" disabled style="width: 40px; height: 40px; margin: 0px; padding: 0px;" ng-model="abilityForm.chaRoll1">
+                            <input type="text" disabled style="width: 40px; height: 40px; margin: 0px; padding: 0px;" ng-model="abilityForm.chaRoll2">
+                            <input type="text" disabled style="width: 40px; height: 40px; margin: 0px; padding: 0px;" ng-model="abilityForm.chaRoll3">
+                            <input type="text" disabled style="width: 40px; height: 40px; margin: 0px; padding: 0px;" ng-model="abilityForm.chaRoll4">
+                        </div>
+                        
+                    </div>  
+                    <div class="col-xs-4">
+                        <div class="col-xs-12>"><h2>Total Scores</h2></div>
+                        <div class="col-xs-12">
+                            <input type="text" disabled style="width: 40px; height: 40px; margin-bottom: 4px; margin-right: 5px; padding: 0px;" ng-model="abilityForm.strTotal">Strength
+                        </div>
+                        <div class="col-xs-12">
+                            <input type="text" disabled style="width: 40px; height: 40px; margin-bottom: 4px; margin-right: 5px; padding: 0px;" ng-model="abilityForm.dexTotal">Dexterity
+                        </div>
+                        <div class="col-xs-12">
+                            <input type="text" disabled style="width: 40px; height: 40px; margin-bottom: 4px; margin-right: 5px; padding: 0px;" ng-model="abilityForm.conTotal">Constitution
+                        </div>
+                        <div class="col-xs-12">
+                            <input type="text" disabled style="width: 40px; height: 40px; margin-bottom: 4px; margin-right: 5px; padding: 0px;" ng-model="abilityForm.wisTotal">Wisdom
+                        </div>
+                        <div class="col-xs-12">
+                            <input type="text" disabled style="width: 40px; height: 40px; margin-bottom: 4px; margin-right: 5px; padding: 0px;" ng-model="abilityForm.intTotal">Intelligence
+                        </div>
+                        <div class="col-xs-12">
+                            <input type="text" disabled style="width: 40px; height: 40px; margin: 0px; margin-right: 5px; padding: 0px;" ng-model="abilityForm.chaTotal">Charism
+                        </div>                        
+                    </div> 
+                    </form>
+                </div>
             </uib-tab>
             <uib-tab index="5" heading="Skills" disable="skillsDisabled">Skills</uib-tab>
             <uib-tab index="6" heading="Equipment" disable="equipDisabled">Equipment</uib-tab>            

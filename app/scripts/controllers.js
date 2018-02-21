@@ -85,6 +85,11 @@ angular.module('dm-app')
             return true;
         };
         
+        $scope.playDice = function() {
+            var audio = new Audio('audio/dice.mp3');
+            audio.play();
+        }
+        
         
         
         //navigation        
@@ -631,7 +636,7 @@ angular.module('dm-app')
             
             console.log("current character form contains:");
             console.log($scope.characterForm);
-            $scope.classDisabled = false; 
+            $scope.alignDisabled = false; 
             $scope.switchTab(3);
         };  
         
@@ -642,7 +647,7 @@ angular.module('dm-app')
         $scope.selectedNG = false;
         $scope.selectedCG = false;
         $scope.selectedLN = false;
-        $scope.selectedTN = false;
+        $scope.selectedTN = true;
         $scope.selectedCN = false;
         $scope.selectedLE = false;
         $scope.selectedNE = false;
@@ -779,9 +784,150 @@ angular.module('dm-app')
             
             console.log("current character form contains:");
             console.log($scope.characterForm);
+            $scope.openAbilities();
+        };  
+                
+        ////////////////////////////////////////////   
+        
+        //Abilities ///////////////////////////////////
+        
+        $scope.strDisabled = false;
+        $scope.dexDisabled = false;
+        $scope.conDisabled = false;
+        $scope.wisDisabled = false;
+        $scope.intDisabled = false;
+        $scope.chaDisabled = false;
+        
+        $scope.openAbilities = function() {
             $scope.abilityDisabled = false; 
             $scope.switchTab(4);
+            if($scope.strDisabled) {
+                //leave this form
+            } else {
+                $scope.abilityForm = {
+                    strRoll1: 0,
+                    strRoll2: 0,
+                    strRoll3: 0,
+                    strRoll4: 0,
+                    strTotal: 0,
+                    dexRoll1: 0,
+                    dexRoll2: 0,
+                    dexRoll3: 0,
+                    dexRoll4: 0,
+                    dexTotal: 0,
+                    conRoll1: 0,
+                    conRoll2: 0,
+                    conRoll3: 0,
+                    conRoll4: 0,
+                    conTotal: 0,
+                    wisRoll1: 0,
+                    wisRoll2: 0,
+                    wisRoll3: 0,
+                    wisRoll4: 0,
+                    wisTotal: 0,
+                    intRoll1: 0,
+                    intRoll2: 0,
+                    intRoll3: 0,
+                    intRoll4: 0,
+                    intTotal: 0,
+                    chaRoll1: 0,
+                    chaRoll2: 0,
+                    chaRoll3: 0,
+                    chaRoll4: 0,
+                    chaTotal: 0
+                };
+            }
+            
+        }
+        
+        $scope.rollStr = function() {
+            $scope.playDice();
+            var str1 = $scope.abilityForm.strRoll1 = Math.floor((Math.random() * 6) + 1);
+            var str2 = $scope.abilityForm.strRoll2 = Math.floor((Math.random() * 6) + 1);
+            var str3 = $scope.abilityForm.strRoll3 = Math.floor((Math.random() * 6) + 1);
+            var str4 = $scope.abilityForm.strRoll4 = Math.floor((Math.random() * 6) + 1);
+            var total = str1 + str2 + str3 + str4;
+            $scope.abilityForm.strTotal = total - $scope.findLowest([str1, str2, str3, str4]); 
+            $scope.strDisabled = true;
+        };
+        
+        $scope.rollDex = function() {
+            $scope.playDice();
+            var dex1 = $scope.abilityForm.dexRoll1 = Math.floor((Math.random() * 6) + 1);
+            var dex2 = $scope.abilityForm.dexRoll2 = Math.floor((Math.random() * 6) + 1);
+            var dex3 = $scope.abilityForm.dexRoll3 = Math.floor((Math.random() * 6) + 1);
+            var dex4 = $scope.abilityForm.dexRoll4 = Math.floor((Math.random() * 6) + 1);
+            var total = dex1 + dex2 + dex3 + dex4;
+            $scope.abilityForm.dexTotal = total - $scope.findLowest([dex1, dex2, dex3, dex4]);
+            $scope.dexDisabled = true;
+        };
+        
+        $scope.rollCon = function() {
+            $scope.playDice();
+            var con1 = $scope.abilityForm.conRoll1 = Math.floor((Math.random() * 6) + 1);
+            var con2 = $scope.abilityForm.conRoll2 = Math.floor((Math.random() * 6) + 1);
+            var con3 = $scope.abilityForm.conRoll3 = Math.floor((Math.random() * 6) + 1);
+            var con4 = $scope.abilityForm.conRoll4 = Math.floor((Math.random() * 6) + 1);
+            var total = con1 + con2 + con3 + con4;
+            $scope.abilityForm.conTotal = total - $scope.findLowest([con1, con2, con3, con4]);  
+            $scope.conDisabled = true;
+        };
+        
+        $scope.rollWis = function() {
+            $scope.playDice();
+            var wis1 = $scope.abilityForm.wisRoll1 = Math.floor((Math.random() * 6) + 1);
+            var wis2 = $scope.abilityForm.wisRoll2 = Math.floor((Math.random() * 6) + 1);
+            var wis3 = $scope.abilityForm.wisRoll3 = Math.floor((Math.random() * 6) + 1);
+            var wis4 = $scope.abilityForm.wisRoll4 = Math.floor((Math.random() * 6) + 1);
+            var total = wis1 + wis2 + wis3 + wis4;
+            $scope.abilityForm.wisTotal = total - $scope.findLowest([wis1, wis2, wis3, wis4]); 
+            $scope.wisDisabled = true;
+        };
+        
+        $scope.rollInt = function() {
+            $scope.playDice();
+            var int1 = $scope.abilityForm.intRoll1 = Math.floor((Math.random() * 6) + 1);
+            var int2 = $scope.abilityForm.intRoll2 = Math.floor((Math.random() * 6) + 1);
+            var int3 = $scope.abilityForm.intRoll3 = Math.floor((Math.random() * 6) + 1);
+            var int4 = $scope.abilityForm.intRoll4 = Math.floor((Math.random() * 6) + 1);
+            var total = int1 + int2 + int3 + int4;
+            $scope.abilityForm.intTotal = total - $scope.findLowest([int1, int2, int3, int4]); 
+            $scope.intDisabled = true;
+        };
+        
+        $scope.rollCha = function() {
+            $scope.playDice();
+            var cha1 = $scope.abilityForm.chaRoll1 = Math.floor((Math.random() * 6) + 1);
+            var cha2 = $scope.abilityForm.chaRoll2 = Math.floor((Math.random() * 6) + 1);
+            var cha3 = $scope.abilityForm.chaRoll3 = Math.floor((Math.random() * 6) + 1);
+            var cha4 = $scope.abilityForm.chaRoll4 = Math.floor((Math.random() * 6) + 1);
+            var total = cha1 + cha2 + cha3 + cha4;
+            $scope.abilityForm.chaTotal = total - $scope.findLowest([cha1, cha2, cha3, cha4]);  
+            $scope.chaDisabled = true;
+        };
+        
+        $scope.findLowest = function(values) {
+            var lowest = 7;
+            for(var i = 0; i < values.length; i++) {
+                if(values[i] < lowest) lowest = values[i];
+            }
+            return lowest;
+        };                
+        
+        $scope.saveCurrentAbilities = function() {
+            $scope.characterForm.str = $scope.abilityForm.strTotal;
+            $scope.characterForm.dex = $scope.abilityForm.dexTotal;
+            $scope.characterForm.con = $scope.abilityForm.conTotal;
+            $scope.characterForm.wis = $scope.abilityForm.wisTotal;
+            $scope.characterForm.int = $scope.abilityForm.intTotal;
+            $scope.characterForm.cha = $scope.abilityForm.chaTotal;            
+
+            console.log("current character form contains:");
+            console.log($scope.characterForm);
+            $scope.skillsDisabled = false; 
+            $scope.switchTab(5);
         };  
+        
        
      }])
 ;
