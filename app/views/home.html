@@ -790,7 +790,7 @@
                     </div>
                     <form>
                     <div class="col-xs-4">
-                        <div style="text-align:center;" class="col-xs-12>"><h2>Roll Scores</h2></div>
+                        <div style="text-align:center;" class="col-xs-12>"><h3>Roll Scores</h3></div>
                         <div class="col-xs-12">
                             <button type="button" ng-click="rollStr()" class="btn btn-dark" style="margin: 0px;" ng-disabled="strDisabled"><img src="images/die2.png"></button>
                             <input type="text" disabled style="width: 40px; height: 40px; margin: 0px; padding: 0px;" ng-model="abilityForm.strRoll1">
@@ -836,7 +836,7 @@
                         
                     </div>  
                     <div class="col-xs-4">
-                        <div class="col-xs-12>"><h2>Total Scores</h2></div>
+                        <div class="col-xs-12>"><h3>Total Scores</h3></div>
                         <div class="col-xs-12">
                             <input type="text" disabled style="width: 40px; height: 40px; margin-bottom: 4px; margin-right: 5px; padding: 0px;" ng-model="abilityForm.strTotal">Strength
                         </div>
@@ -859,7 +859,172 @@
                     </form>
                 </div>
             </uib-tab>
-            <uib-tab index="5" heading="Skills" disable="skillsDisabled">Skills</uib-tab>
+            <uib-tab index="5" heading="Skills" disable="skillsDisabled">
+                <div class="col-xs-12">
+                    <div class="col-xs-4">  
+                        <div style="text-align:justify;"><img src="http://www.patrickborrelli.com/images/dropP.jpg" style="padding-right: 5px; padding-bottom: 10px; float: left;"/>layer Character (PC) skills are utilized in many aspects of gameplay. In the 5th Edition rules, all players have some level of all skills, based on the ability associated with a particular skill. For example, a player who has a Strength score of 14 gets a +2 modifier for Strength. So for any Strength related skills (Athletics), the player will get the same bonus to that particular skill.<br/><br/>Additionally, depending on their character class, players get to choose a proficiency in some number of skills. The character class may also limit the list of skills a character can be proficient in (i.e., a Fighter can choose two skills to be proficient in from Acrobatics, Animal Handling, Athletics, History, Insight, Intimidation, Perception and Survival). Any skill a player is proficient in has the player's proficiency bonus applied to that skill as well.</div><br/>
+                        <button type="button" class="btn btn-sm btn-info btn-custom125" ng-click="saveCurrentAbilities();">Next</button><br/>
+                        <button type="button" class="btn btn-sm btn-info btn-custom125" ng-click="switchTab(activeIndex - 1);">Previous</button>
+                    </div>
+                    <form>
+                    <div class="col-xs-4">
+                        <div style="text-align:center;" class="col-xs-12>"><h3>Skill Proficiencies</h3></div>
+                        <div class="checkbox">
+                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <label>
+                                <input type="checkbox"> Acrobatics (Dex)
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <label>
+                                <input type="checkbox"> Animal Handling (Wis)
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <label>
+                                <input type="checkbox"> Arcana (Int)
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <label>
+                                <input type="checkbox"> Athletics (Str)
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <label>
+                                <input type="checkbox"> Deception (Cha)
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <label>
+                                <input type="checkbox"> History (Int)
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <label>
+                                <input type="checkbox"> Insight (Wis)
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <label>
+                                <input type="checkbox"> Intimidation (Cha)
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <label>
+                                <input type="checkbox"> Investigation (Int)
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <label>
+                                <input type="checkbox"> Medicine (Wis)
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <label>
+                                <input type="checkbox"> Nature (Int)
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <label>
+                                <input type="checkbox"> Perception (Wis)
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <label>
+                                <input type="checkbox"> Performance (Cha)
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <label>
+                                <input type="checkbox"> Persuasion (Cha)
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <label>
+                                <input type="checkbox"> Religion (Int)
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <label>
+                                <input type="checkbox"> Sleight of Hand (Dex)
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <label>
+                                <input type="checkbox"> Stealth (Dex)
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <label>
+                                <input type="checkbox"> Survival (Wis)
+                            </label>
+                        </div>
+                    </div>  
+                    <div class="col-xs-4">
+                        <div class="col-xs-12>"><h3>Languages</h3></div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Common
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Dwarvish
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Elvish
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Giant
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Gnomish
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Goblin
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Halfling
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Orcish
+                            </label>
+                        </div>
+                    </div> 
+                    </form>
+                </div>
+            
+            </uib-tab>
             <uib-tab index="6" heading="Equipment" disable="equipDisabled">Equipment</uib-tab>            
             <uib-tab index="7" heading="Spellcasting" disable="spellsDisabled">Spellcasting</uib-tab>
         </uib-tabset>
