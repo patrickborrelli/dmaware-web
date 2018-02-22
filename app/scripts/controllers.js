@@ -950,7 +950,44 @@ angular.module('dm-app')
         $scope.survDisabled = false;
         
         $scope.commonSelected = false;
-        $scope.commonDisabled = false;
+        $scope.dwarvishSelected = false;
+        $scope.elvishSelected = false; 
+        $scope.giantSelected = false;
+        $scope.gnomishSelected = false;
+        $scope.goblinSelected = false;
+        $scope.halflingSelected = false;
+        $scope.orcishSelected = false;       
+        
+        $scope.commonDisabled = false;        
+        $scope.dwarvishDisabled = false;
+        $scope.elvishDisabled = false;
+        $scope.giantDisabled = false;
+        $scope.gnomishDisabled = false;
+        $scope.goblinDisabled = false;
+        $scope.halflingDisabled = false;
+        $scope.orcishDisabled = false; 
+        
+        $scope.setLangDisabled = function() {
+            $scope.commonDisabled = true;        
+            $scope.dwarvishDisabled = true;
+            $scope.elvishDisabled = true;
+            $scope.giantDisabled = true;
+            $scope.gnomishDisabled = true;
+            $scope.goblinDisabled = true;
+            $scope.halflingDisabled = true;
+            $scope.orcishDisabled = true; 
+        };
+        
+        $scope.setLangEnabled = function() {
+            $scope.commonDisabled = false;        
+            $scope.dwarvishDisabled = false;
+            $scope.elvishDisabled = false;
+            $scope.giantDisabled = false;
+            $scope.gnomishDisabled = false;
+            $scope.goblinDisabled = false;
+            $scope.halflingDisabled = false;
+            $scope.orcishDisabled = false; 
+        };
         
         $scope.raceString = '';
         $scope.classString = '';
@@ -1137,37 +1174,57 @@ angular.module('dm-app')
                 case 'DWARF':
                 case 'HILL DWARF':
                     $scope.raceString = "You can speak, read, and write Common and Dwarvish. Dwarvish is full of hard consonants and guttural sounds, and those characteristics spill over into whatever other language a dwarf might speak.";
+                    $scope.setLangDisabled();
+                    $scope.commonSelected = true;
+                    $scope.dwarvishSelected = true;
                     break;
                 case 'ELF': 
                     $scope.raceString = "You can speak, read, and write Common and Elvish. Elvish is fluid, with subtle intonations and intricate grammar. Elven literature is rich and varied, and their songs and poems are famous among other races. Many bards learn their language so they can add Elvish ballads to their repertoires.";
+                    $scope.setLangDisabled();
+                    $scope.commonSelected = true;
+                    $scope.elvishSelected = true;
                     break;
                 case 'HIGH ELF':
-                    $scope.raceString = "You can speak, read, and write Common and Elvish. Elvish is fluid, with subtle intonations and intricate grammar. Elven literature is rich and varied, and their songs and poems are famous among other races. Many bards learn their language so they can add Elvish ballads to their repertoires. As a High Elf, you can speak one extra language of your choice.";
+                    $scope.raceString = "You can speak, read, and write Common and Elvish. Elvish is fluid, with subtle intonations and intricate grammar. Elven literature is rich and varied, and their songs and poems are famous among other races. Many bards learn their language so they can add Elvish ballads to their repertoires. As a High Elf, you can speak one extra language of your choice."; 
+                    $scope.setLangEnabled();
+                    $scope.commonSelected = true;
+                    $scope.elvishSelected = true;
+                    $scope.commonDisabled = true;
+                    $scope.elvishDisabled = true;
                     break;
                 case 'HALFLING':
                 case 'LIGHTFOOT':
                     $scope.raceString = "You can speak, read, and write Common and Halfling. The Halfling language isn’t secret, but halflings are loath to share it with others. They write very little, so they don’t have a rich body of literature. Their oral tradition, however, is very strong. Almost all halflings speak Common to converse with the people in whose lands they dwell or through which they are traveling.";
+                    $scope.setLangDisabled();
+                    $scope.commonSelected = true;
+                    $scope.halflingSelected = true;
                     break;
                 case 'HUMAN':
-                    $scope.raceString = "Monks choose two skills from Acrobatics, Athletics, History, Insight, Religion, and Stealth.";
+                    $scope.raceString = "You can speak, read, and write Common and one extra language of your choice. Humans typically learn the languages of other peoples they deal with, including obscure dialects. They are fond of sprinkling their speech with words borrowed from other tongues: Orc curses, Elvish musical expressions, Dwarvish military phrases, and so on.";
+                    $scope.setLangEnabled();
+                    $scope.commonSelected = true;
+                    $scope.commonDisabled = true;
                     break;
-                case 'PALADIN':
-                    $scope.raceString = "Paladins choose two skills from Athletics, Insight, Intimidation, Medicine, Persuasion, and Religion.";
+                case 'GNOME':
+                case 'ROCK GNOME':
+                    $scope.raceString = "You can speak, read, and write Common and Gnomish. The Gnomish language, which uses the Dwarvish script, is renowned for its technical treatises and its catalogs of knowledge about the natural world.";
+                    $scope.setLangDisabled();
+                    $scope.commonSelected = true;
+                    $scope.gnomishSelected = true;
                     break;
-                case 'RANGER':
-                    $scope.raceString = "Rangers choose three skills from Animal Handling, Athletics, Insight, Investigation, Nature, Preception, and Stealth.";
+                case 'HALF ELF':
+                    $scope.raceString = "You can speak, read, and write Common, Elvish, and one extra language of your choice.";
+                    $scope.setLangEnabled();
+                    $scope.commonSelected = true;
+                    $scope.elvishSelected = true;
+                    $scope.commonDisabled = true;
+                    $scope.elvishDisabled = true;
                     break;
-                case 'ROGUE':
-                    $scope.classString = "Rogues choose four skills from Acrobatics, Athletics, Deception, Insight, Intimidation, Investigation, Perception, Performance, Persuasion, Sleight of Hand, and Stealth.";
-                    break;
-                case 'SORCERER':
-                    $scope.classString = "Sorcerers choose two skills from Arcana, Deception, Insight, Intimidation, Persuasion, and Religion.";
-                    break;                
-                case 'WARLOCK':
-                    $scope.classString = "Warlocks choose two skills from Arcana, Deception, History, Intimidation, Investigation, Nature, and Religion.";
-                    break;                
-                case 'WIZARD':
-                    $scope.classString = "Wizards choose two skills from Arcana, History, Insight, Investigation, Medicine, and Religion.";
+                case 'HALF ORC':
+                    $scope.classString = "You can speak, read, and write Common and Orc. Orc is a harsh, grating language with hard consonants. It has no script of its own but is written in the Dwarvish script.";
+                    $scope.setLangDisabled();
+                    $scope.commonSelected = true;
+                    $scope.orcishSelected = true;
                     break;
             }
         };
