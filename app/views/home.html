@@ -863,6 +863,8 @@
                 <div class="col-xs-12">
                     <div class="col-xs-4">  
                         <div style="text-align:justify;"><img src="http://www.patrickborrelli.com/images/dropP.jpg" style="padding-right: 5px; padding-bottom: 10px; float: left;"/>layer Character (PC) skills are utilized in many aspects of gameplay. In the 5th Edition rules, all players have some level of all skills, based on the ability associated with a particular skill. For example, a player who has a Strength score of 14 gets a +2 modifier for Strength. So for any Strength related skills (Athletics), the player will get the same bonus to that particular skill.<br/><br/>Additionally, depending on their character class, players get to choose a proficiency in some number of skills. The character class may also limit the list of skills a character can be proficient in (i.e., a Fighter can choose two skills to be proficient in from Acrobatics, Animal Handling, Athletics, History, Insight, Intimidation, Perception and Survival). Any skill a player is proficient in has the player's proficiency bonus applied to that skill as well.</div><br/>
+                        <div style="color: maroon;">{{classString}}</div><br/>
+                        <div style="color: maroon;">{{raceString}}</div><br/>
                         <button type="button" class="btn btn-sm btn-info btn-custom125" ng-click="saveCurrentAbilities();">Next</button><br/>
                         <button type="button" class="btn btn-sm btn-info btn-custom125" ng-click="switchTab(activeIndex - 1);">Previous</button>
                     </div>
@@ -870,111 +872,111 @@
                     <div class="col-xs-4">
                         <div style="text-align:center;" class="col-xs-12>"><h3>Skill Proficiencies</h3></div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="acroDisabled">INFO</button>
                             <label>
-                                <input type="checkbox"> Acrobatics (Dex)
+                                <input type="checkbox" ng-disabled="acroDisabled"> Acrobatics (Dex)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="animDisabled">INFO</button>
                             <label>
-                                <input type="checkbox"> Animal Handling (Wis)
+                                <input type="checkbox" ng-disabled="animDisabled"> Animal Handling (Wis)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="arcaDisabled">INFO</button>
                             <label>
-                                <input type="checkbox"> Arcana (Int)
+                                <input type="checkbox" ng-disabled="arcaDisabled"> Arcana (Int)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="athlDisabled">INFO</button>
                             <label>
-                                <input type="checkbox"> Athletics (Str)
+                                <input type="checkbox" ng-disabled="athlDisabled"> Athletics (Str)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="deceDisabled">INFO</button>
                             <label>
-                                <input type="checkbox"> Deception (Cha)
+                                <input type="checkbox" ng-disabled="deceDisabled"> Deception (Cha)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="histDisabled">INFO</button>
                             <label>
-                                <input type="checkbox"> History (Int)
+                                <input type="checkbox" ng-disabled="histDisabled"> History (Int)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="insiDisabled">INFO</button>
                             <label>
-                                <input type="checkbox"> Insight (Wis)
+                                <input type="checkbox" ng-disabled="insiDisabled"> Insight (Wis)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="intiDisabled">INFO</button>
                             <label>
-                                <input type="checkbox"> Intimidation (Cha)
+                                <input type="checkbox" ng-disabled="intiDisabled"> Intimidation (Cha)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="inveDisabled">INFO</button>
                             <label>
-                                <input type="checkbox"> Investigation (Int)
+                                <input type="checkbox" ng-disabled="inveDisabled"> Investigation (Int)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="mediDisabled">INFO</button>
                             <label>
-                                <input type="checkbox"> Medicine (Wis)
+                                <input type="checkbox" ng-disabled="mediDisabled"> Medicine (Wis)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="natuDisabled">INFO</button>
                             <label>
-                                <input type="checkbox"> Nature (Int)
+                                <input type="checkbox" ng-disabled="natuDisabled"> Nature (Int)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="percDisabled">INFO</button>
                             <label>
-                                <input type="checkbox"> Perception (Wis)
+                                <input type="checkbox" ng-disabled="percDisabled"> Perception (Wis)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="perfDisabled">INFO</button>
                             <label>
-                                <input type="checkbox"> Performance (Cha)
+                                <input type="checkbox" ng-disabled="perfDisabled"> Performance (Cha)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="persDisabled">INFO</button>
                             <label>
-                                <input type="checkbox"> Persuasion (Cha)
+                                <input type="checkbox" ng-disabled="persDisabled"> Persuasion (Cha)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="reliDisabled">INFO</button>
                             <label>
-                                <input type="checkbox"> Religion (Int)
+                                <input type="checkbox" ng-disabled="reliDisabled"> Religion (Int)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="sleiDisabled">INFO</button>
                             <label>
-                                <input type="checkbox"> Sleight of Hand (Dex)
+                                <input type="checkbox" ng-disabled="sleiDisabled"> Sleight of Hand (Dex)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="steaDisabled">INFO</button>
                             <label>
-                                <input type="checkbox"> Stealth (Dex)
+                                <input type="checkbox" ng-disabled="steaDisabled"> Stealth (Dex)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="">INFO</button>
+                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="survDisabled">INFO</button>
                             <label>
-                                <input type="checkbox"> Survival (Wis)
+                                <input type="checkbox" ng-disabled="survDisabled"> Survival (Wis)
                             </label>
                         </div>
                     </div>  
@@ -982,42 +984,42 @@
                         <div class="col-xs-12>"><h3>Languages</h3></div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Common
+                                <input type="checkbox" ng-disabled="commonDisabled"ng-checked="commonSelected"> Common
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Dwarvish
+                                <input type="checkbox" ng-checked="dwarvishSelected"> Dwarvish
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Elvish
+                                <input type="checkbox" ng-checked="elvishSelected"> Elvish
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Giant
+                                <input type="checkbox" ng-checked="giantishSelected"> Giant
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Gnomish
+                                <input type="checkbox" ng-checked="gnomishSelected"> Gnomish
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Goblin
+                                <input type="checkbox" ng-checked="goblinishSelected"> Goblin
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Halfling
+                                <input type="checkbox" ng-checked="halflingishSelected"> Halfling
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Orcish
+                                <input type="checkbox" ng-checked="orcishSelected"> Orcish
                             </label>
                         </div>
                     </div> 

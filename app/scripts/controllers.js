@@ -924,10 +924,253 @@ angular.module('dm-app')
 
             console.log("current character form contains:");
             console.log($scope.characterForm);
-            $scope.skillsDisabled = false; 
-            $scope.switchTab(5);
+            $scope.openSkills();
         };  
         
+        ////////////////////////////////////////////   
+        
+        //Skills ///////////////////////////////////
+        $scope.acroDisabled = false;
+        $scope.animDisabled = false;
+        $scope.arcaDisabled = false;
+        $scope.athlDisabled = false;
+        $scope.deceDisabled = false;
+        $scope.histDisabled = false;
+        $scope.insiDisabled = false;
+        $scope.intiDisabled = false;
+        $scope.inveDisabled = false;
+        $scope.mediDisabled = false;
+        $scope.natuDisabled = false;
+        $scope.percDisabled = false;
+        $scope.perfDisabled = false;
+        $scope.persDisabled = false;
+        $scope.reliDisabled = false;
+        $scope.sleiDisabled = false;
+        $scope.steaDisabled = false;
+        $scope.survDisabled = false;
+        
+        $scope.commonSelected = false;
+        $scope.commonDisabled = false;
+        
+        $scope.raceString = '';
+        $scope.classString = '';
+        
+        $scope.setAllEnabled = function() {
+            $scope.acroDisabled = false;
+            $scope.animDisabled = false;
+            $scope.arcaDisabled = false;
+            $scope.athlDisabled = false;
+            $scope.deceDisabled = false;
+            $scope.histDisabled = false;
+            $scope.insiDisabled = false;
+            $scope.intiDisabled = false;
+            $scope.inveDisabled = false;
+            $scope.mediDisabled = false;
+            $scope.natuDisabled = false;
+            $scope.percDisabled = false;
+            $scope.perfDisabled = false;
+            $scope.persDisabled = false;
+            $scope.reliDisabled = false;
+            $scope.sleiDisabled = false;
+            $scope.steaDisabled = false;
+            $scope.survDisabled = false;
+        };
+        
+        $scope.setAllDisabled = function() {
+            $scope.acroDisabled = true;
+            $scope.animDisabled = true;
+            $scope.arcaDisabled = true;
+            $scope.athlDisabled = true;
+            $scope.deceDisabled = true;
+            $scope.histDisabled = true;
+            $scope.insiDisabled = true;
+            $scope.intiDisabled = true;
+            $scope.inveDisabled = true;
+            $scope.mediDisabled = true;
+            $scope.natuDisabled = true;
+            $scope.percDisabled = true;
+            $scope.perfDisabled = true;
+            $scope.persDisabled = true;
+            $scope.reliDisabled = true;
+            $scope.sleiDisabled = true;
+            $scope.steaDisabled = true;
+            $scope.survDisabled = true;
+        };
+        
+        $scope.openSkills = function() {            
+            $scope.determineSkillState($scope.characterForm.race, $scope.characterForm.class);
+            $scope.skillsDisabled = false; 
+            $scope.switchTab(5);
+        };
+        
+        $scope.determineSkillState = function(race, charClass) {
+            //first set all the available skills based on class:
+            switch(charClass) {
+                case 'BARBARIAN':
+                    $scope.classString = "Barbarians choose two skills from Animal Handling, Athletics, Intimidation, Nature, Perception, and Survival.";
+                    $scope.setAllDisabled();
+                    $scope.animDisabled = false;
+                    $scope.athlDisabled = false;
+                    $scope.intiDisabled = false;
+                    $scope.natuDisabled = false;
+                    $scope.percDisabled = false;
+                    $scope.survDisabled = false;
+                    break;
+                case 'BARD': 
+                    $scope.classString = "Bards choose any three skills";
+                    $scope.setAllEnabled();
+                    break;
+                case 'CLERIC':
+                    $scope.classString = "Clerics choose two skills from History, Insight, Medicine, Persuasion, and Religion.";
+                    $scope.setAllDisabled();
+                    $scope.histDisabled = false;
+                    $scope.insiDisabled = false;
+                    $scope.mediDisabled = false;
+                    $scope.persDisabled = false;
+                    $scope.reliDisabled = false;
+                    break;
+                case 'DRUID':
+                    $scope.classString = "Druids choose two skills from Arcana, Animal Handling, Insight, Medicine, Nature, Perception, Religion, and Survival.";
+                    $scope.setAllDisabled();
+                    $scope.arcaDisabled = false;
+                    $scope.animDisabled = false;
+                    $scope.insiDisabled = false;
+                    $scope.mediDisabled = false;
+                    $scope.natuDisabled = false;
+                    $scope.percDisabled = false;
+                    $scope.reliDisabled = false;
+                    $scope.survDisabled = false;
+                    break;
+                case 'FIGHTER':
+                    $scope.classString = "Fighters choose two skills from Acrobatics, Animal Handling, Athletics, History, Insight, Intimidation, Perception, and Survival.";
+                    $scope.setAllDisabled();
+                    $scope.acroDisabled = false;
+                    $scope.animDisabled = false;
+                    $scope.athlDisabled = false;
+                    $scope.histDisabled = false;
+                    $scope.insiDisabled = false;
+                    $scope.intiDisabled = false;
+                    $scope.percDisabled = false;
+                    $scope.survDisabled = false;
+                    break;
+                case 'MONK':
+                    $scope.classString = "Monks choose two skills from Acrobatics, Athletics, History, Insight, Religion, and Stealth.";
+                    $scope.setAllDisabled();
+                    $scope.acroDisabled = false;
+                    $scope.athlDisabled = false;
+                    $scope.histDisabled = false;
+                    $scope.insiDisabled = false;
+                    $scope.reliDisabled = false;
+                    $scope.steaDisabled = false;
+                    break;
+                case 'PALADIN':
+                    $scope.classString = "Paladins choose two skills from Athletics, Insight, Intimidation, Medicine, Persuasion, and Religion.";
+                    $scope.setAllDisabled();
+                    $scope.athlDisabled = false;
+                    $scope.insiDisabled = false;
+                    $scope.intiDisabled = false;
+                    $scope.mediDisabled = false;
+                    $scope.persDisabled = false;
+                    $scope.reliDisabled = false;
+                    break;
+                case 'RANGER':
+                    $scope.classString = "Rangers choose three skills from Animal Handling, Athletics, Insight, Investigation, Nature, Preception, and Stealth.";
+                    $scope.setAllDisabled();
+                    $scope.animDisabled = false;
+                    $scope.athlDisabled = false;
+                    $scope.insiDisabled = false;
+                    $scope.inveDisabled = false;
+                    $scope.natuDisabled = false;
+                    $scope.percDisabled = false;
+                    $scope.steaDisabled = false;
+                    break;
+                case 'ROGUE':
+                    $scope.classString = "Rogues choose four skills from Acrobatics, Athletics, Deception, Insight, Intimidation, Investigation, Perception, Performance, Persuasion, Sleight of Hand, and Stealth.";
+                    $scope.setAllDisabled();
+                    $scope.acroDisabled = false;
+                    $scope.athlDisabled = false; 
+                    $scope.deceDisabled = false; 
+                    $scope.insiDisabled = false;
+                    $scope.intiDisabled = false;
+                    $scope.inveDisabled = false;
+                    $scope.percDisabled = false; 
+                    $scope.perfDisabled = false;
+                    $scope.persDisabled = false;
+                    $scope.sleiDisabled = false;
+                    $scope.steaDisabled = false;
+                    break;
+                case 'SORCERER':
+                    $scope.classString = "Sorcerers choose two skills from Arcana, Deception, Insight, Intimidation, Persuasion, and Religion.";
+                    $scope.setAllDisabled();
+                    $scope.arcaDisabled = false;
+                    $scope.deceDisabled = false;
+                    $scope.insiDisabled = false;
+                    $scope.intiDisabled = false;
+                    $scope.persDisabled = false;
+                    $scope.reliDisabled - false;
+                    break;                
+                case 'WARLOCK':
+                    $scope.classString = "Warlocks choose two skills from Arcana, Deception, History, Intimidation, Investigation, Nature, and Religion.";
+                    $scope.setAllDisabled();
+                    $scope.arcaDisabled = false;
+                    $scope.deceDisabled = false;
+                    $scope.histDisabled = false;
+                    $scope.intiDisabled = false;
+                    $scope.inveDisabled = false;
+                    $scope.natuDisabled = false;
+                    $scope.reliDisabled - false;
+                    break;                
+                case 'WIZARD':
+                    $scope.classString = "Wizards choose two skills from Arcana, History, Insight, Investigation, Medicine, and Religion.";
+                    $scope.setAllDisabled();
+                    $scope.arcaDisabled = false;
+                    $scope.histDisabled = false;
+                    $scope.insiDisabled = false;
+                    $scope.inveDisabled = false; 
+                    $scope.mediDisabled = false;
+                    $scope.reliDisabled = false;
+                    break;
+            }
+            
+            //next set all the available languages based on race:
+            switch(race) {
+                case 'DWARF':
+                case 'HILL DWARF':
+                    $scope.raceString = "You can speak, read, and write Common and Dwarvish. Dwarvish is full of hard consonants and guttural sounds, and those characteristics spill over into whatever other language a dwarf might speak.";
+                    break;
+                case 'ELF': 
+                    $scope.raceString = "You can speak, read, and write Common and Elvish. Elvish is fluid, with subtle intonations and intricate grammar. Elven literature is rich and varied, and their songs and poems are famous among other races. Many bards learn their language so they can add Elvish ballads to their repertoires.";
+                    break;
+                case 'HIGH ELF':
+                    $scope.raceString = "You can speak, read, and write Common and Elvish. Elvish is fluid, with subtle intonations and intricate grammar. Elven literature is rich and varied, and their songs and poems are famous among other races. Many bards learn their language so they can add Elvish ballads to their repertoires. As a High Elf, you can speak one extra language of your choice.";
+                    break;
+                case 'HALFLING':
+                case 'LIGHTFOOT':
+                    $scope.raceString = "You can speak, read, and write Common and Halfling. The Halfling language isn’t secret, but halflings are loath to share it with others. They write very little, so they don’t have a rich body of literature. Their oral tradition, however, is very strong. Almost all halflings speak Common to converse with the people in whose lands they dwell or through which they are traveling.";
+                    break;
+                case 'HUMAN':
+                    $scope.raceString = "Monks choose two skills from Acrobatics, Athletics, History, Insight, Religion, and Stealth.";
+                    break;
+                case 'PALADIN':
+                    $scope.raceString = "Paladins choose two skills from Athletics, Insight, Intimidation, Medicine, Persuasion, and Religion.";
+                    break;
+                case 'RANGER':
+                    $scope.raceString = "Rangers choose three skills from Animal Handling, Athletics, Insight, Investigation, Nature, Preception, and Stealth.";
+                    break;
+                case 'ROGUE':
+                    $scope.classString = "Rogues choose four skills from Acrobatics, Athletics, Deception, Insight, Intimidation, Investigation, Perception, Performance, Persuasion, Sleight of Hand, and Stealth.";
+                    break;
+                case 'SORCERER':
+                    $scope.classString = "Sorcerers choose two skills from Arcana, Deception, Insight, Intimidation, Persuasion, and Religion.";
+                    break;                
+                case 'WARLOCK':
+                    $scope.classString = "Warlocks choose two skills from Arcana, Deception, History, Intimidation, Investigation, Nature, and Religion.";
+                    break;                
+                case 'WIZARD':
+                    $scope.classString = "Wizards choose two skills from Arcana, History, Insight, Investigation, Medicine, and Religion.";
+                    break;
+            }
+        };
        
      }])
 ;
