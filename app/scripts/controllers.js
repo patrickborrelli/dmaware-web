@@ -967,6 +967,8 @@ angular.module('dm-app')
         $scope.halflingDisabled = false;
         $scope.orcishDisabled = false; 
         
+        $scope.languageCount = 0;
+                
         $scope.setLangDisabled = function() {
             $scope.commonDisabled = true;        
             $scope.dwarvishDisabled = true;
@@ -1177,12 +1179,14 @@ angular.module('dm-app')
                     $scope.setLangDisabled();
                     $scope.commonSelected = true;
                     $scope.dwarvishSelected = true;
+                    $scope.languageCount = 2;
                     break;
                 case 'ELF': 
                     $scope.raceString = "You can speak, read, and write Common and Elvish. Elvish is fluid, with subtle intonations and intricate grammar. Elven literature is rich and varied, and their songs and poems are famous among other races. Many bards learn their language so they can add Elvish ballads to their repertoires.";
                     $scope.setLangDisabled();
                     $scope.commonSelected = true;
                     $scope.elvishSelected = true;
+                    $scope.languageCount = 2;
                     break;
                 case 'HIGH ELF':
                     $scope.raceString = "You can speak, read, and write Common and Elvish. Elvish is fluid, with subtle intonations and intricate grammar. Elven literature is rich and varied, and their songs and poems are famous among other races. Many bards learn their language so they can add Elvish ballads to their repertoires. As a High Elf, you can speak one extra language of your choice."; 
@@ -1191,6 +1195,7 @@ angular.module('dm-app')
                     $scope.elvishSelected = true;
                     $scope.commonDisabled = true;
                     $scope.elvishDisabled = true;
+                    $scope.languageCount = 3;
                     break;
                 case 'HALFLING':
                 case 'LIGHTFOOT':
@@ -1198,12 +1203,14 @@ angular.module('dm-app')
                     $scope.setLangDisabled();
                     $scope.commonSelected = true;
                     $scope.halflingSelected = true;
+                    $scope.languageCount = 2;
                     break;
                 case 'HUMAN':
                     $scope.raceString = "You can speak, read, and write Common and one extra language of your choice. Humans typically learn the languages of other peoples they deal with, including obscure dialects. They are fond of sprinkling their speech with words borrowed from other tongues: Orc curses, Elvish musical expressions, Dwarvish military phrases, and so on.";
                     $scope.setLangEnabled();
                     $scope.commonSelected = true;
                     $scope.commonDisabled = true;
+                    $scope.languageCount = 2;
                     break;
                 case 'GNOME':
                 case 'ROCK GNOME':
@@ -1211,6 +1218,7 @@ angular.module('dm-app')
                     $scope.setLangDisabled();
                     $scope.commonSelected = true;
                     $scope.gnomishSelected = true;
+                    $scope.languageCount = 2;
                     break;
                 case 'HALF ELF':
                     $scope.raceString = "You can speak, read, and write Common, Elvish, and one extra language of your choice.";
@@ -1219,14 +1227,60 @@ angular.module('dm-app')
                     $scope.elvishSelected = true;
                     $scope.commonDisabled = true;
                     $scope.elvishDisabled = true;
+                    $scope.languageCount = 3;
                     break;
                 case 'HALF ORC':
                     $scope.classString = "You can speak, read, and write Common and Orc. Orc is a harsh, grating language with hard consonants. It has no script of its own but is written in the Dwarvish script.";
                     $scope.setLangDisabled();
                     $scope.commonSelected = true;
                     $scope.orcishSelected = true;
+                    $scope.languageCount = 2;
                     break;
             }
+        };
+        
+        $scope.openInfo = function(skill) {
+            console.log('Attempting to open dialog for ' + skill);
+            if(skill == 'ACRO') 
+                ngDialog.open({ template: 'views/templates/acrobatics.html', scope: $scope, className: 'ngdialog-theme-default custom-width-600', controller:"HomeController" }); 
+            else if(skill == 'ANIM')
+                ngDialog.open({ template: 'views/templates/animalhandling.html', scope: $scope, className: 'ngdialog-theme-default custom-width-600', controller:"HomeController" }); 
+            else if(skill == 'ARCA')
+                ngDialog.open({ template: 'views/templates/arcana.html', scope: $scope, className: 'ngdialog-theme-default custom-width-600', controller:"HomeController" }); 
+            else if(skill == 'ATHL')
+                ngDialog.open({ template: 'views/templates/athletics.html', scope: $scope, className: 'ngdialog-theme-default custom-width-600', controller:"HomeController" }); 
+            else if(skill == 'DECE')
+                ngDialog.open({ template: 'views/templates/deception.html', scope: $scope, className: 'ngdialog-theme-default custom-width-600', controller:"HomeController" }); 
+            else if(skill == 'HIST')
+                ngDialog.open({ template: 'views/templates/history.html', scope: $scope, className: 'ngdialog-theme-default custom-width-600', controller:"HomeController" }); 
+            else if(skill == 'INSI')
+                ngDialog.open({ template: 'views/templates/insight.html', scope: $scope, className: 'ngdialog-theme-default custom-width-600', controller:"HomeController" }); 
+            else if(skill == 'INTI')
+                ngDialog.open({ template: 'views/templates/intimidation.html', scope: $scope, className: 'ngdialog-theme-default custom-width-600', controller:"HomeController" }); 
+            else if(skill == 'INVE')
+                ngDialog.open({ template: 'views/templates/investigation.html', scope: $scope, className: 'ngdialog-theme-default custom-width-600', controller:"HomeController" }); 
+            else if(skill == 'MEDI')
+                ngDialog.open({ template: 'views/templates/medicine.html', scope: $scope, className: 'ngdialog-theme-default custom-width-600', controller:"HomeController" }); 
+            else if(skill == 'NATU')
+                ngDialog.open({ template: 'views/templates/nature.html', scope: $scope, className: 'ngdialog-theme-default custom-width-600', controller:"HomeController" }); 
+            else if(skill == 'PERC')
+                ngDialog.open({ template: 'views/templates/perception.html', scope: $scope, className: 'ngdialog-theme-default custom-width-600', controller:"HomeController" }); 
+            else if(skill == 'PERF')
+                ngDialog.open({ template: 'views/templates/performance.html', scope: $scope, className: 'ngdialog-theme-default custom-width-600', controller:"HomeController" }); 
+            else if(skill == 'PERS')
+                ngDialog.open({ template: 'views/templates/persuasion.html', scope: $scope, className: 'ngdialog-theme-default custom-width-600', controller:"HomeController" }); 
+            else if(skill == 'RELI')
+                ngDialog.open({ template: 'views/templates/religion.html', scope: $scope, className: 'ngdialog-theme-default custom-width-600', controller:"HomeController" }); 
+            else if(skill == 'SLEI')
+                ngDialog.open({ template: 'views/templates/sleightofhand.html', scope: $scope, className: 'ngdialog-theme-default custom-width-600', controller:"HomeController" }); 
+            else if(skill == 'STEA')
+                ngDialog.open({ template: 'views/templates/stealth.html', scope: $scope, className: 'ngdialog-theme-default custom-width-600', controller:"HomeController" }); 
+            else if(skill == 'SURV')
+                ngDialog.open({ template: 'views/templates/survival.html', scope: $scope, className: 'ngdialog-theme-default custom-width-600', controller:"HomeController" }); 
+        };
+        
+        $scope.saveCurrentSkills = function() {
+            
         };
        
      }])

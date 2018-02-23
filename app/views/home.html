@@ -872,111 +872,111 @@
                     <div class="col-xs-4">
                         <div style="text-align:center;" class="col-xs-12>"><h3>Skill Proficiencies</h3></div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="acroDisabled">INFO</button>
-                            <label>
-                                <input type="checkbox" ng-disabled="acroDisabled"> Acrobatics (Dex)
+                            <button type="button" class="btn btn-sm btn-default" ng-click="openInfo('ACRO')" ng-hide="acroDisabled">INFO</button>
+                            <label ng-hide="acroDisabled">
+                                <input type="checkbox"> Acrobatics (Dex)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="animDisabled">INFO</button>
-                            <label>
-                                <input type="checkbox" ng-disabled="animDisabled"> Animal Handling (Wis)
+                            <button type="button" class="btn btn-sm btn-default" ng-click="openInfo('ANIM')" ng-hide="animDisabled">INFO</button>
+                            <label ng-hide="animDisabled">
+                                <input type="checkbox"> Animal Handling (Wis)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="arcaDisabled">INFO</button>
-                            <label>
-                                <input type="checkbox" ng-disabled="arcaDisabled"> Arcana (Int)
+                            <button type="button" class="btn btn-sm btn-default" ng-click="openInfo('ARCA')" ng-hide="arcaDisabled">INFO</button>
+                            <label ng-hide="arcaDisabled">
+                                <input type="checkbox"> Arcana (Int)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="athlDisabled">INFO</button>
-                            <label>
-                                <input type="checkbox" ng-disabled="athlDisabled"> Athletics (Str)
+                            <button type="button" class="btn btn-sm btn-default" ng-click="openInfo('ATHL')" ng-hide="athlDisabled">INFO</button>
+                            <label ng-hide="athlDisabled">
+                                <input type="checkbox"> Athletics (Str)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="deceDisabled">INFO</button>
-                            <label>
-                                <input type="checkbox" ng-disabled="deceDisabled"> Deception (Cha)
+                            <button type="button" class="btn btn-sm btn-default" ng-click="openInfo('DECE')" ng-hide="deceDisabled">INFO</button>
+                            <label ng-hide="deceDisabled">
+                                <input type="checkbox"> Deception (Cha)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="histDisabled">INFO</button>
-                            <label>
-                                <input type="checkbox" ng-disabled="histDisabled"> History (Int)
+                            <button type="button" class="btn btn-sm btn-default" ng-click="openInfo('HIST')" ng-hide="histDisabled">INFO</button>
+                            <label ng-hide="histDisabled">
+                                <input type="checkbox"> History (Int)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="insiDisabled">INFO</button>
-                            <label>
-                                <input type="checkbox" ng-disabled="insiDisabled"> Insight (Wis)
+                            <button type="button" class="btn btn-sm btn-default" ng-click="openInfo('INSI')" ng-hide="insiDisabled">INFO</button>
+                            <label ng-hide="insiDisabled">
+                                <input type="checkbox"> Insight (Wis)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="intiDisabled">INFO</button>
-                            <label>
-                                <input type="checkbox" ng-disabled="intiDisabled"> Intimidation (Cha)
+                            <button type="button" class="btn btn-sm btn-default" ng-click="openInfo('INTI')" ng-hide="intiDisabled">INFO</button>
+                            <label ng-hide="intiDisabled">
+                                <input type="checkbox"> Intimidation (Cha)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="inveDisabled">INFO</button>
-                            <label>
-                                <input type="checkbox" ng-disabled="inveDisabled"> Investigation (Int)
+                            <button type="button" class="btn btn-sm btn-default" ng-click="openInfo('INVE')" ng-hide="inveDisabled">INFO</button>
+                            <label ng-hide="inveDisabled">
+                                <input type="checkbox"> Investigation (Int)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="mediDisabled">INFO</button>
-                            <label>
-                                <input type="checkbox" ng-disabled="mediDisabled"> Medicine (Wis)
+                            <button type="button" class="btn btn-sm btn-default" ng-click="openInfo('MEDI')" ng-hide="mediDisabled">INFO</button>
+                            <label ng-hide="mediDisabled">
+                                <input type="checkbox"> Medicine (Wis)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="natuDisabled">INFO</button>
-                            <label>
-                                <input type="checkbox" ng-disabled="natuDisabled"> Nature (Int)
+                            <button type="button" class="btn btn-sm btn-default" ng-click="openInfo('NATU')" ng-hide="natuDisabled">INFO</button>
+                            <label ng-hide="natuDisabled">
+                                <input type="checkbox"> Nature (Int)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="percDisabled">INFO</button>
-                            <label>
-                                <input type="checkbox" ng-disabled="percDisabled"> Perception (Wis)
+                            <button type="button" class="btn btn-sm btn-default" ng-click="openInfo('PERC')" ng-hide="percDisabled">INFO</button>
+                            <label ng-hide="percDisabled">
+                                <input type="checkbox"> Perception (Wis)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="perfDisabled">INFO</button>
-                            <label>
-                                <input type="checkbox" ng-disabled="perfDisabled"> Performance (Cha)
+                            <button type="button" class="btn btn-sm btn-default" ng-click="openInfo('PERF')" ng-hide="perfDisabled">INFO</button>
+                            <label ng-hide="perfDisabled">
+                                <input type="checkbox"> Performance (Cha)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="persDisabled">INFO</button>
-                            <label>
-                                <input type="checkbox" ng-disabled="persDisabled"> Persuasion (Cha)
+                            <button type="button" class="btn btn-sm btn-default" ng-click="openInfo('PERS')" ng-hide="persDisabled">INFO</button>
+                            <label ng-hide="persDisabled">
+                                <input type="checkbox"> Persuasion (Cha)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="reliDisabled">INFO</button>
-                            <label>
-                                <input type="checkbox" ng-disabled="reliDisabled"> Religion (Int)
+                            <button type="button" class="btn btn-sm btn-default" ng-click="openInfo('RELI')" ng-hide="reliDisabled">INFO</button>
+                            <label ng-hide="reliDisabled">
+                                <input type="checkbox"> Religion (Int)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="sleiDisabled">INFO</button>
-                            <label>
-                                <input type="checkbox" ng-disabled="sleiDisabled"> Sleight of Hand (Dex)
+                            <button type="button" class="btn btn-sm btn-default" ng-click="openInfo('SLEI')" ng-hide="sleiDisabled">INFO</button>
+                            <label ng-hide="sleiDisabled">
+                                <input type="checkbox"> Sleight of Hand (Dex)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="steaDisabled">INFO</button>
-                            <label>
-                                <input type="checkbox" ng-disabled="steaDisabled"> Stealth (Dex)
+                            <button type="button" class="btn btn-sm btn-default" ng-click="openInfo('STEA')" ng-hide="steaDisabled">INFO</button>
+                            <label ng-hide="steaDisabled">
+                                <input type="checkbox"> Stealth (Dex)
                             </label>
                         </div>
                         <div class="checkbox">
-                            <button type="button" class="btn btn-sm btn-default" ng-click="" ng-disabled="survDisabled">INFO</button>
-                            <label>
-                                <input type="checkbox" ng-disabled="survDisabled"> Survival (Wis)
+                            <button type="button" class="btn btn-sm btn-default" ng-click="openInfo('SURV')" ng-hide="survDisabled">INFO</button>
+                            <label ng-hide="survDisabled">
+                                <input type="checkbox"> Survival (Wis)
                             </label>
                         </div>
                     </div>  
