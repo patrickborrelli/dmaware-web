@@ -1026,7 +1026,61 @@
                     </form>
                 </div>            
             </uib-tab>
-            <uib-tab index="6" heading="Equipment" disable="equipDisabled">Equipment</uib-tab>            
+            <uib-tab index="6" heading="Equipment" disable="equipDisabled">
+                <div class="col-xs-12">
+                    <div class="col-xs-4">  
+                        <div style="text-align:justify;"><img src="http://www.patrickborrelli.com/images/dropE.jpg" style="padding-right: 5px; padding-bottom: 10px; float: left;"/>quipment is critical in the success of any party.  For an adventurer, the availability of armor, weapons, backpacks, rope, and similar goods is of paramount importance, since proper equipment can mean the difference between life and death in a dungeon or the untamed wilds. <br/><br/>When you create your character, you receive equipment based on a combination of your class and background. You decide how your character came by this starting equipment. It might have been an inheritance, or goods that the character purchased during his or her upbringing. You might have been equipped with a weapon, armor, and a backpack as part of military service. You might even have stolen your gear. A weapon could be a family heirloom, passed down from generation to generation until your character finally took up the mantle and followed in an ancestor’s adventurous footsteps.</div><br/>
+                        <button type="button" class="btn btn-sm btn-info btn-custom125" ng-click="saveCurrentEquipment();">Next</button><br/>
+                        <button type="button" class="btn btn-sm btn-info btn-custom125" ng-click="switchTab(activeIndex - 1);">Previous</button>
+                    </div>
+                    <form>
+                    <div class="col-xs-8">
+                        <div class="col-xs-12" style="padding-bottom: 20px;">
+                            <div class="col-xs-4" ng-show="hasPrimary()">
+                                <div class="col-xs-12">Primary:</div>
+                                <div class="col-xs-12" ng-repeat="weapon in primaryWeapons">
+                                    <label>
+                                        <input type="radio" ng-value="weapon" ng-model="$parent.equipForm.selectedPrimary" />
+                                        {{weapon.name}}
+                                    </label>
+                                </div>
+                            </div> 
+
+                            <div class="col-xs-4" ng-show="hasSecondary()">
+                                <div class="col-xs-12">Secondary:</div>
+                                <div class="col-xs-12" ng-repeat="weapon in secondaryWeapons">
+                                    <label>
+                                        <input type="radio" ng-value="weapon" ng-model="$parent.equipForm.selectedSecondary" />
+                                        {{weapon.name}}
+                                    </label>
+                                </div>
+                            </div> 
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="col-xs-4" ng-show="hasTertiary()">
+                                <div class="col-xs-12">Additional:</div>
+                                <div class="col-xs-12" ng-repeat="weapon in tertiaryWeapons">
+                                    <label>
+                                        <input type="radio" ng-value="weapon" ng-model="$parent.equipForm.selectedTertiary" />
+                                        {{weapon.name}}
+                                    </label>
+                                </div>
+                            </div> 
+
+                            <div class="col-xs-4" ng-show="hasArmor()">
+                                <div class="col-xs-12">Armor:</div>
+                                <div class="col-xs-12" ng-repeat="weapon in armor">
+                                    <label>
+                                        <input type="radio" ng-value="weapon" ng-model="$parent.equipForm.selectedArmor" />
+                                        {{weapon.name}}
+                                    </label>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                    </form>
+                </div>   
+            </uib-tab>            
             <uib-tab index="7" heading="Spellcasting" disable="spellsDisabled">Spellcasting</uib-tab>
         </uib-tabset>
     </div>

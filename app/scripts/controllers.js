@@ -58,7 +58,7 @@ angular.module('dm-app')
         };       
     }])
 
-    .controller('HomeController', ['$scope', '$timeout', 'ngDialog', 'authService', 'userService', function($scope, $timeout, ngDialog, authService, userService) {
+    .controller('HomeController', ['$scope', '$timeout', 'ngDialog', 'authService', 'userService', 'classService', function($scope, $timeout, ngDialog, authService, userService, classService) {
         $scope.characterForm = {
             player: '',
             character: ''
@@ -94,7 +94,7 @@ angular.module('dm-app')
         
         //navigation        
         $scope.switchToRace = function(player, char) {
-            console.log('Received player:' + player + ' and char:' +char);
+            console.log('Received player:' + player + ' and char:' + char);
             $scope.characterForm.player = player;
             $scope.characterForm.character = char;
             console.log($scope.characterForm);
@@ -609,30 +609,37 @@ angular.module('dm-app')
         
         $scope.saveCurrentClass = function() {
             if($scope.showingBarbarian) {
-                $scope.characterForm.class = 'BARBARIAN';
+                $scope.characterForm.characterclass = 'Barbarian';
             } else if($scope.showingBard) {
-                $scope.characterForm.class = 'BARD';
+                $scope.characterForm.characterclass = 'Bard';
             } else if($scope.showingCleric) {
-                $scope.characterForm.class = 'CLERIC';
+                $scope.characterForm.characterclass = 'Cleric';
             } else if($scope.showingDruid) {
-                $scope.characterForm.class = 'DRUID';
+                $scope.characterForm.characterclass = 'Druid';
             } else if($scope.showingFighter) {
-                $scope.characterForm.class = 'FIGHTER';
+                $scope.characterForm.characterclass = 'Fighter';
             } else if($scope.showingMonk) {
-                $scope.characterForm.class = 'MONK';
+                $scope.characterForm.characterclass = 'Monk';
             } else if($scope.showingPaladin) {
-                $scope.characterForm.class = 'PALADIN';
+                $scope.characterForm.characterclass = 'Paladin';
             } else if($scope.showingRanger) {
-                $scope.characterForm.class = 'RANGER';
+                $scope.characterForm.characterclass = 'Ranger';
             } else if($scope.showingRogue) {
-                $scope.characterForm.class = 'ROGUE';
+                $scope.characterForm.characterclass = 'Rogue';
             } else if($scope.showingSorcerer) {
-                $scope.characterForm.class = 'SORCERER';
+                $scope.characterForm.characterclass = 'Sorcerer';
             } else if($scope.showingWarlock) {
-                $scope.characterForm.class = 'WARLOCK';
+                $scope.characterForm.characterclass = 'Warlock';
             } else if($scope.showingWizard) {
-                $scope.characterForm.class = 'WIZARD';
+                $scope.characterForm.characterclass = 'Wizard';
             }
+            
+            classService.getCharClassByName($scope.characterForm.characterclass)
+                .then(function(response) {
+                    console.log("received class");
+                    console.log(response);
+                    $scope.characterForm.charObject = response.data[0];
+            });
             
             console.log("current character form contains:");
             console.log($scope.characterForm);
@@ -1066,7 +1073,7 @@ angular.module('dm-app')
         }; 
         
         $scope.openSkills = function() {            
-            $scope.determineSkillState($scope.characterForm.race, $scope.characterForm.class);
+            $scope.determineSkillState($scope.characterForm.race, $scope.characterForm.characterclass);
             $scope.skillsDisabled = false; 
             $scope.switchTab(5); 
         };
@@ -1074,7 +1081,7 @@ angular.module('dm-app')
         $scope.determineSkillState = function(race, charClass) {
             //first set all the available skills based on class:
             switch(charClass) {
-                case 'BARBARIAN':
+                case 'Barbarian':
                     $scope.classString = "Barbarians choose two skills from Animal Handling, Athletics, Intimidation, Nature, Perception, and Survival.";
                     $scope.setAllDisabled();
                     $scope.animDisabled = false;
@@ -1084,11 +1091,11 @@ angular.module('dm-app')
                     $scope.percDisabled = false;
                     $scope.survDisabled = false;
                     break;
-                case 'BARD': 
+                case 'Bard': 
                     $scope.classString = "Bards choose any three skills";
                     $scope.setAllEnabled();
                     break;
-                case 'CLERIC':
+                case 'Cleric':
                     $scope.classString = "Clerics choose two skills from History, Insight, Medicine, Persuasion, and Religion.";
                     $scope.setAllDisabled();
                     $scope.histDisabled = false;
@@ -1097,7 +1104,7 @@ angular.module('dm-app')
                     $scope.persDisabled = false;
                     $scope.reliDisabled = false;
                     break;
-                case 'DRUID':
+                case 'Druid':
                     $scope.classString = "Druids choose two skills from Arcana, Animal Handling, Insight, Medicine, Nature, Perception, Religion, and Survival.";
                     $scope.setAllDisabled();
                     $scope.arcaDisabled = false;
@@ -1109,7 +1116,7 @@ angular.module('dm-app')
                     $scope.reliDisabled = false;
                     $scope.survDisabled = false;
                     break;
-                case 'FIGHTER':
+                case 'Fighter':
                     $scope.classString = "Fighters choose two skills from Acrobatics, Animal Handling, Athletics, History, Insight, Intimidation, Perception, and Survival.";
                     $scope.setAllDisabled();
                     $scope.acroDisabled = false;
@@ -1121,7 +1128,7 @@ angular.module('dm-app')
                     $scope.percDisabled = false;
                     $scope.survDisabled = false;
                     break;
-                case 'MONK':
+                case 'Monk':
                     $scope.classString = "Monks choose two skills from Acrobatics, Athletics, History, Insight, Religion, and Stealth.";
                     $scope.setAllDisabled();
                     $scope.acroDisabled = false;
@@ -1131,7 +1138,7 @@ angular.module('dm-app')
                     $scope.reliDisabled = false;
                     $scope.steaDisabled = false;
                     break;
-                case 'PALADIN':
+                case 'Paladin':
                     $scope.classString = "Paladins choose two skills from Athletics, Insight, Intimidation, Medicine, Persuasion, and Religion.";
                     $scope.setAllDisabled();
                     $scope.athlDisabled = false;
@@ -1141,7 +1148,7 @@ angular.module('dm-app')
                     $scope.persDisabled = false;
                     $scope.reliDisabled = false;
                     break;
-                case 'RANGER':
+                case 'Ranger':
                     $scope.classString = "Rangers choose three skills from Animal Handling, Athletics, Insight, Investigation, Nature, Preception, and Stealth.";
                     $scope.setAllDisabled();
                     $scope.animDisabled = false;
@@ -1152,7 +1159,7 @@ angular.module('dm-app')
                     $scope.percDisabled = false;
                     $scope.steaDisabled = false;
                     break;
-                case 'ROGUE':
+                case 'Rogue':
                     $scope.classString = "Rogues choose four skills from Acrobatics, Athletics, Deception, Insight, Intimidation, Investigation, Perception, Performance, Persuasion, Sleight of Hand, and Stealth.";
                     $scope.setAllDisabled();
                     $scope.acroDisabled = false;
@@ -1167,7 +1174,7 @@ angular.module('dm-app')
                     $scope.sleiDisabled = false;
                     $scope.steaDisabled = false;
                     break;
-                case 'SORCERER':
+                case 'Sorcerer':
                     $scope.classString = "Sorcerers choose two skills from Arcana, Deception, Insight, Intimidation, Persuasion, and Religion.";
                     $scope.setAllDisabled();
                     $scope.arcaDisabled = false;
@@ -1177,7 +1184,7 @@ angular.module('dm-app')
                     $scope.persDisabled = false;
                     $scope.reliDisabled - false;
                     break;                
-                case 'WARLOCK':
+                case 'Warlock':
                     $scope.classString = "Warlocks choose two skills from Arcana, Deception, History, Intimidation, Investigation, Nature, and Religion.";
                     $scope.setAllDisabled();
                     $scope.arcaDisabled = false;
@@ -1188,7 +1195,7 @@ angular.module('dm-app')
                     $scope.natuDisabled = false;
                     $scope.reliDisabled - false;
                     break;                
-                case 'WIZARD':
+                case 'Wizard':
                     $scope.classString = "Wizards choose two skills from Arcana, History, Insight, Investigation, Medicine, and Religion.";
                     $scope.setAllDisabled();
                     $scope.arcaDisabled = false;
@@ -1366,10 +1373,98 @@ angular.module('dm-app')
         //Equipment/////////////////////////////////
         
         
-        $scope.openEquipment = function() {            
+        $scope.openEquipment = function() { 
+            $scope.equipForm = {
+                selectedPrimary: null,
+                selectedSecondary: null,
+                selectedTertiary: null,
+                selectedArmor: null           
+            };
             $scope.equipDisabled = false; 
-            $scope.switchTab(6); 
+            $scope.switchTab(6);             
+            
+            console.log($scope.characterForm.charObject);
+            $scope.primaryWeapons = $scope.characterForm.charObject.primary_weapon;
+            $scope.secondaryWeapons = $scope.characterForm.charObject.secondary_weapon;
+            $scope.tertiaryWeapons = $scope.characterForm.charObject.tertiary_weapon;
+            $scope.armor = $scope.characterForm.charObject.armor;
+            $scope.mandatoryItems = $scope.characterForm.charObject.mandatory_equipment;
+                        
+            $scope.hasPrimary = function() {
+                if($scope.primaryWeapons.length > 0) {
+                    return true;
+                } else {
+                    $scope.equipForm.selectedPrimary = null;
+                    return false;
+                }
+            }
+            
+            $scope.hasSecondary = function() {
+                if($scope.secondaryWeapons.length > 0) {
+                    return true;
+                } else {
+                    $scope.equipForm.selectedSecondary = null;
+                    return false;
+                }
+            }
+            
+            $scope.hasTertiary = function() {
+                if($scope.tertiaryWeapons.length > 0) {
+                    return true;
+                } else {                    
+                    $scope.equipForm.selectedTertiary = null;
+                    return false;
+                }
+            }
+            
+            $scope.hasArmor = function() {
+                if($scope.armor.length > 0) {
+                    return true;
+                } else {
+                    $scope.equipForm.selectedArmor = null;
+                    return false;
+                }
+            }
+            
+            $scope.hasMandatory = function() {
+                if($scope.mandatoryItems.length > 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         };
+        
+        $scope.saveCurrentEquipment = function() {
+            var equip = [];
+            
+            if($scope.equipForm.selectedPrimary != null) {
+                equip.push($scope.equipForm.selectedPrimary);
+            }
+            
+            if($scope.equipForm.selectedSecondary != null) {
+                equip.push($scope.equipForm.selectedSecondary);
+            }
+            
+            if($scope.equipForm.selectedTertiary != null) {
+                equip.push($scope.equipForm.selectedTertiary);
+            }
+            
+            if($scope.equipForm.selectedArmor != null) {
+                equip.push($scope.equipForm.selectedArmor);
+            }
+            
+            if($scope.hasMandatory) {
+                for(var i = 0; i < $scope.mandatoryItems.length; i++) {
+                    equip.push($scope.mandatoryItems[i]);
+                }
+            }
+            
+            $scope.characterForm.equipment = equip;
+            
+            console.log("current character form contains:");
+            console.log($scope.characterForm);
+        }
         
        
      }])

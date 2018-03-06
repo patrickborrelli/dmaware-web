@@ -88,8 +88,7 @@ angular.module('dm-app')
             console.log("Setting current user stale");
             currentUserStale = true;
             console.log("currentUserStale: " + currentUserStale);
-        };
-        
+        };        
         
         this.cleanupLoggedOutUser = function() {
             currentUser = {};
@@ -283,6 +282,31 @@ angular.module('dm-app')
         this.isLoggedIn = function() {
             return isAuthenticated;
         };
+    }])
+
+    .service('classService', ['$http', '$rootScope', '$state', '$q', 'baseURL', 'ngDialog', function($http, $rootScope, $state, $q, baseURL, ngDialog) {
+        
+        var currentClass;
+        
+        this.getCurrentClass = function() {
+            return currentClass;
+        };
+        
+        var setCurrentClass = function(myClass) {
+            currentClass = myClass;
+        };
+        
+        this.getCharClassByName = function(name) {
+            console.log('Using string= ' + baseURL + 'character_classes?name=' + name);
+            return $http({
+                url: baseURL + 'character_classes?name=' + name,
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json' 
+                }
+            });
+        };
+    
     }])
 
 ;
