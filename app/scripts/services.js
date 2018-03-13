@@ -44,38 +44,7 @@ angular.module('dm-app')
             }            
         };
         
-        this.retrieveUserRoles = function(promise, userId) {
-            var response = null;
-            var user_id;
-            
-            if(userId == null || userId == 0) {
-                user_id = currentUser._id;
-            } else {
-                user_id = userId;
-            }
-            console.log("Attempting to retrieve current user roles...currentRolesStale: " + currentRolesStale);
-            if(currentRolesStale) {
-                currentRolesStale = false;
-                return $http({
-                   url: baseURL + 'club_roles?member=' + user_id,
-                    method: 'GET',
-                    headers: {
-                        'content-type': 'application/json' 
-                    }
-                });
-                
-            } else {
-                if(promise) {
-                    response = $q.when($rootScope.userClubRoles);
-                } else {
-                    response = $rootScope.userClubRoles;
-                }
-                return response;
-            }            
-        };
-        
-        var localRetrieveUserRoles = this.retrieveUserRoles;
-        
+               
         this.setCurrentUser = function(user) {
             currentUser = user;
             console.log("Added new current user:");
@@ -93,6 +62,28 @@ angular.module('dm-app')
         this.cleanupLoggedOutUser = function() {
             currentUser = {};
             
+        };
+        
+        this.getUserSpells = function(charclass, level) {
+            console.log('Using string= ' + baseURL + 'spells?character_class=' + charclass + '&level=' + level);
+            return $http({
+                url: baseURL + 'spells?character_class=' + charclass + '&level=' + level,
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json' 
+                }
+            });
+        };
+        
+        this.getUserCantrips = function(charclass) {
+            console.log('Using string= ' + baseURL + 'spells?character_class=' + charclass + '&level=0');
+            return $http({
+                url: baseURL + 'spells?character_class=' + charclass + '&level=0',
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json' 
+                }
+            });
         };
         
       }])

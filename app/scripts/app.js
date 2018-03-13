@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dm-app', ['ui.router', 'ngDialog', 'ui.bootstrap', '720kb.tooltips'])
+angular.module('dm-app', ['ui.router', 'ngDialog', 'ui.bootstrap', '720kb.tooltips', 'checklist-model'])
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider            
             .state('app', {

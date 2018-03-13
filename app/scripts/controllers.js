@@ -97,6 +97,7 @@ angular.module('dm-app')
             console.log('Received player:' + player + ' and char:' + char);
             $scope.characterForm.player = player;
             $scope.characterForm.character = char;
+            $scope.characterForm.level = 1;
             console.log($scope.characterForm);
             $scope.raceDisabled = false; 
             $scope.switchTab(1);
@@ -955,49 +956,10 @@ angular.module('dm-app')
         $scope.sleiDisabled = false;
         $scope.steaDisabled = false;
         $scope.survDisabled = false;
-        
-        $scope.commonSelected = false;
-        $scope.dwarvishSelected = false;
-        $scope.elvishSelected = false; 
-        $scope.giantSelected = false;
-        $scope.gnomishSelected = false;
-        $scope.goblinSelected = false;
-        $scope.halflingSelected = false;
-        $scope.orcishSelected = false;       
-        
-        $scope.commonDisabled = false;        
-        $scope.dwarvishDisabled = false;
-        $scope.elvishDisabled = false;
-        $scope.giantDisabled = false;
-        $scope.gnomishDisabled = false;
-        $scope.goblinDisabled = false;
-        $scope.halflingDisabled = false;
-        $scope.orcishDisabled = false; 
-        
-        $scope.languageCount = 0;
                 
-        $scope.setLangDisabled = function() {
-            $scope.commonDisabled = true;        
-            $scope.dwarvishDisabled = true;
-            $scope.elvishDisabled = true;
-            $scope.giantDisabled = true;
-            $scope.gnomishDisabled = true;
-            $scope.goblinDisabled = true;
-            $scope.halflingDisabled = true;
-            $scope.orcishDisabled = true; 
-        };
-        
-        $scope.setLangEnabled = function() {
-            $scope.commonDisabled = false;        
-            $scope.dwarvishDisabled = false;
-            $scope.elvishDisabled = false;
-            $scope.giantDisabled = false;
-            $scope.gnomishDisabled = false;
-            $scope.goblinDisabled = false;
-            $scope.halflingDisabled = false;
-            $scope.orcishDisabled = false; 
-        };
-        
+        $scope.languageCount = 0;
+        $scope.skillCount = 0;
+                
         $scope.raceString = '';
         $scope.classString = '';
         
@@ -1078,6 +1040,24 @@ angular.module('dm-app')
             $scope.switchTab(5); 
         };
         
+        $scope.languagesDisabled = function() {
+            $('.myLanguages').change(function(){
+                if($('input.myLanguages').filter(':checked').length == $scope.languageCount)
+                    $('input.myLanguages:not(:checked)').attr('disabled', 'disabled');
+                else
+                    $('input.myLanguages').removeAttr('disabled');
+            });
+        };
+        
+        $scope.disabledSkills = function() {
+            $('.mySkills').change(function(){
+                if($('input.mySkills').filter(':checked').length == $scope.skillCount)
+                    $('input.mySkills:not(:checked)').attr('disabled', 'disabled');
+                else
+                    $('input.mySkills').removeAttr('disabled');
+            });
+        };
+        
         $scope.determineSkillState = function(race, charClass) {
             //first set all the available skills based on class:
             switch(charClass) {
@@ -1090,10 +1070,12 @@ angular.module('dm-app')
                     $scope.natuDisabled = false;
                     $scope.percDisabled = false;
                     $scope.survDisabled = false;
+                    $scope.skillCount = 2;
                     break;
                 case 'Bard': 
                     $scope.classString = "Bards choose any three skills";
                     $scope.setAllEnabled();
+                    $scope.skillCount = 3;
                     break;
                 case 'Cleric':
                     $scope.classString = "Clerics choose two skills from History, Insight, Medicine, Persuasion, and Religion.";
@@ -1103,6 +1085,7 @@ angular.module('dm-app')
                     $scope.mediDisabled = false;
                     $scope.persDisabled = false;
                     $scope.reliDisabled = false;
+                    $scope.skillCount = 2;
                     break;
                 case 'Druid':
                     $scope.classString = "Druids choose two skills from Arcana, Animal Handling, Insight, Medicine, Nature, Perception, Religion, and Survival.";
@@ -1115,6 +1098,7 @@ angular.module('dm-app')
                     $scope.percDisabled = false;
                     $scope.reliDisabled = false;
                     $scope.survDisabled = false;
+                    $scope.skillCount = 2;
                     break;
                 case 'Fighter':
                     $scope.classString = "Fighters choose two skills from Acrobatics, Animal Handling, Athletics, History, Insight, Intimidation, Perception, and Survival.";
@@ -1127,6 +1111,7 @@ angular.module('dm-app')
                     $scope.intiDisabled = false;
                     $scope.percDisabled = false;
                     $scope.survDisabled = false;
+                    $scope.skillCount = 2;
                     break;
                 case 'Monk':
                     $scope.classString = "Monks choose two skills from Acrobatics, Athletics, History, Insight, Religion, and Stealth.";
@@ -1137,6 +1122,7 @@ angular.module('dm-app')
                     $scope.insiDisabled = false;
                     $scope.reliDisabled = false;
                     $scope.steaDisabled = false;
+                    $scope.skillCount = 2;
                     break;
                 case 'Paladin':
                     $scope.classString = "Paladins choose two skills from Athletics, Insight, Intimidation, Medicine, Persuasion, and Religion.";
@@ -1147,6 +1133,7 @@ angular.module('dm-app')
                     $scope.mediDisabled = false;
                     $scope.persDisabled = false;
                     $scope.reliDisabled = false;
+                    $scope.skillCount = 2;
                     break;
                 case 'Ranger':
                     $scope.classString = "Rangers choose three skills from Animal Handling, Athletics, Insight, Investigation, Nature, Preception, and Stealth.";
@@ -1158,6 +1145,7 @@ angular.module('dm-app')
                     $scope.natuDisabled = false;
                     $scope.percDisabled = false;
                     $scope.steaDisabled = false;
+                    $scope.skillCount = 3;
                     break;
                 case 'Rogue':
                     $scope.classString = "Rogues choose four skills from Acrobatics, Athletics, Deception, Insight, Intimidation, Investigation, Perception, Performance, Persuasion, Sleight of Hand, and Stealth.";
@@ -1173,6 +1161,7 @@ angular.module('dm-app')
                     $scope.persDisabled = false;
                     $scope.sleiDisabled = false;
                     $scope.steaDisabled = false;
+                    $scope.skillCount = 4;
                     break;
                 case 'Sorcerer':
                     $scope.classString = "Sorcerers choose two skills from Arcana, Deception, Insight, Intimidation, Persuasion, and Religion.";
@@ -1183,6 +1172,7 @@ angular.module('dm-app')
                     $scope.intiDisabled = false;
                     $scope.persDisabled = false;
                     $scope.reliDisabled - false;
+                    $scope.skillCount = 2;
                     break;                
                 case 'Warlock':
                     $scope.classString = "Warlocks choose two skills from Arcana, Deception, History, Intimidation, Investigation, Nature, and Religion.";
@@ -1194,6 +1184,7 @@ angular.module('dm-app')
                     $scope.inveDisabled = false;
                     $scope.natuDisabled = false;
                     $scope.reliDisabled - false;
+                    $scope.skillCount = 2;
                     break;                
                 case 'Wizard':
                     $scope.classString = "Wizards choose two skills from Arcana, History, Insight, Investigation, Medicine, and Religion.";
@@ -1204,6 +1195,7 @@ angular.module('dm-app')
                     $scope.inveDisabled = false; 
                     $scope.mediDisabled = false;
                     $scope.reliDisabled = false;
+                    $scope.skillCount = 2;
                     break;
             }
             
@@ -1212,68 +1204,86 @@ angular.module('dm-app')
                 case 'DWARF':
                 case 'HILL DWARF':
                     $scope.raceString = "You can speak, read, and write Common and Dwarvish. Dwarvish is full of hard consonants and guttural sounds, and those characteristics spill over into whatever other language a dwarf might speak.";
-                    $scope.setLangDisabled();
-                    $scope.skillForm.common = true;
-                    $scope.skillForm.dwarvish = true;
+                    $scope.setLanguageChecked('common');
+                    $scope.setLanguageChecked('dwarvish');
+                    $scope.setAllLangDisabled();
                     $scope.languageCount = 2;
                     break;
                 case 'ELF': 
                     $scope.raceString = "You can speak, read, and write Common and Elvish. Elvish is fluid, with subtle intonations and intricate grammar. Elven literature is rich and varied, and their songs and poems are famous among other races. Many bards learn their language so they can add Elvish ballads to their repertoires.";
-                    $scope.setLangDisabled();
-                    $scope.skillForm.common = true;
-                    $scope.skillForm.elvish = true;
+                    $scope.setLanguageChecked('common');
+                    $scope.setLanguageChecked('elvish');
+                    $scope.setAllLangDisabled();
                     $scope.languageCount = 2;
                     break;
                 case 'HIGH ELF':
                     $scope.raceString = "You can speak, read, and write Common and Elvish. Elvish is fluid, with subtle intonations and intricate grammar. Elven literature is rich and varied, and their songs and poems are famous among other races. Many bards learn their language so they can add Elvish ballads to their repertoires. As a High Elf, you can speak one extra language of your choice."; 
-                    $scope.setLangEnabled();
-                    $scope.skillForm.common = true;
-                    $scope.skillForm.elvish = true;
-                    $scope.commonDisabled = true;
-                    $scope.elvishDisabled = true;
+                    $scope.setLanguageChecked('common');
+                    $scope.setLanguageChecked('elvish');
+                    $scope.setLanguageDisabled('common');
+                    $scope.setLanguageDisabled('elvish');
                     $scope.languageCount = 3;
                     break;
                 case 'HALFLING':
                 case 'LIGHTFOOT':
                     $scope.raceString = "You can speak, read, and write Common and Halfling. The Halfling language isn’t secret, but halflings are loath to share it with others. They write very little, so they don’t have a rich body of literature. Their oral tradition, however, is very strong. Almost all halflings speak Common to converse with the people in whose lands they dwell or through which they are traveling.";
-                    $scope.setLangDisabled();
-                    $scope.skillForm.common = true;
-                    $scope.skillForm.halfling = true;
+                    $scope.setLanguageChecked('common');
+                    $scope.setLanguageChecked('halfling');
+                    $scope.setAllLangDisabled();
                     $scope.languageCount = 2;
                     break;
                 case 'HUMAN':
                     $scope.raceString = "You can speak, read, and write Common and one extra language of your choice. Humans typically learn the languages of other peoples they deal with, including obscure dialects. They are fond of sprinkling their speech with words borrowed from other tongues: Orc curses, Elvish musical expressions, Dwarvish military phrases, and so on.";
-                    $scope.setLangEnabled();
                     $scope.skillForm.common = true;
-                    $scope.commonDisabled = true;
+                    $scope.setLanguageDisabled('common');
                     $scope.languageCount = 2;
                     break;
                 case 'GNOME':
                 case 'ROCK GNOME':
                     $scope.raceString = "You can speak, read, and write Common and Gnomish. The Gnomish language, which uses the Dwarvish script, is renowned for its technical treatises and its catalogs of knowledge about the natural world.";
-                    $scope.setLangDisabled();
-                    $scope.commonSelected = true;
-                    $scope.gnomishSelected = true;
+                    $scope.setLanguageChecked('common');
+                    $scope.setLanguageChecked('gnomish');
+                    $scope.setAllLangDisabled();
                     $scope.languageCount = 2;
                     break;
                 case 'HALF ELF':
                     $scope.raceString = "You can speak, read, and write Common, Elvish, and one extra language of your choice.";
-                    $scope.setLangEnabled();
-                    $scope.skillForm.common = true;
-                    $scope.skillForm.elvish = true;
-                    $scope.commonDisabled = true;
-                    $scope.elvishDisabled = true;
+                    $scope.setLanguageChecked('common');
+                    $scope.setLanguageChecked('elvish');
+                    $scope.setLanguageDisabled('common');
+                    $scope.setLanguageDisabled('elvish');
                     $scope.languageCount = 3;
                     break;
                 case 'HALF ORC':
                     $scope.classString = "You can speak, read, and write Common and Orc. Orc is a harsh, grating language with hard consonants. It has no script of its own but is written in the Dwarvish script.";
-                    $scope.setLangDisabled();
-                    $scope.skillForm.common = true;
-                    $scope.skillForm.orcish = true;
+                    $scope.setLanguageChecked('common');
+                    $scope.setLanguageChecked('orcish');
+                    $scope.setAllLangDisabled();
                     $scope.languageCount = 2;
                     break;
             }
         };
+        
+        $scope.setLanguageChecked = function(lang) {
+            $("[name =" + lang + "]").prop('checked', true);
+        };       
+        
+        $scope.setLanguageDisabled = function(lang) {
+            $("[name =" + lang + "]").attr('disabled', true);
+        };
+        
+        $scope.setAllLangDisabled = function() {
+            $('input.myLanguages').attr('disabled', true);
+        };
+        
+        $scope.setAllLangEnabled = function() {
+            $('input.myLanguages').attr('disabled', false);
+        };
+        
+        $scope.resetAllLanguages = function() {
+            $('input.myLanguages').attr('disabled', false);            
+            $('input.myLanguages').prop('checked', false);
+        }; 
         
         $scope.getSkillCount = function() {
             var count = 0;
@@ -1460,12 +1470,139 @@ angular.module('dm-app')
                 }
             }
             
-            $scope.characterForm.equipment = equip;
-            
+            $scope.characterForm.equipment = equip;            
             console.log("current character form contains:");
             console.log($scope.characterForm);
-        }
+            $scope.openSpells();
+        };
         
+        ////////////////////////////////////////////   
+        
+        //Spells/////////////////////////////////
+        $scope.openSpells = function() { 
+            
+            $scope.spellsDisabled = false; 
+            $scope.switchTab(7);
+            $scope.selectedCantrips = [];
+            $scope.selectedSpells = [];
+            $scope.cantripText = '';
+            $scope.spellText = '';
+            $scope.cantripCount = 2;
+            $scope.spellCount = 0;            
+            
+            //get cantrips based on level and class:
+            userService.getUserCantrips($scope.characterForm.characterclass)
+            .then(function(response) {
+                    console.log("received cantrips");
+                    console.log(response.data);
+                    $scope.cantrips = response.data;
+            });
+            
+            //get spells based on level and class:
+            userService.getUserSpells($scope.characterForm.characterclass, $scope.characterForm.level)
+            .then(function(response) {
+                    console.log("received spells");
+                    console.log(response.data);
+                    if($scope.characterForm.characterclass != 'Ranger' &&
+                       $scope.characterForm.characterclass != 'Paladin')
+                            $scope.spells = response.data;
+            });
+            
+            switch($scope.characterForm.characterclass) {
+                case 'Barbarian':
+                    $scope.cantripText = "Barbarians are not magic users and do not get cantrips or spells."
+                    break;
+                case 'Bard':
+                    $scope.cantripText = "Bards at 1st level know 2 cantrips. Select 2 cantrips from the list to the right."
+                    $scope.cantripCount = 2;
+                    $scope.spellText = "Bards at 1st level know 4 spells. Select 4 spells from the list to the right";
+                    $scope.spellCount = 4;
+                    break;
+                case 'Cleric':
+                    $scope.cantripText = "Clerics at 1st level know 3 cantrips. Select 3 cantrips from the list to the right."
+                    $scope.cantripCount = 3;
+                    $scope.spellText = "Clerics know all of their spells, none to select.";
+                    $scope.spellCount = 0;
+                    break;
+                case 'Druid':
+                    $scope.cantripText = "Druids at 1st level know 2 cantrips. Select 2 cantrips from the list to the right."
+                    $scope.cantripCount = 2;
+                    $scope.spellText = "Druids know all of their spells, none to select.";
+                    $scope.spellCount = 0;
+                    break;
+                case 'Fighter':
+                    $scope.cantripText = "Fighters are not magic users and do not get cantrips or spells."
+                    break;
+                case 'Monk':
+                    $scope.cantripText = "Monks are not magic users and do not get cantrips or spells."
+                    break;
+                case 'Paladin':
+                    $scope.cantripText = "Paladins do not get magical abilities at first level."
+                    break;
+                case 'Ranger':
+                    $scope.cantripText = "Rangers do not get magical abilities at first level."
+                    break;
+                case 'Rogue':
+                    $scope.cantripText = "Rogues are not magic users and do not get cantrips or spells."
+                    break;
+                case 'Sorcerer':
+                    $scope.cantripText = "Sorcerers at 1st level know 4 cantrips. Select 4 cantrips from the list to the right."
+                    $scope.cantripCount = 4;
+                    $scope.spellText = "Sorcerers at 1st level know 2 spells. Select 2 spells from the list to the right.";
+                    $scope.spellCount = 2;
+                    break;
+                case 'Warlock':
+                    $scope.cantripText = "Warlocks at 1st level know 2 cantrips. Select 2 cantrips from the list to the right."
+                    $scope.cantripCount = 2;
+                    $scope.spellText = "Warlocks at 1st level know 2 spells. Select 2 spells from the list to the right.";
+                    $scope.spellCount = 2;
+                    break;
+                case 'Wizard':
+                    $scope.cantripText = "Wizards at 1st level know 3 cantrips. Select 3 cantrips from the list to the right."
+                    $scope.cantripCount = 3;
+                    $scope.spellText = "Wizards know all of their spells, none to select.";
+                    $scope.spellCount = 0;
+                    break;
+            }
+            
+            $scope.disableCantrips = function() {
+                $('.myCantrips').change(function(){
+                    if($('input.myCantrips').filter(':checked').length == $scope.cantripCount)
+                        $('input.myCantrips:not(:checked)').attr('disabled', 'disabled');
+                    else
+                        $('input.myCantrips').removeAttr('disabled');
+                });
+            };
+                        
+            $scope.disableSpells = function() {
+                if($scope.spellCount == 0) {
+                    $('input.mySpells').prop('checked', true);
+                    $('input.mySpells').attr('disabled', true);
+                }
+                $('.mySpells').change(function(){
+                    if($('input.mySpells').filter(':checked').length == $scope.spellCount) {
+                        $('input.mySpells:not(:checked)').attr('disabled', 'disabled');
+                    } else
+                        $('input.mySpells').removeAttr('disabled');
+                });
+            };
+            
+        };
+        
+        $scope.hasCantrips = function() {
+            return ($scope.cantrips != null && $scope.cantrips.length > 0);  
+        };
+        
+        $scope.hasSpells = function() {
+            return ($scope.spells != null && $scope.spells.length > 0);  
+        };
+        
+        $scope.saveCurrentSpells = function() {
+            $scope.characterForm.cantrips = $scope.selectedCantrips; 
+            $scope.characterForm.spells = $scope.selectedSpells; 
+            console.log("current character form contains:");
+            console.log($scope.characterForm);
+        };
        
      }])
 ;
