@@ -959,6 +959,8 @@ angular.module('dm-app')
                 
         $scope.languageCount = 0;
         $scope.skillCount = 0;
+        $scope.selectedLanguages = [];
+        $scope.selectedSkills = [];
                 
         $scope.raceString = '';
         $scope.classString = '';
@@ -1206,6 +1208,8 @@ angular.module('dm-app')
                     $scope.raceString = "You can speak, read, and write Common and Dwarvish. Dwarvish is full of hard consonants and guttural sounds, and those characteristics spill over into whatever other language a dwarf might speak.";
                     $scope.setLanguageChecked('common');
                     $scope.setLanguageChecked('dwarvish');
+                    $scope.selectedLanguages.push("Common");                    
+                    $scope.selectedLanguages.push("Dwarvish");
                     $scope.setAllLangDisabled();
                     $scope.languageCount = 2;
                     break;
@@ -1213,6 +1217,8 @@ angular.module('dm-app')
                     $scope.raceString = "You can speak, read, and write Common and Elvish. Elvish is fluid, with subtle intonations and intricate grammar. Elven literature is rich and varied, and their songs and poems are famous among other races. Many bards learn their language so they can add Elvish ballads to their repertoires.";
                     $scope.setLanguageChecked('common');
                     $scope.setLanguageChecked('elvish');
+                    $scope.selectedLanguages.push("Common");
+                    $scope.selectedLanguages.push("Elvish");
                     $scope.setAllLangDisabled();
                     $scope.languageCount = 2;
                     break;
@@ -1222,6 +1228,8 @@ angular.module('dm-app')
                     $scope.setLanguageChecked('elvish');
                     $scope.setLanguageDisabled('common');
                     $scope.setLanguageDisabled('elvish');
+                    $scope.selectedLanguages.push("Common");
+                    $scope.selectedLanguages.push("Elvish");
                     $scope.languageCount = 3;
                     break;
                 case 'HALFLING':
@@ -1229,13 +1237,16 @@ angular.module('dm-app')
                     $scope.raceString = "You can speak, read, and write Common and Halfling. The Halfling language isn’t secret, but halflings are loath to share it with others. They write very little, so they don’t have a rich body of literature. Their oral tradition, however, is very strong. Almost all halflings speak Common to converse with the people in whose lands they dwell or through which they are traveling.";
                     $scope.setLanguageChecked('common');
                     $scope.setLanguageChecked('halfling');
+                    $scope.selectedLanguages.push("Common");
+                    $scope.selectedLanguages.push("Halfling");
                     $scope.setAllLangDisabled();
                     $scope.languageCount = 2;
                     break;
                 case 'HUMAN':
                     $scope.raceString = "You can speak, read, and write Common and one extra language of your choice. Humans typically learn the languages of other peoples they deal with, including obscure dialects. They are fond of sprinkling their speech with words borrowed from other tongues: Orc curses, Elvish musical expressions, Dwarvish military phrases, and so on.";
-                    $scope.skillForm.common = true;
+                    $scope.setLanguageChecked('common');
                     $scope.setLanguageDisabled('common');
+                    $scope.selectedLanguages.push("Common");
                     $scope.languageCount = 2;
                     break;
                 case 'GNOME':
@@ -1243,6 +1254,8 @@ angular.module('dm-app')
                     $scope.raceString = "You can speak, read, and write Common and Gnomish. The Gnomish language, which uses the Dwarvish script, is renowned for its technical treatises and its catalogs of knowledge about the natural world.";
                     $scope.setLanguageChecked('common');
                     $scope.setLanguageChecked('gnomish');
+                    $scope.selectedLanguages.push("Common");
+                    $scope.selectedLanguages.push("Gnomish");
                     $scope.setAllLangDisabled();
                     $scope.languageCount = 2;
                     break;
@@ -1252,12 +1265,16 @@ angular.module('dm-app')
                     $scope.setLanguageChecked('elvish');
                     $scope.setLanguageDisabled('common');
                     $scope.setLanguageDisabled('elvish');
+                    $scope.selectedLanguages.push("Common");
+                    $scope.selectedLanguages.push("Elvish");
                     $scope.languageCount = 3;
                     break;
                 case 'HALF ORC':
                     $scope.classString = "You can speak, read, and write Common and Orc. Orc is a harsh, grating language with hard consonants. It has no script of its own but is written in the Dwarvish script.";
                     $scope.setLanguageChecked('common');
                     $scope.setLanguageChecked('orcish');
+                    $scope.selectedLanguages.push("Common");
+                    $scope.selectedLanguages.push("Orcish");
                     $scope.setAllLangDisabled();
                     $scope.languageCount = 2;
                     break;
@@ -1348,31 +1365,8 @@ angular.module('dm-app')
         };
         
         $scope.saveCurrentSkills = function() {
-            $scope.characterForm.acrobatics = $scope.skillForm.acrobatics; 
-            $scope.characterForm.animal_handling = $scope.skillForm.animal_handling; 
-            $scope.characterForm.arcana = $scope.skillForm.arcana; 
-            $scope.characterForm.athletics = $scope.skillForm.athletics; 
-            $scope.characterForm.deception = $scope.skillForm.deception;
-            $scope.characterForm.history = $scope.skillForm.history;
-            $scope.characterForm.insight = $scope.skillForm.insight;
-            $scope.characterForm.intimidation = $scope.skillForm.intimidation;
-            $scope.characterForm.investigation = $scope.skillForm.investigation; 
-            $scope.characterForm.medicine = $scope.skillForm.medicine;
-            $scope.characterForm.nature = $scope.skillForm.nature; 
-            $scope.characterForm.perception = $scope.skillForm.perception;
-            $scope.characterForm.persuasion = $scope.skillForm.persuasion;
-            $scope.characterForm.religion = $scope.skillForm.religion;
-            $scope.characterForm.sleight_of_hand = $scope.skillForm.sleight_of_hand;
-            $scope.characterForm.stealth = $scope.skillForm.stealth; 
-            $scope.characterForm.survival = $scope.skillForm.survival;
-            $scope.characterForm.common = $scope.skillForm.common;
-            $scope.characterForm.dwarvish = $scope.skillForm.dwarvish;
-            $scope.characterForm.elvish = $scope.skillForm.elvish;
-            $scope.characterForm.giant = $scope.skillForm.giant;
-            $scope.characterForm.gnomish = $scope.skillForm.gnomish;
-            $scope.characterForm.goblin = $scope.skillForm.goblin;
-            $scope.characterForm.halfling = $scope.skillForm.halfling;
-            $scope.characterForm.orcish = $scope.skillForm.orcish;
+            $scope.characterForm.skills = $scope.selectedSkills;
+            $scope.characterForm.languages = $scope.selectedLanguages;
             console.log("current character form contains:");
             console.log($scope.characterForm);
             $scope.openEquipment();
@@ -1597,11 +1591,37 @@ angular.module('dm-app')
             return ($scope.spells != null && $scope.spells.length > 0);  
         };
         
+        $scope.getAllSpells = function() {
+            var spells = $scope.spells;
+            var mySpells = [];
+            for(var i = 0; i < spells.length; i++) {
+                mySpells.push(spells[i].name);
+            }
+            return mySpells;
+        };
+        
         $scope.saveCurrentSpells = function() {
             $scope.characterForm.cantrips = $scope.selectedCantrips; 
             $scope.characterForm.spells = $scope.selectedSpells; 
+            if($scope.characterForm.characterclass == 'Cleric' ||
+               $scope.characterForm.characterclass == 'Druid' ||
+               $scope.characterForm.characterclass == 'Wizard') {
+                //characters of these classes know all first level spells so add them to the form:
+                $scope.characterForm.spells = $scope.getAllSpells();
+            }
             console.log("current character form contains:");
             console.log($scope.characterForm);
+            $scope.openSummary();
+        };
+        
+        ////////////////////////////////////////////   
+        
+        //Summary/////////////////////////////////
+        $scope.openSummary = function() { 
+            $scope.summaryDisabled = false; 
+            $scope.switchTab(8);
+            
+            //create character and save in scope
         };
        
      }])
