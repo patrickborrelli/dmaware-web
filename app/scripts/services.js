@@ -283,7 +283,7 @@ angular.module('dm-app')
             return currentClass;
         };
         
-        var setCurrentClass = function(myClass) {
+        this.setCurrentClass = function(myClass) {
             currentClass = myClass;
         };
         
@@ -299,5 +299,52 @@ angular.module('dm-app')
         };
     
     }])
+
+    .service('raceService', ['$http', '$rootScope', '$state', '$q', 'baseURL', 'ngDialog', function($http, $rootScope, $state, $q, baseURL, ngDialog) {
+        
+        var currentRace;
+        
+        this.getCurrentRace = function() {
+            return currentRace;
+        };
+        
+        this.setCurrentRace = function(myRace) {
+            currentRace = myRace;
+        };
+        
+        this.getRaceByName = function(name) {
+            console.log('Using string= ' + baseURL + 'races?name=' + name);
+            return $http({
+                url: baseURL + 'races?name=' + name,
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json' 
+                }
+            });
+        };
+    
+    }])
+
+    .service('characterService', ['$http', '$rootScope', '$state', '$q', 'baseURL', 'ngDialog', function($http, $rootScope, $state, $q, baseURL, ngDialog) {
+        
+        var currentCharacter;
+        
+        this.getCurrentChar = function() {
+            return currentCharacter;
+        };
+        
+        this.setCurrentChar = function(myChar) {
+            currentCharacter = myChar;
+        };
+        
+        this.generateCharacter = function(characterForm) {
+            console.log("Building character from form ");
+            console.log(characterForm);
+        };
+        
+    
+    }])
+
+
 
 ;

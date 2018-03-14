@@ -58,7 +58,7 @@ angular.module('dm-app')
         };       
     }])
 
-    .controller('HomeController', ['$scope', '$timeout', 'ngDialog', 'authService', 'userService', 'classService', function($scope, $timeout, ngDialog, authService, userService, classService) {
+    .controller('HomeController', ['$scope', '$timeout', 'ngDialog', 'authService', 'userService', 'classService', 'raceService', 'characterService', function($scope, $timeout, ngDialog, authService, userService, classService, raceService, characterService) {
         $scope.characterForm = {
             player: '',
             character: ''
@@ -355,7 +355,14 @@ angular.module('dm-app')
                 $scope.characterForm.race = 'HALF ELF';
             } else if($scope.showingHalfOrc) {
                 $scope.characterForm.race = 'HALF ORC';
-            }
+            }          
+            
+            raceService.getRaceByName($scope.characterForm.race)
+                .then(function(response) {
+                    console.log("received race");
+                    console.log(response);
+                    raceService.setCurrentRace(response.data[0]);
+            });
             
             console.log("current character form contains:");
             console.log($scope.characterForm);
@@ -639,7 +646,7 @@ angular.module('dm-app')
                 .then(function(response) {
                     console.log("received class");
                     console.log(response);
-                    $scope.characterForm.charObject = response.data[0];
+                    classService.setCurrentClass(response.data[0]);
             });
             
             console.log("current character form contains:");
@@ -1622,6 +1629,7 @@ angular.module('dm-app')
             $scope.switchTab(8);
             
             //create character and save in scope
+            $scope.character = characterService.generateCharacter($scope.characterForm);
         };
        
      }])
