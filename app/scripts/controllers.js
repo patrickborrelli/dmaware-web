@@ -334,27 +334,27 @@ angular.module('dm-app')
         
         $scope.saveCurrentRace = function() {
             if($scope.showingHuman) {
-                $scope.characterForm.race = 'HUMAN';
+                $scope.characterForm.race = 'Human';
             } else if($scope.showingDwarf) {
-                $scope.characterForm.race = 'DWARF';
+                $scope.characterForm.race = 'Dwarf';
             } else if($scope.showingHillDwarf) {
-                $scope.characterForm.race = 'HILL DWARF';
+                $scope.characterForm.race = 'Hill Dwarf';
             } else if($scope.showingElf) {
-                $scope.characterForm.race = 'ELF';
+                $scope.characterForm.race = 'Elf';
             } else if($scope.showingHighElf) {
-                $scope.characterForm.race = 'HIGH ELF';
+                $scope.characterForm.race = 'High Elf';
             } else if($scope.showingHalfling) {
-                $scope.characterForm.race = 'HALFLING';
+                $scope.characterForm.race = 'Halfling';
             } else if($scope.showingLightfoot) {
-                $scope.characterForm.race = 'LIGHTFOOT';
+                $scope.characterForm.race = 'Lightfoot';
             } else if($scope.showingGnome) {
-                $scope.characterForm.race = 'GNOME';
+                $scope.characterForm.race = 'Gnome';
             } else if($scope.showingRockGnome) {
-                $scope.characterForm.race = 'ROCK GNOME';
+                $scope.characterForm.race = 'Rock Gnome';
             } else if($scope.showingHalfElf) {
-                $scope.characterForm.race = 'HALF ELF';
+                $scope.characterForm.race = 'Half Elf';
             } else if($scope.showingHalfOrc) {
-                $scope.characterForm.race = 'HALF ORC';
+                $scope.characterForm.race = 'Half Orc';
             }          
             
             raceService.getRaceByName($scope.characterForm.race)
@@ -1210,8 +1210,8 @@ angular.module('dm-app')
             
             //next set all the available languages based on race:
             switch(race) {
-                case 'DWARF':
-                case 'HILL DWARF':
+                case 'Dwarf':
+                case 'Hill Dwarf':
                     $scope.raceString = "You can speak, read, and write Common and Dwarvish. Dwarvish is full of hard consonants and guttural sounds, and those characteristics spill over into whatever other language a dwarf might speak.";
                     $scope.setLanguageChecked('common');
                     $scope.setLanguageChecked('dwarvish');
@@ -1220,7 +1220,7 @@ angular.module('dm-app')
                     $scope.setAllLangDisabled();
                     $scope.languageCount = 2;
                     break;
-                case 'ELF': 
+                case 'Elf': 
                     $scope.raceString = "You can speak, read, and write Common and Elvish. Elvish is fluid, with subtle intonations and intricate grammar. Elven literature is rich and varied, and their songs and poems are famous among other races. Many bards learn their language so they can add Elvish ballads to their repertoires.";
                     $scope.setLanguageChecked('common');
                     $scope.setLanguageChecked('elvish');
@@ -1229,7 +1229,7 @@ angular.module('dm-app')
                     $scope.setAllLangDisabled();
                     $scope.languageCount = 2;
                     break;
-                case 'HIGH ELF':
+                case 'High Elf':
                     $scope.raceString = "You can speak, read, and write Common and Elvish. Elvish is fluid, with subtle intonations and intricate grammar. Elven literature is rich and varied, and their songs and poems are famous among other races. Many bards learn their language so they can add Elvish ballads to their repertoires. As a High Elf, you can speak one extra language of your choice."; 
                     $scope.setLanguageChecked('common');
                     $scope.setLanguageChecked('elvish');
@@ -1239,8 +1239,8 @@ angular.module('dm-app')
                     $scope.selectedLanguages.push("Elvish");
                     $scope.languageCount = 3;
                     break;
-                case 'HALFLING':
-                case 'LIGHTFOOT':
+                case 'Halfling':
+                case 'Lightfoot':
                     $scope.raceString = "You can speak, read, and write Common and Halfling. The Halfling language isn’t secret, but halflings are loath to share it with others. They write very little, so they don’t have a rich body of literature. Their oral tradition, however, is very strong. Almost all halflings speak Common to converse with the people in whose lands they dwell or through which they are traveling.";
                     $scope.setLanguageChecked('common');
                     $scope.setLanguageChecked('halfling');
@@ -1249,15 +1249,15 @@ angular.module('dm-app')
                     $scope.setAllLangDisabled();
                     $scope.languageCount = 2;
                     break;
-                case 'HUMAN':
+                case 'Human':
                     $scope.raceString = "You can speak, read, and write Common and one extra language of your choice. Humans typically learn the languages of other peoples they deal with, including obscure dialects. They are fond of sprinkling their speech with words borrowed from other tongues: Orc curses, Elvish musical expressions, Dwarvish military phrases, and so on.";
                     $scope.setLanguageChecked('common');
                     $scope.setLanguageDisabled('common');
                     $scope.selectedLanguages.push("Common");
                     $scope.languageCount = 2;
                     break;
-                case 'GNOME':
-                case 'ROCK GNOME':
+                case 'Gnome':
+                case 'Rock Gnome':
                     $scope.raceString = "You can speak, read, and write Common and Gnomish. The Gnomish language, which uses the Dwarvish script, is renowned for its technical treatises and its catalogs of knowledge about the natural world.";
                     $scope.setLanguageChecked('common');
                     $scope.setLanguageChecked('gnomish');
@@ -1266,7 +1266,7 @@ angular.module('dm-app')
                     $scope.setAllLangDisabled();
                     $scope.languageCount = 2;
                     break;
-                case 'HALF ELF':
+                case 'Half Elf':
                     $scope.raceString = "You can speak, read, and write Common, Elvish, and one extra language of your choice.";
                     $scope.setLanguageChecked('common');
                     $scope.setLanguageChecked('elvish');
@@ -1276,7 +1276,7 @@ angular.module('dm-app')
                     $scope.selectedLanguages.push("Elvish");
                     $scope.languageCount = 3;
                     break;
-                case 'HALF ORC':
+                case 'Half Orc':
                     $scope.classString = "You can speak, read, and write Common and Orc. Orc is a harsh, grating language with hard consonants. It has no script of its own but is written in the Dwarvish script.";
                     $scope.setLanguageChecked('common');
                     $scope.setLanguageChecked('orcish');
@@ -1394,12 +1394,12 @@ angular.module('dm-app')
             $scope.equipDisabled = false; 
             $scope.switchTab(6);             
             
-            console.log($scope.characterForm.charObject);
-            $scope.primaryWeapons = $scope.characterForm.charObject.primary_weapon;
-            $scope.secondaryWeapons = $scope.characterForm.charObject.secondary_weapon;
-            $scope.tertiaryWeapons = $scope.characterForm.charObject.tertiary_weapon;
-            $scope.armor = $scope.characterForm.charObject.armor;
-            $scope.mandatoryItems = $scope.characterForm.charObject.mandatory_equipment;
+            console.log(classService.getCurrentClass());
+            $scope.primaryWeapons = classService.getCurrentClass().primary_weapon;
+            $scope.secondaryWeapons = classService.getCurrentClass().secondary_weapon;
+            $scope.tertiaryWeapons = classService.getCurrentClass().tertiary_weapon;
+            $scope.armor = classService.getCurrentClass().armor;
+            $scope.mandatoryItems = classService.getCurrentClass().mandatory_equipment;
                         
             $scope.hasPrimary = function() {
                 if($scope.primaryWeapons.length > 0) {
@@ -1602,7 +1602,7 @@ angular.module('dm-app')
             var spells = $scope.spells;
             var mySpells = [];
             for(var i = 0; i < spells.length; i++) {
-                mySpells.push(spells[i].name);
+                mySpells.push(spells[i]);
             }
             return mySpells;
         };

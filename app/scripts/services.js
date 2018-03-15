@@ -88,7 +88,7 @@ angular.module('dm-app')
         
       }])
                              
-    .service('authService', ['$http', 'baseURL', 'ngDialog', '$state', 'userService', function($http, baseURL, ngDialog, $state, userService) {
+    .service('authService', ['$http', 'baseURL', 'ngDialog', '$state', 'userService', 'coreDataService', function($http, baseURL, ngDialog, $state, userService, coreDataService) {
         var authToken = undefined;
         var isAuthenticated = false;  
         var isAdmin = false;
@@ -140,6 +140,7 @@ angular.module('dm-app')
                     console.log("\n\nSETTING CURRENT USER TO: " );
                     console.log(response.data);
                     userService.setCurrentUser(response.data);   
+                    coreDataService.populateCoreData();
                 });   
                 
                 $state.go("app.home");
@@ -275,6 +276,66 @@ angular.module('dm-app')
         };
     }])
 
+    .service('coreDataService', ['$http', 'baseURL', 'ngDialog', '$state', 'userService', function($http, baseURL, ngDialog, $state, userService) {
+        var abilityModifiers = [];
+        var proficiencyBonuses = [];
+        var skillLookup = [];
+        
+        this.getAbilityModifiers = function() {
+            return abilityModifiers;  
+        };
+        
+        this.getProficiencyBonuses = function() {
+            return proficiencyBonuses;
+        };
+        
+        this.getSkillLookup = function() {
+            return skillLookup;
+        };
+        
+        this.populateCoreData = function() {
+            //retrieve ability modifiers:
+            $http({
+                url: baseURL + 'ability_score_modifiers/',
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json' 
+                }
+            }).then(function(response) {
+                console.log("Retrieved the ability score modifiers from the API: ");
+                console.log(response.data);
+                abilityModifiers = response.data;
+            });
+            
+            //retrieve proficiency bonuses:
+            $http({
+                url: baseURL + 'proficiency_bonuses/', 
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json'
+                }
+            }).then(function(response) {                
+                console.log("Retrieved the proficiency bonuses from the API: ");
+                console.log(response.data);
+                proficiencyBonuses = response.data;
+            });
+            
+            //retrieve skill lookups:
+            $http({
+                url: baseURL + 'skill_lookups/', 
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json'
+                }
+            }).then(function(response) {                
+                console.log("Retrieved the proficiency bonuses from the API: ");
+                console.log(response.data);
+                proficiencyBonuses = response.data;
+            });
+        }
+        
+    }])                    
+
     .service('classService', ['$http', '$rootScope', '$state', '$q', 'baseURL', 'ngDialog', function($http, $rootScope, $state, $q, baseURL, ngDialog) {
         
         var currentClass;
@@ -325,7 +386,7 @@ angular.module('dm-app')
     
     }])
 
-    .service('characterService', ['$http', '$rootScope', '$state', '$q', 'baseURL', 'ngDialog', function($http, $rootScope, $state, $q, baseURL, ngDialog) {
+    .service('characterService', ['$http', '$rootScope', '$state', '$q', 'baseURL', 'ngDialog', 'raceService', 'classService', 'coreDataService', function($http, $rootScope, $state, $q, baseURL, ngDialog, raceService, classService, coreDataService) {
         
         var currentCharacter;
         
@@ -340,7 +401,139 @@ angular.module('dm-app')
         this.generateCharacter = function(characterForm) {
             console.log("Building character from form ");
             console.log(characterForm);
+            
+            var curClass = classService.getCurrentClass();
+            var curRace = raceService.getCurrentRace();
+            
+            //first calculate racial ability bonuses:
+            var race = raceService.getCurrentRace();
+            characterForm.str += getRacialBonus("STRENGTH", race);
+            characterForm.dex += getRacialBonus("DEXTERITY", race);
+            characterForm.con += getRacialBonus("CONSTITUTION", race);
+            characterForm.wis += getRacialBonus("WISDOM", race);
+            characterForm.int += getRacialBonus("INTELLIGENCE", race);
+            characterForm.cha += getRacialBonus("CHARISMA", race);
+            
+            //now determine ability modifiers:
+            characterForm.strmod = getModifier(characterForm.str);
+            characterForm.dexmod = getModifier(characterForm.dex);
+            characterForm.conmod = getModifier(characterForm.con);
+            characterForm.wismod = getModifier(characterForm.wis);
+            characterForm.intmod = getModifier(characterForm.int);
+            characterForm.chamod = getModifier(characterForm.cha);
+            
+            
+            //set proficiency bonus:
+            characterForm.probonus = getProfBonus(curClass, 1);
+            
+            var classSvBonuses = curClass.saving_throw_proficiency;
+            
+            //set saving throw proficiency and modifiers:
+            if(classSvBonuses.includes("Strength")) {
+                characterForm.strsvmod = characterForm.strmod + characterForm.probonus;
+                characterForm.strsvpro = true;
+            } else {
+                characterForm.strsvmod = characterForm.strmod;
+                characterForm.strsvpro = false;
+            }
+            
+            if(classSvBonuses.includes("Dexterity")) {
+                characterForm.dexsvmod = characterForm.dexmod + characterForm.probonus;
+                characterForm.dexsvpro = true;
+            } else {
+                characterForm.dexsvmod = characterForm.dexmod;
+                characterForm.dexsvpro = false;
+            }
+            
+            if(classSvBonuses.includes("Constitution")) {
+                characterForm.consvmod = characterForm.conmod + characterForm.probonus;
+                characterForm.consvpro = true;
+            } else {
+                characterForm.consvmod = characterForm.conmod;
+                characterForm.consvpro = false;
+            }
+            
+            if(classSvBonuses.includes("Wisdom")) {
+                characterForm.wissvmod = characterForm.wismod + characterForm.probonus;
+                characterForm.wissvpro = true;
+            } else {
+                characterForm.wissvmod = characterForm.wismod;
+                characterForm.wissvpro = false;
+            }
+            
+            if(classSvBonuses.includes("Intelligence")) {
+                characterForm.intsvmod = characterForm.intmod + characterForm.probonus;
+                characterForm.intsvpro = true;
+            } else {
+                characterForm.intsvmod = characterForm.intmod;
+                characterForm.intsvpro = false;
+            }
+            
+            if(classSvBonuses.includes("Charisma")) {
+                characterForm.chasvmod = characterForm.chamod + characterForm.probonus;
+                characterForm.chasvpro = true;
+            } else {
+                characterForm.chasvmod = characterForm.chamod;
+                characterForm.chasvpro = false;
+            }
+                        
+            //set hit dice, hit points and max hit points:
+            console.log("Current class:" );
+            console.log(classService.getCurrentClass());
+            characterForm.hitdietotal = 1;
+            characterForm.hitdie = 'd' + curClass.hit_die;
+            characterForm.hptemp = 0;
+            characterForm.hpcurr = parseInt(curClass.hit_die) + characterForm.conmod;
+            characterForm.hpmax = characterForm.hpcurr;
+            
+            
+            
+            console.log("FINISHED");
+            console.log(characterForm);           
         };
+            
+        function getRacialBonus(ability, race) {
+            var bonus = 0;
+            var scores = race.ability_score_increase;
+            
+            for(var i = 0; i < scores.length; i++) {
+                console.log("Comparing " + scores[i].ability + " to " + ability);
+                if(scores[i].ability == ability) {
+                    bonus = scores[i].increase;
+                }
+            }
+            console.log("Returning " + bonus);
+            return bonus;
+        };
+        
+        function getModifier(score) {
+            var mod = 0;
+            var modifiers = coreDataService.getAbilityModifiers();
+            
+            for(var i = 0; i < modifiers.length; i++) {
+                if(modifiers[i].score == score) {
+                    mod = modifiers[i].increase;
+                    break;
+                }
+            }
+            
+            return mod;
+        };
+        
+        function getProfBonus(cls, lvl) {
+            var bonuses = coreDataService.getProficiencyBonuses();
+            var curClass = classService.getCurrentClass();
+            var bonus = 0;
+            
+            for(var i = 0; i < bonuses.length; i++) {
+                if(bonuses[i].char_class == curClass._id && bonuses[i].level == lvl) {
+                    bonus = bonuses[i].bonus;
+                    break;
+                }
+            }
+            
+            return bonus;
+        }
         
     
     }])

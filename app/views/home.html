@@ -1097,7 +1097,7 @@
                                 <div class="col-xs-12">Cantrips:</div>
                                 <div class="col-xs-12" ng-repeat="cantrip in cantrips">
                                     <label>
-                                        <input type="checkbox" class="myCantrips" ng-disabled="disableCantrips()" checklist-value="cantrip.name" checklist-model="selectedCantrips" />
+                                        <input type="checkbox" class="myCantrips" ng-disabled="disableCantrips()" checklist-value="cantrip" checklist-model="selectedCantrips" />
                                         {{cantrip.name}}
                                     </label>
                                 </div>
@@ -1107,7 +1107,7 @@
                                 <div class="col-xs-12">Spells:</div>
                                 <div class="col-xs-12" ng-repeat="spell in spells">
                                     <label>
-                                        <input type="checkbox" class="mySpells" ng-disabled="disableSpells()" checklist-value="spell.name" checklist-model="selectedSpells" />
+                                        <input type="checkbox" class="mySpells" ng-disabled="disableSpells()" checklist-value="spell" checklist-model="selectedSpells" />
                                         {{spell.name}}
                                     </label>
                                 </div>
