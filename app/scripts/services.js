@@ -330,7 +330,7 @@ angular.module('dm-app')
             }).then(function(response) {                
                 console.log("Retrieved the proficiency bonuses from the API: ");
                 console.log(response.data);
-                proficiencyBonuses = response.data;
+                skillLookup = response.data;
             });
         }
         
@@ -478,18 +478,85 @@ angular.module('dm-app')
             }
                         
             //set hit dice, hit points and max hit points:
-            console.log("Current class:" );
-            console.log(classService.getCurrentClass());
             characterForm.hitdietotal = 1;
             characterForm.hitdie = 'd' + curClass.hit_die;
             characterForm.hptemp = 0;
             characterForm.hpcurr = parseInt(curClass.hit_die) + characterForm.conmod;
             characterForm.hpmax = characterForm.hpcurr;
             
+            //create inventory:
+            characterForm.skillString = generateSkillsString(characterForm);
             
+            //create spellbook:
+            characterForm.spellbookString = generateSpellbook(characterForm);
             
             console.log("FINISHED");
             console.log(characterForm);           
+        };
+        
+        function generateSkillsString(form) {
+            var lookup = coreDataService.getSkillLookup();
+            var skillString = '{ "skills": [';   
+            
+            lookup.forEach(function(skill) {
+                var isProficient = hasProficiency(skill.name, form);
+                skillString += '{ "name": "' + skill.name + '", "constrolling_ability": "' + 
+                    skill.controlling_ability + '", "proficiency":' + isProficient + 
+                    ', "bonus": ' + getBonus(skill.controlling_ability, isProficient, form) + '}';
+            });
+            skillString += ']}';
+            return skillString;
+        };
+        
+        function hasProficiency(ability, form) {
+            var abilities = form.skills;
+            var proficient = false;
+            
+            for(var i = 0; i < abilities.length; i++) {
+                if(abilities[i] === ability) {
+                    proficient = true;
+                    break;
+                }
+            }            
+            return proficient;
+        };
+        
+        function getBonus(ability, proficient, form) {
+            var bonus = 0;
+            
+            switch(ability) {
+                case 'STRENGTH':
+                    bonus += form.strmod;
+                    if(proficient) bonus += form.probonus;
+                    break;
+                    
+                case 'DEXTERITY':
+                    bonus += form.dexmod;
+                    if(proficient) bonus += form.probonus;
+                    break;
+                    
+                case 'CONSTITUTION':
+                    bonus += form.conmod;
+                    if(proficient) bonus += form.probonus;
+                    break;
+                    
+                case 'WISDOM':
+                    bonus += form.wismod;
+                    if(proficient) bonus += form.probonus;
+                    break;
+                    
+                case 'INTELLIGENCE':
+                    bonus += form.intmod;
+                    if(proficient) bonus += form.probonus;
+                    break;
+                    
+                case 'CHARISMA':
+                    bonus += form.chamod;
+                    if(proficient) bonus += form.probonus;
+                    break;                    
+            }            
+            
+            return bonus;
         };
             
         function getRacialBonus(ability, race) {
@@ -497,12 +564,10 @@ angular.module('dm-app')
             var scores = race.ability_score_increase;
             
             for(var i = 0; i < scores.length; i++) {
-                console.log("Comparing " + scores[i].ability + " to " + ability);
                 if(scores[i].ability == ability) {
                     bonus = scores[i].increase;
                 }
             }
-            console.log("Returning " + bonus);
             return bonus;
         };
         
