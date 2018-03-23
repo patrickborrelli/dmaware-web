@@ -58,7 +58,7 @@ angular.module('dm-app')
         };       
     }])
 
-    .controller('HomeController', ['$scope', '$timeout', 'ngDialog', 'authService', 'userService', 'classService', 'raceService', 'characterService', function($scope, $timeout, ngDialog, authService, userService, classService, raceService, characterService) {
+    .controller('HomeController', ['$scope', '$timeout', 'ngDialog', 'authService', 'userService', 'classService', 'raceService', 'characterService', 'coreDataService', function($scope, $timeout, ngDialog, authService, userService, classService, raceService, characterService, coreDataService) {
         $scope.characterForm = {
             player: '',
             character: ''
@@ -71,6 +71,7 @@ angular.module('dm-app')
         $scope.skillsDisabled = true;
         $scope.equipDisabled = true;
         $scope.spellsDisabled = true;
+        $scope.summaryDisabled = true;
         $scope.activeIndex = 0;
         
          //init form:
@@ -778,23 +779,23 @@ angular.module('dm-app')
         
          $scope.saveCurrentAlignment = function() {
             if($scope.selectedLG) {
-                $scope.characterForm.alignment = 'LAWFUL GOOD';
+                $scope.characterForm.alignment = 'Lawful Good';
             } else if($scope.selectedNG) {
-                $scope.characterForm.alignment = 'NEUTRAL GOOD';
+                $scope.characterForm.alignment = 'Neutral Good';
             } else if($scope.selectedCG) {
-                $scope.characterForm.alignment = 'CHAOTIC GOOD';
+                $scope.characterForm.alignment = 'Chaotic Good';
             } else if($scope.selectedLN) {
-                $scope.characterForm.alignment = 'LAWFUL NEUTRAL';
+                $scope.characterForm.alignment = 'Lawful Neutral';
             } else if($scope.selectedTN) {
-                $scope.characterForm.alignment = 'TRUE NEUTRAL';
+                $scope.characterForm.alignment = 'True Neutral';
             } else if($scope.selectedCN) {
-                $scope.characterForm.alignment = 'CHAOTIC NEUTRAL';
+                $scope.characterForm.alignment = 'Chaotic Neutral';
             } else if($scope.selectedLE) {
-                $scope.characterForm.alignment = 'LAWFUL EVIL';
+                $scope.characterForm.alignment = 'Lawful Evil';
             } else if($scope.selectedNE) {
-                $scope.characterForm.alignment = 'NEUTRAL EVIL';
+                $scope.characterForm.alignment = 'Neutral Evil';
             } else if($scope.selectedCE) {
-                $scope.characterForm.alignment = 'CHAOTIC EVIL';
+                $scope.characterForm.alignment = 'Chaotic Evil';
             } 
             
             console.log("current character form contains:");
@@ -1627,6 +1628,19 @@ angular.module('dm-app')
         $scope.openSummary = function() { 
             $scope.summaryDisabled = false; 
             $scope.switchTab(8);
+            
+            $scope.hasCharacters = function() {
+                $scope.characters = coreDataService.getUsersCharacters();
+                if($scope.characters != null) 
+                    return true;
+                else
+                    return false;                
+            };
+            
+            $scope.deleteCharacter = function(charId) {
+                characterService.deleteCharacter(charId);
+                
+            }
             
             //create character and save in scope
             $scope.character = characterService.generateCharacter($scope.characterForm);

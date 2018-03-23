@@ -280,6 +280,12 @@ angular.module('dm-app')
         var abilityModifiers = [];
         var proficiencyBonuses = [];
         var skillLookup = [];
+        var spellSlotsLookup = [];
+        var  usersCharacters = [];
+        
+        this.getUsersCharacters = function() {
+            return usersCharacters;
+        };        
         
         this.getAbilityModifiers = function() {
             return abilityModifiers;  
@@ -292,6 +298,10 @@ angular.module('dm-app')
         this.getSkillLookup = function() {
             return skillLookup;
         };
+        
+        this.getSpellSlotLookup = function() {
+            return spellSlotsLookup;
+        }
         
         this.populateCoreData = function() {
             //retrieve ability modifiers:
@@ -328,9 +338,35 @@ angular.module('dm-app')
                     'content-type': 'application/json'
                 }
             }).then(function(response) {                
-                console.log("Retrieved the proficiency bonuses from the API: ");
+                console.log("Retrieved the skill lookups from the API: ");
                 console.log(response.data);
                 skillLookup = response.data;
+            });
+            
+            //retrieve spell slot lookups:
+            $http({
+                url: baseURL + 'spell_slots/', 
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json'
+                }
+            }).then(function(response) {                
+                console.log("Retrieved the spell slot lookups from the API: ");
+                console.log(response.data);
+                spellSlotsLookup = response.data;
+            });
+                    
+            //retrieve users characters:
+            $http({
+                url: baseURL + 'characters?user=' + userService.getCurrentUserId(), 
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json'
+                }
+            }).then(function(response) {                
+                console.log("Retrieved the current users charaacters from the API: ");
+                console.log(response.data);
+                usersCharacters = response.data;
             });
         }
         
@@ -386,7 +422,7 @@ angular.module('dm-app')
     
     }])
 
-    .service('characterService', ['$http', '$rootScope', '$state', '$q', 'baseURL', 'ngDialog', 'raceService', 'classService', 'coreDataService', function($http, $rootScope, $state, $q, baseURL, ngDialog, raceService, classService, coreDataService) {
+    .service('characterService', ['$http', '$rootScope', '$state', '$q', 'baseURL', 'ngDialog', 'raceService', 'classService', 'coreDataService', 'userService', function($http, $rootScope, $state, $q, baseURL, ngDialog, raceService, classService, coreDataService, userService) {
         
         var currentCharacter;
         
@@ -396,6 +432,21 @@ angular.module('dm-app')
         
         this.setCurrentChar = function(myChar) {
             currentCharacter = myChar;
+        };
+        
+        this.deleteCharacter = function(charId) {
+            console.log("Received delete request for character: " + charId);
+            $http({
+                url: baseURL + 'characters/' + charId, 
+                method: 'DELETE',
+                headers: {
+                    'content-type': 'application/json'
+                }
+            }).then(function(response) {                
+                console.log("Deleted the charaacter from the API: ");
+                console.log(response.data);
+                coreDataService.populateCoreData();
+            });
         };
         
         this.generateCharacter = function(characterForm) {
@@ -484,27 +535,507 @@ angular.module('dm-app')
             characterForm.hpcurr = parseInt(curClass.hit_die) + characterForm.conmod;
             characterForm.hpmax = characterForm.hpcurr;
             
-            //create inventory:
-            characterForm.skillString = generateSkillsString(characterForm);
-            
-            //create spellbook:
-            characterForm.spellbookString = generateSpellbook(characterForm);
+            //create attacks:
+            characterForm.attackString = generateAttackString(characterForm);
             
             console.log("FINISHED");
-            console.log(characterForm);           
+            console.log(characterForm);  
+            
+            //now start the actual build:
+            var spellcaster = true;
+            
+            if(getSlotsAsString(characterForm) == "") 
+                spellcaster = false;             
+            
+            if(spellcaster) {
+                $http({
+                    url: baseURL + 'slots/',
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json' 
+                    },
+                    data: getSlotsAsString(characterForm)
+                }).then(function(response) {                    
+                    characterForm.slotIds = getSlotIdString(response.data);       
+                    //create spellbook:
+                    characterForm.spellbookString = generateSpellbookString(characterForm);
+                    
+                    //now build spellbook:
+                    $http({
+                        url: baseURL + 'spellbooks/',
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json' 
+                        },
+                        data: characterForm.spellbookString
+                    }).then(function(spellbookResponse) { 
+                        characterForm.spellBookId = spellbookResponse.data._id;
+                        
+                        //build inventory:
+                        $http({
+                            url: baseURL + 'inventories/buildFromItems/',
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json' 
+                            },
+                            data: getInventoryString(characterForm.equipment)
+                        }).then(function(invResponse) { 
+                            characterForm.inventoryId = invResponse.data._id;
+                            //build attacks:
+                            $http({
+                                url: baseURL + 'attacks/',
+                                method: 'POST',
+                                headers: {
+                                    'content-type': 'application/json' 
+                                },
+                                data: characterForm.attackString
+                            }).then(function(attResponse) { 
+                                characterForm.attackIds = getAttackIds(attResponse.data);
+                                //build skills:
+                                $http({
+                                    url: baseURL + 'skills/',
+                                    method: 'POST',
+                                    headers: {
+                                        'content-type': 'application/json' 
+                                    },
+                                    data: generateSkillsString(characterForm)
+                                }).then(function(skillResponse) { 
+                                    characterForm.skillIds = getSkillIds(skillResponse.data);
+                                    
+                                    //last of all, build the character string and save it:
+                                    var str = '{'
+                                    str += '"name": "' + characterForm.character + '", ';
+                                    str += '"character_class": "' + classService.getCurrentClass()._id + '", ';
+                                    str += '"character_level": 1, ';
+                                    str += '"race": "' + raceService.getCurrentRace()._id + '", ';
+                                    str += '"experience_points": 0, ';
+                                    str += '"strength": ' + characterForm.str + ', ';                                    
+                                    str += '"dexterity": ' + characterForm.dex  + ', ';
+                                    str += '"constitution": ' + characterForm.con + ', ';
+                                    str += '"wisdom": ' + characterForm.wis + ', ';
+                                    str += '"intelligence": ' + characterForm.int + ', ';
+                                    str += '"charisma": ' + characterForm.cha + ', ';
+                                    str += '"strength_modifier": ' + characterForm.strmod + ', ';                                    
+                                    str += '"dexterity_modifier": ' + characterForm.dexmod  + ', ';
+                                    str += '"constitution_modifier": ' + characterForm.conmod + ', ';
+                                    str += '"wisdom_modifier": ' + characterForm.wismod + ', ';
+                                    str += '"intelligence_modifier": ' + characterForm.intmod + ', ';
+                                    str += '"charisma_modifier": ' + characterForm.chamod + ', ';
+                                    str += '"proficiency_bonus": ' + characterForm.probonus + ', ';
+                                    str += '"hit_point_maximum": ' + characterForm.hpmax + ', ';
+                                    str += '"hit_points": ' + characterForm.hpcurr + ', ';
+                                    str += '"hit_points_temporary": ' + characterForm.hptemp + ', ';
+                                    str += '"hit_die_type": ' + parseInt(characterForm.hitdie.substr(1)) + ', ';
+                                    str += '"hit_dice_count": ' + characterForm.hitdietotal + ', ';
+                                    str += '"speed_base": ' + raceService.getCurrentRace().base_speed + ', ';                                    
+                                    str += '"speed_current": ' + raceService.getCurrentRace().base_speed + ', ';
+                                    str += '"saving_throw_modifier_strength": ' + characterForm.strsvmod + ', ';
+                                    str += '"saving_throw_modifier_dexterity": ' + characterForm.dexsvmod + ', ';
+                                    str += '"saving_throw_modifier_constitution": ' + characterForm.consvmod + ', ';
+                                    str += '"saving_throw_modifier_wisdom": ' + characterForm.wissvmod + ', ';
+                                    str += '"saving_throw_modifier_intelligence": ' + characterForm.intsvmod + ', ';
+                                    str += '"saving_throw_modifier_charisma": ' + characterForm.chasvmod + ', ';
+                                    str += '"skills": ' + characterForm.skillIds + ', ';
+                                    str += '"inventory": "' + characterForm.inventoryId + '", ';
+                                    str += '"armor_class": 10, ';
+                                    str += '"alignment": "' + characterForm.alignment + '", ';
+                                    str += '"langauge": ' + buildStringJSON(characterForm.languages) + ', ';
+                                    str += '"saving_throw_proficiency_strength": ' + characterForm.strsvpro + ', ';
+                                    str += '"saving_throw_proficiency_dexterity": ' + characterForm.dexsvpro + ', ';
+                                    str += '"saving_throw_proficiency_constitution": ' + characterForm.consvpro + ', ';
+                                    str += '"saving_throw_proficiency_wisdom": ' + characterForm.wissvpro + ', ';
+                                    str += '"saving_throw_proficiency_intelligence": ' + characterForm.intsvpro + ', ';
+                                    str += '"saving_throw_proficiency_charisma": ' + characterForm.chasvpro + ', ';
+                                    str += '"attacks": ' + characterForm.attackIds + ', ';
+                                    str += '"attack_count": 1, ';
+                                    str += '"proficiencies": ' + buildProficiencyArray(characterForm) + ', ';
+                                    
+                                    var pass = 10 + characterForm.wismod;
+                                    if(characterForm.wissvpro) 
+                                        pass += characterForm.probonus;
+                                    str += '"passive_perception": ' + pass + ', ';                                    
+                                    str += '"spellbook": ["' + characterForm.spellBookId + '"], ';
+                                    str += '"user": "' + userService.getCurrentUser()._id + '"';    
+                                    str += '}';
+                                    
+                                    console.log("THE CHARACTER STRING");
+                                    console.log(str);
+                                    
+                                    $http({
+                                        url: baseURL + 'characters/',
+                                        method: 'POST',
+                                        headers: {
+                                            'content-type': 'application/json' 
+                                        },
+                                        data: str
+                                    }).then(function(charResponse) { 
+                                        console.log("Successfully created Character");
+                                        console.log(charResponse);
+                                        //reload current user's characters
+                                        coreDataService.populateCoreData();
+                                    });                             
+                                });                                
+                            });                            
+                        });
+                    });                    
+                });
+            } else {
+                //TODO: handle non-spellcasters
+                console.log("Non-spellcaster");
+                //build inventory:
+                $http({
+                    url: baseURL + 'inventories/buildFromItems/',
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json' 
+                    },
+                    data: getInventoryString(characterForm.equipment)
+                }).then(function(invResponse) { 
+                    characterForm.inventoryId = invResponse.data._id;
+                    //build attacks:
+                    $http({
+                        url: baseURL + 'attacks/',
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json' 
+                        },
+                        data: characterForm.attackString
+                    }).then(function(attResponse) { 
+                        characterForm.attackIds = getAttackIds(attResponse.data);
+                        //build skills:
+                        $http({
+                            url: baseURL + 'skills/',
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json' 
+                            },
+                            data: generateSkillsString(characterForm)
+                        }).then(function(skillResponse) { 
+                            characterForm.skillIds = getSkillIds(skillResponse.data);
+
+                            //last of all, build the character string and save it:
+                            var str = '{'
+                            str += '"name": "' + characterForm.character + '", ';
+                            str += '"character_class": "' + classService.getCurrentClass()._id + '", ';
+                            str += '"character_level": 1, ';
+                            str += '"race": "' + raceService.getCurrentRace()._id + '", ';
+                            str += '"experience_points": 0, ';
+                            str += '"strength": ' + characterForm.str + ', ';                                    
+                            str += '"dexterity": ' + characterForm.dex  + ', ';
+                            str += '"constitution": ' + characterForm.con + ', ';
+                            str += '"wisdom": ' + characterForm.wis + ', ';
+                            str += '"intelligence": ' + characterForm.int + ', ';
+                            str += '"charisma": ' + characterForm.cha + ', ';
+                            str += '"strength_modifier": ' + characterForm.strmod + ', ';                                    
+                            str += '"dexterity_modifier": ' + characterForm.dexmod  + ', ';
+                            str += '"constitution_modifier": ' + characterForm.conmod + ', ';
+                            str += '"wisdom_modifier": ' + characterForm.wismod + ', ';
+                            str += '"intelligence_modifier": ' + characterForm.intmod + ', ';
+                            str += '"charisma_modifier": ' + characterForm.chamod + ', ';
+                            str += '"proficiency_bonus": ' + characterForm.probonus + ', ';
+                            str += '"hit_point_maximum": ' + characterForm.hpmax + ', ';
+                            str += '"hit_points": ' + characterForm.hpcurr + ', ';
+                            str += '"hit_points_temporary": ' + characterForm.hptemp + ', ';
+                            str += '"hit_die_type": ' + parseInt(characterForm.hitdie.substr(1)) + ', ';
+                            str += '"hit_dice_count": ' + characterForm.hitdietotal + ', ';
+                            str += '"speed_base": ' + raceService.getCurrentRace().base_speed + ', ';                                    
+                            str += '"speed_current": ' + raceService.getCurrentRace().base_speed + ', ';
+                            str += '"saving_throw_modifier_strength": ' + characterForm.strsvmod + ', ';
+                            str += '"saving_throw_modifier_dexterity": ' + characterForm.dexsvmod + ', ';
+                            str += '"saving_throw_modifier_constitution": ' + characterForm.consvmod + ', ';
+                            str += '"saving_throw_modifier_wisdom": ' + characterForm.wissvmod + ', ';
+                            str += '"saving_throw_modifier_intelligence": ' + characterForm.intsvmod + ', ';
+                            str += '"saving_throw_modifier_charisma": ' + characterForm.chasvmod + ', ';
+                            str += '"skills": ' + characterForm.skillIds + ', ';
+                            str += '"inventory": "' + characterForm.inventoryId + '", ';
+                            str += '"armor_class": 10, ';
+                            str += '"alignment": "' + characterForm.alignment + '", ';
+                            str += '"langauge": ' + buildStringJSON(characterForm.languages) + ', ';
+                            str += '"saving_throw_proficiency_strength": ' + characterForm.strsvpro + ', ';
+                            str += '"saving_throw_proficiency_dexterity": ' + characterForm.dexsvpro + ', ';
+                            str += '"saving_throw_proficiency_constitution": ' + characterForm.consvpro + ', ';
+                            str += '"saving_throw_proficiency_wisdom": ' + characterForm.wissvpro + ', ';
+                            str += '"saving_throw_proficiency_intelligence": ' + characterForm.intsvpro + ', ';
+                            str += '"saving_throw_proficiency_charisma": ' + characterForm.chasvpro + ', ';
+                            str += '"attacks": ' + characterForm.attackIds + ', ';
+                            str += '"attack_count": 1, ';
+                            str += '"proficiencies": ' + buildProficiencyArray(characterForm) + ', ';
+
+                            var pass = 10 + characterForm.wismod;
+                            if(characterForm.wissvpro) 
+                                pass += characterForm.probonus;
+                            str += '"passive_perception": ' + pass + ', ';                                    
+                            str += '"spellbook": ["' + characterForm.spellBookId + '"], ';
+                            str += '"user": "' + userService.getCurrentUser()._id + '"';    
+                            str += '}';
+
+                            console.log("THE CHARACTER STRING");
+                            console.log(str);
+
+                            $http({
+                                url: baseURL + 'characters/',
+                                method: 'POST',
+                                headers: {
+                                    'content-type': 'application/json' 
+                                },
+                                data: str
+                            }).then(function(charResponse) { 
+                                console.log("Successfully created Character");
+                                console.log(charResponse);
+                                //reload current user's characters
+                                coreDataService.populateCoreData();
+                            }); 
+                        });
+                    });
+                });
+            }
         };
+        
+        function buildProficiencyArray(form) {
+            var pro = '['
+            //languages:
+            for(var i = 0; i < form.languages.length; i++) {
+                pro += '"' + form.languages[i] + '", ';
+            }
+            
+            //armor proficiencies:
+            var arm = classService.getCurrentClass().armor_proficiency;
+            for(var i = 0; i < arm.length; i++) {
+                pro += '"' + arm[i] + '", ';
+            }
+            
+            //weapon proficiencies:
+            var weapon = classService.getCurrentClass().weapon_proficiency;
+            for(var i = 0; i < weapon.length; i++) {
+                pro += '"' + weapon[i] + '", ';
+            }            
+            
+            pro = pro.slice(0, -2);
+            pro += ']'
+            return pro;
+        };
+        
+        function buildStringJSON(ary) {
+            var items = '[';
+            for(var i = 0; i < ary.length; i++) {
+                items += '"' + ary[i] + '", ';
+            }
+            
+            items = items.slice(0, -2);
+            items += ']';
+            
+            return items;
+        };
+        
+        function getSkillIds(skills) {
+            var skillId = '[';
+            for(var i = 0; i < skills.length; i++) {
+                skillId += '"' + skills[i]._id + '", ';
+            }
+            
+            skillId = skillId.slice(0, -2);
+            skillId += ']';
+            
+            return skillId;            
+        };
+        
+        function getAttackIds(attacks) {
+            var attId = '[';
+            for(var i = 0; i < attacks.length; i++) {
+                attId += '"' + attacks[i]._id + '", ';
+            }
+            
+            attId = attId.slice(0, -2);
+            attId += ']';
+            
+            return attId;            
+        };
+        
+        function getInventoryString(items) {
+            var ids = '{"items": [';
+            
+            for(var i = 0; i < items.length; i++) {
+                ids += '{"_id": "' + items[i]._id + '", "weight":' + items[i].weight + '}, ';
+            }
+            
+            ids = ids.slice(0, -2);
+            ids += ']}';
+            
+            return ids;
+        };
+        
+        function getSlotIdString(slots) {
+            var ids = '[';
+            
+            for(var i = 0; i < slots.length; i++) {
+                ids += '"' + slots[i]._id + '",';
+            }
+            
+            ids = ids.slice(0, -1);
+            ids += ']';
+            
+            return ids;
+        };
+        
+        function generateAttackString(form) {
+            var weapons = getDamageInducingItems(form.equipment);
+            var attackString = '[';
+            
+            for(var i = 0; i < weapons.length; i++) {
+                attackString += '{"name": "' + weapons[i].name + '", "damage_type": "' + weapons[i].damage_type + '", "multiplier": ' + weapons[i].multiplier + ', "die_type": ' + weapons[i].die_type + '}, ';
+            }
+            
+            attackString = attackString.slice(0, -2);
+            attackString += ']';
+            
+            return attackString;         
+        };
+        
+        function getDamageInducingItems(items) {
+            var weapons = [];
+            
+            for(var i = 0; i < items.length; i++) {
+                if(items[i].damage_inducing) 
+                    weapons.push(items[i]);
+            }
+            
+            return weapons;
+        }
+        
+        function generateSpellbookString(form) {
+            var spellbookString = ''; 
+            spellbookString += '{ "spell_save_dc": ' + getSpellSaveDC(form) + ', ';
+            spellbookString += '"spell_attack_bonus": ' + getSpellAttackBonus(form) + ', ';
+            spellbookString += '"spellbook_spells": ' + getSpellsAsString(form) + ', ';
+            spellbookString += '"slots": ' + form.slotIds + '}';
+            
+            console.log(spellbookString);
+                    
+            return spellbookString;
+        };
+        
+        function getSlotsAsString(form) {
+            
+            var slotString = '[';
+            
+            //retrieve spell slot lookups:
+            var slots = getSlotLookups(form.characterclass, form.level);
+            
+            if(slots == null)
+                return "";
+                
+            slotString += '{ "level": 1, "spell_count": "' + slots.first_lvl + '", "used":0}, ';
+            slotString += '{ "level": 2, "spell_count": "' + slots.second_lvl + '", "used":0}, ';
+            slotString += '{ "level": 3, "spell_count": "' + slots.third_lvl + '", "used":0}, ';
+            slotString += '{ "level": 4, "spell_count": "' + slots.fourth_lvl + '", "used":0}, ';
+            slotString += '{ "level": 5, "spell_count": "' + slots.fifth_lvl + '", "used":0}, ';
+            slotString += '{ "level": 6, "spell_count": "' + slots.sixth_lvl + '", "used":0}, ';
+            slotString += '{ "level": 7, "spell_count": "' + slots.seventh_lvl + '", "used":0}, ';
+            slotString += '{ "level": 8, "spell_count": "' + slots.eighth_lvl + '", "used":0}, ';
+            slotString += '{ "level": 9, "spell_count": "' + slots.ninth_lvl + '", "used":0}';
+            
+            slotString += ']';
+            return slotString;
+        };
+        
+        function getSpellsAsString(form) {
+            var spellString = '[';
+            
+            var spells = form.spells;
+            
+            for(var i = 0; i < spells.length; i++) {
+                spellString += '"' + spells[i]._id + '", ';
+            }
+            
+            spellString = spellString.slice(0, -2);
+            
+            spellString += ']';
+            
+            return spellString;
+        };
+        
+        function getSpellSaveDC(form) {
+            var castingAbility = classService.getCurrentClass().spellcasting_ability;
+            var bonus = form.probonus;
+            var saveDC = 0;
+            
+            switch(castingAbility) {
+                case "Strength":
+                    saveDC = 8 + bonus + form.strmod;
+                    break;
+                case "Desterity":
+                    saveDC = 8 + bonus + form.dexmod;
+                    break;
+                case "Constitution":
+                    saveDC = 8 + bonus + form.conmod;
+                    break;
+                case "Wisdom":
+                    saveDC = 8 + bonus + form.wismod;
+                    break;
+                case "Intelligence":
+                    saveDC = 8 + bonus + form.intmod;
+                    break;
+                case "Charisma":
+                    saveDC = 8 + bonus + form.chamod;
+                    break;
+            }
+            return saveDC;
+        };
+        
+        function getSpellAttackBonus(form) {
+            var castingAbility = classService.getCurrentClass().spellcasting_ability;
+            var bonus = form.probonus;
+            var attackbonus = 0;
+            
+            switch(castingAbility) {
+                case "Strength":
+                    attackbonus = bonus + form.strmod;
+                    break;
+                case "Desterity":
+                    attackbonus = bonus + form.dexmod;
+                    break;
+                case "Constitution":
+                    attackbonus = bonus + form.conmod;
+                    break;
+                case "Wisdom":
+                    attackbonus = bonus + form.wismod;
+                    break;
+                case "Intelligence":
+                    attackbonus = bonus + form.intmod;
+                    break;
+                case "Charisma":
+                    attackbonus = bonus + form.chamod;
+                    break;
+            }
+            return attackbonus;
+        };
+        
+        function getSlotLookups(charClass, level) {            
+            var lookup = coreDataService.getSpellSlotLookup();
+            var slots = null;
+            
+            for(var i = 0; i < lookup.length; i++) {
+                if(lookup[i].level == level && lookup[i].character_class == charClass) {
+                    slots = lookup[i];
+                    break;
+                }
+            }
+            return slots;
+        }
         
         function generateSkillsString(form) {
             var lookup = coreDataService.getSkillLookup();
-            var skillString = '{ "skills": [';   
+            var skillString = '[';   
             
             lookup.forEach(function(skill) {
                 var isProficient = hasProficiency(skill.name, form);
                 skillString += '{ "name": "' + skill.name + '", "constrolling_ability": "' + 
                     skill.controlling_ability + '", "proficiency":' + isProficient + 
-                    ', "bonus": ' + getBonus(skill.controlling_ability, isProficient, form) + '}';
+                    ', "bonus": ' + getBonus(skill.controlling_ability, isProficient, form) + '}, ';
             });
-            skillString += ']}';
+            skillString = skillString.slice(0, -2);
+            skillString += ']';
+            console.log("SKILLSTRING: " + skillString);
             return skillString;
         };
         
