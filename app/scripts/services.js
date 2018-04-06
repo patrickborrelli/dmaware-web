@@ -150,8 +150,7 @@ angular.module('dm-app')
                 var message = '\
                 <div class="ngdialog-message">\
                 <div><h3>Login Unsuccessful</h3></div>' +
-                  '<div><p>' +  errResponse + '</p><p>' +
-                    errResponse + '</p></div>' +
+                  '<div><p>' + errResponse.data.err.message  + '</p></div>' +
                 '<div class="ngdialog-buttons">\
                     <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click=confirm("OK")>OK</button>\
                 </div>'
@@ -232,7 +231,6 @@ angular.module('dm-app')
                 
             }, function(response) {
                 console.log("failed to registered a user.");
-                $scope.showRegLoader = true;
                 var message = '\
                 <div class="ngdialog-message">\
                 <div><h3>Login Unsuccessful</h3></div>' +

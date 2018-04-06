@@ -4,58 +4,77 @@
     </div>
     <div class="">&nbsp;</div>
     <div class="">
-        <form name="regForm" class="form-horizontal" >
-            <div class="form-group custom-padding">
+        <form name="regForm" class="form-horizontal" name="regForm" novalidate>
+            <div class="form-group custom-padding" ng-class="{'has-error has-feedback':regForm.username.$invalid && !regForm.username.$pristine}">
                 <label class="sr-only" for="username">Username</label>
                 <div class="col-xs-12">
                     <div class="input-group">
                         <div class="input-group-addon custom-width-140">Username</div>
-                        <input type="text" class="form-control" id="username" ng-model="registration.username">
+                        <span style="color:red" ng-show="!regForm.username.$pristine && regForm.username.$invalid">
+                            <span ng-show="regForm.username.$error.required">Username is required.</span>
+                        </span>
+                        <input type="text" class="form-control" id="username" name="username" ng-model="registration.username" required>
                     </div>                    
                 </div>
             </div>
-            <div class="form-group custom-padding">
+            <div class="form-group custom-padding" ng-class="{'has-error has-feedback':regForm.pword.$invalid && !regForm.pword.$pristine}">
                 <label class="sr-only" for="password">Password</label>
                 <div class="col-xs-12">
                     <div class="input-group">
                         <div class="input-group-addon custom-width-140">Password</div>
-                        <input type="text" class="form-control" id="password" ng-model="registration.password">
+                        <span style="color:red" ng-show="!regForm.pword.$pristine && regForm.pword.$invalid">
+                            <span ng-show="regForm.pword.$error.required">Password is required.</span>
+                        </span>
+                        <input type="password" class="form-control" id="password" name="pword" ng-model="registration.password" required>                        
                     </div>                    
                 </div>
             </div>
-            <div class="form-group custom-padding">
+            <div class="form-group custom-padding" ng-class="{'has-error has-feedback':regForm.pwordconfirm.$invalid && !regForm.pwordconfirm.$pristine}">
                 <label class="sr-only" for="confirmpassword">Confirm Password</label>
                 <div class="col-xs-12">
                     <div class="input-group">
                         <div class="input-group-addon custom-width-140">Confirm Password</div>
-                        <input type="text" class="form-control" id="confirmpassword" ng-model="registration.confirmpassword">
+                        <span style="color:red" ng-show="!regForm.pwordconfirm.$pristine && regForm.pwordconfirm.$invalid">
+                            <span ng-show="regForm.pwordconfirm.$error.required">Password confirmation is required.</span>
+                        </span>
+                        <input type="password" class="form-control" id="confirmpassword" name="pwordconfirm" ng-model="registration.confirmpassword" required>
                     </div>                    
                 </div>
             </div>
-            <div class="form-group custom-padding">
+            <div class="form-group custom-padding" ng-class="{'has-error has-feedback':regForm.fname.$invalid && !regForm.fname.$pristine}">
                 <label class="sr-only" for="first_name">First Name</label>
                 <div class="col-xs-12">
                     <div class="input-group">
                         <div class="input-group-addon custom-width-140">First Name</div>
-                        <input type="text" class="form-control" id="first_name" ng-model="registration.first_name">
+                        <span style="color:red" ng-show="!regForm.fname.$pristine && regForm.fname.$invalid">
+                            <span ng-show="regForm.fname.$error.required">First name is required.</span>
+                        </span>
+                        <input type="text" class="form-control" id="first_name" name="fname" ng-model="registration.first_name" required>
                     </div>                    
                 </div>
             </div>            
-            <div class="form-group custom-padding">
+            <div class="form-group custom-padding" ng-class="{'has-error has-feedback':regForm.lname.$invalid && !regForm.lname.$pristine}">
                 <label class="sr-only" for="last_name">Last Name</label>
                 <div class="col-xs-12">
                     <div class="input-group">
                         <div class="input-group-addon custom-width-140">Last Name</div>
-                        <input type="text" class="form-control" id="last_name" ng-model="registration.last_name">
+                        <span style="color:red" ng-show="!regForm.lname.$pristine && regForm.lname.$invalid">
+                            <span ng-show="regForm.lname.$error.required">Last name is required.</span>
+                        </span>
+                        <input type="text" class="form-control" id="last_name" name="lname" ng-model="registration.last_name" required>
                     </div>                    
                 </div>
             </div>
-            <div class="form-group custom-padding">
+            <div class="form-group custom-padding" ng-class="{'has-error has-feedback':regForm.email.$invalid && !regForm.email.$pristine}">
                 <label class="sr-only" for="email_address">Email</label>
                 <div class="col-xs-12">
                     <div class="input-group">
                         <div class="input-group-addon custom-width-140">Email</div>
-                        <input type="text" class="form-control" id="email_address" ng-model="registration.email_address">
+                        <span style="color:red" ng-show="!regForm.email.$pristine && regForm.email.$invalid">
+                            <span ng-show="regForm.email.$error.required">Email is required.</span>
+                            <span ng-show="regForm.email.$error.email">Invalid email address.</span>
+                        </span>
+                        <input type="email" class="form-control" id="email_address" name="email" ng-model="registration.email_address" required>
                     </div>                    
                 </div>
             </div>
@@ -68,7 +87,7 @@
                     </div>                    
                 </div>
             </div>   
-            <button type="button" class="btn btn-info" ng-click="showRegLoading(); registerUser()">Register</button>
+            <button type="button" class="btn btn-info" ng-click="showRegLoading(); registerUser()" ng-disabled="regForm.$invalid">Register</button>
             <button type="button" class="btn btn-default" ng-click='closeThisDialog("Cancel")'>Cancel</button>
         </form>
         <div ng-show="showRegLoader" class="loader"></div>

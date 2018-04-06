@@ -37,18 +37,28 @@ angular.module('dm-app')
             $scope.showLoader = true;
         };
         
+        $scope.hideLoading = function() {
+            $scope.showLoader = false;
+        };
+        
         $scope.showRegLoading = function() {
             $scope.showRegLoader = true;
+        };       
+        
+        $scope.hideRegLoading = function() {
+            $scope.showRegLoader = false;
         };
         
         $scope.registerUser = function() {
             console.log('Doing registration', $scope.registration); 
             authService.register($scope.registration);
+            $scope.hideRegLoading();
         };
         
         $scope.processLogin = function() {
             console.log('Doing login', $scope.loginData);
-            authService.login($scope.loginData);            
+            authService.login($scope.loginData);    
+            $scope.hideLoading();
         };
         
         $scope.processLogout = function() {

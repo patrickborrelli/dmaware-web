@@ -45,7 +45,7 @@
                     Enter the information required below and click on Begin to get started!
                 </div><br/>
                 
-                <form class="form-horizontal" >
+                <form class="form-horizontal" name="myIntroForm" novalidate>
                     <div class="form-group custom-padding">
                         <label class="sr-only" for="playername">Player Name</label>
                         <div class="col-xs-8">
@@ -55,16 +55,19 @@
                             </div>                    
                         </div>
                     </div>
-                    <div class="form-group custom-padding-bottom">
+                    <div class="form-group custom-padding-bottom" ng-class="{'has-error has-feedback':myIntroForm.charactername.$invalid}">
                         <label class="sr-only" for="charactername">Character Name</label>
                         <div class="col-xs-8">
                             <div class="input-group">
                                 <div class="input-group-addon custom-width-140">Character Name</div>
-                                <input type="text" class="form-control input-sm" id="charactername" ng-model="introForm.charactername">
+                                <input type="text" class="form-control input-sm" id="charactername" name="characterName" ng-model="introForm.charactername" required>
+                                <span style="color:red" ng-show="!myIntroForm.charactername.$pristine && myIntroForm.charactername.$invalid">
+                                    <span ng-show="myIntroForm.charactername.$error.required">Character name is required.</span>
+                                </span>
                             </div>                    
                         </div>
                     </div>         
-                    <button type="button" style="margin-left: 16px;" class="btn btn-sm btn-info btn-custom125" ng-click="switchToRace(getUserName(), introForm.charactername)">Begin</button>   
+                    <button type="button" style="margin-left: 16px;" class="btn btn-sm btn-info btn-custom125" ng-click="switchToRace(getUserName(), introForm.charactername)" ng-disabled="myIntroForm.$invalid" >Begin</button>   
                 </form>
             </uib-tab>
             <uib-tab index="1" heading="Race" disable="raceDisabled">
@@ -785,7 +788,7 @@
                             <li><strong>Charisma</strong> - force of personality</li>
                         </ul><br/>
                         <div style="text-align:justify;">DMAware uses random rolled ability scores.  This is the standard approach to determining your characters ability scores. A six-sided die is rolled 4 times, and the best 3 results are kept. This results in scores ranging from 3 to 18.</div><br/>
-                        <button type="button" class="btn btn-sm btn-info btn-custom125" ng-click="saveCurrentAbilities();">Next</button><br/>
+                        <button type="button" class="btn btn-sm btn-info btn-custom125" ng-click="saveCurrentAbilities();" ng-disabled="!abilityForm.strTotal || !abilityForm.dexTotal || !abilityForm.conTotal || !abilityForm.wisTotal || !abilityForm.intTotal || !abilityForm.chaTotal">Next</button><br/>
                         <button type="button" class="btn btn-sm btn-info btn-custom125" ng-click="switchTab(activeIndex - 1);">Previous</button>
                     </div>
                     <form>
